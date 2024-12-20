@@ -13,7 +13,7 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 require('./middlewares/passport')(app);
-
+app.use('/api/users', require('./routers/user.r.js'));
 app.use('/api/auth', require('./routers/auth.r.js'));
 
 app.get('/', (req, res) => {
