@@ -124,7 +124,17 @@ PUT /api/profiles/:id
 DELETE /api/profiles/:id
 
 # 4. PRODUCT REVIEW
-## 4.1. Get all reviews of a product
+
+## 4.1. Post a review
+POST /api/reviews
+```json
+{
+    "content": "This product is fantastic! It has exceeded all my expectations. The performance is top-notch and it is very user-friendly. I highly recommend it to anyone looking for a high-quality product.",
+    "rating": 5,
+    "product_id": 1
+}
+```
+## 4.2. Get all reviews of a product
 GET /api/reviews?id=
 ```json
 {
