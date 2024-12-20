@@ -83,3 +83,42 @@ GET /api/auth/login/google
 
 ## 2.4. Logout
 GET /api/auth/logout
+
+# 3. USER PROFILE
+## 3.1. Get profile by id
+GET /api/profiles/:id
+```json
+{
+    "id": 1,
+    "name": "Tô An An",
+    "phone": "0334191260",
+    "address": "Quận Tân Bình, TP Hồ Chí Minh",
+    "user": {
+        "id": 7,
+        "username": "anan1997"
+    }
+}
+```
+
+## 3.2. Create new profile
+POST /api/profiles
+```json
+{
+    "name": "Nguyễn Khánh Du",
+    "phone": "01668823429",
+    "address": "TP Biên Hòa, Tỉnh Đồng Nai"
+}
+```
+
+## 3.3. Update profile
+PUT /api/profiles/:id
+```json
+{
+    "name": "Tô An An",
+    "address": "Quận Tân Phú, TP Hồ Chí Minh",
+    "phone": "0935127671"
+}
+```
+
+## 3.4. Delete profile
+DELETE /api/profiles/:id
