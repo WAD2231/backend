@@ -4,8 +4,7 @@ module.exports = {
     postReview: async (req, res) => {
         try {
             const review = req.body;
-            // review.user_id = req.user.user_id;
-            review.user_id = 1;
+            review.user_id = req.user.user_id;
             await Review.postReview(review);
             res.status(201).send('Review posted');
         }
