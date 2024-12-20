@@ -122,3 +122,56 @@ PUT /api/profiles/:id
 
 ## 3.4. Delete profile
 DELETE /api/profiles/:id
+
+# 4. PRODUCT REVIEW
+## 4.1. Get all reviews of a product
+GET /api/reviews?id=
+```json
+{
+    "product_id": 1,
+    "total": "4",
+    "average": "3.3",
+    "reviews": [
+        {
+        "id": 5,
+        "content": "I'm very disappointed with this product. It stopped working after a week of use. The quality is poor and not worth the price. I would not recommend this to anyone.",
+        "rating": 1,
+        "posted_at": "2024-12-20T16:28:52.822475",
+        "user": {
+            "id": 8,
+            "name": "Nguyễn Khánh Du"
+        }
+        },
+        {
+        "id": 2,
+        "content": "The product is decent for its price. It performs well for basic tasks, but don't expect high-end features. The build quality is average, but it gets the job done. Overall, a good purchase if you're on a budget.",
+        "rating": 3,
+        "posted_at": "2024-12-20T16:28:09.021634",
+        "user": {
+            "id": 8,
+            "name": "Nguyễn Khánh Du"
+        }
+        },
+        {
+        "id": 6,
+        "content": "Great product! It arrived on time and in perfect condition. Easy to set up and use. I am very satisfied with my purchase and would buy again.",
+        "rating": 4,
+        "posted_at": "2024-12-20T16:28:57.391665",
+        "user": {
+            "id": 7,
+            "name": "Bùi Công Anh"
+        }
+        },
+        {
+        "id": 1,
+        "content": "This product exceeded my expectations! The quality is excellent and it works perfectly. Highly recommend to anyone looking for a reliable and well-made product.",
+        "rating": 5,
+        "posted_at": "2024-12-20T16:26:59.967478",
+        "user": {
+            "id": 7,
+            "name": "Bùi Công Anh"
+        }
+        }
+    ]
+}
+```
