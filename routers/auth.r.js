@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const AuthC = require('../controllers/auth.c.js');
 
-router.post('/register', AuthC.register);
-
 router.post('/login/local', AuthC.localLogin);
 
 router.get('/login/google', AuthC.googleLogin);

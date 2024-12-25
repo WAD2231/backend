@@ -10,7 +10,7 @@ module.exports = (app) => {
     app.use(passport.session());
 
     passport.use(new LocalStrategy(async (username, password, done) => {
-        const user = await User.getUserByUsername(username);
+        const user = await User.getUser('username', username);
         if (!user) {
             return done(null, false, { message: 'Incorrect username.' });
         }
@@ -51,7 +51,7 @@ module.exports = (app) => {
 
     passport.deserializeUser(async (id, done) => {
         try {
-            const user = await User.getUser(id);
+            const user = await User.getUser('user_id', id);
             done(null, user);
         }
         catch (error) {
