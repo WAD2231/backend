@@ -16,6 +16,7 @@ require('./middlewares/passport')(app);
 app.use('/api/users', require('./routers/user.r.js'));
 app.use('/api/auth', require('./routers/auth.r.js'));
 app.use('/api/profiles', require('./routers/profile.r.js'));
+app.use('/api/reviews', require('./routers/review.r.js'));
 
 app.get('/', (req, res) => {
     if (req.isAuthenticated()) {
