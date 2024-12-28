@@ -13,6 +13,7 @@ const options = {
 }
 
 app.use('/api/accounts', require('./routers/account.r.js'));
+app.use('/api/transactions', require('./routers/transaction.r.js'));
 
 const server = https.createServer(options, app);
 server.listen(process.env.EPAY_PORT, () => {

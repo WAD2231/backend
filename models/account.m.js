@@ -15,5 +15,20 @@ module.exports = {
         catch (error) {
             throw error;
         }
-    }
+    },
+
+    getBalance: async (id) => {
+        try {
+            const sql = `
+                SELECT balance
+                FROM ${SCHEMA}.accounts
+                WHERE account_id = $1
+            `;
+            const result = await db.one(sql, [id]);
+            return result.balance;
+        }
+        catch (error) {
+            throw error;
+        }
+    },
 };
