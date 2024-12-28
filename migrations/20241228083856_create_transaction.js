@@ -1,0 +1,25 @@
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.up = async function(knex) {
+    await knex.raw(`
+        CREATE TABLE IF NOT EXISTS transactions (
+            transaction_id SERIAL PRIMARY KEY,
+            account_id INT NOT NULL,
+            amount BIGINT NOT NULL,
+            status VARCHAR(20) DEFAULT 'pending',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );    
+    `);
+};
+
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.down = async function(knex) {
+    await knex.raw(`
+        DROP TABLE IF EXISTS transactions;
+    `);
+};
