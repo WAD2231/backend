@@ -12,6 +12,8 @@ const options = {
     cert: fs.readFileSync('./sslkeys/cert.pem')
 }
 
+app.use('/api/accounts', require('./routers/account.r.js'));
+
 const server = https.createServer(options, app);
 server.listen(process.env.EPAY_PORT, () => {
     console.log(`Server is running on port ${process.env.EPAY_PORT}`);
