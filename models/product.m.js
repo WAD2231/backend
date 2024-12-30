@@ -3,7 +3,7 @@ const db = require('./db');
 const SCHEMA = process.env.DB_SCHEMA;
 
 module.exports = {
-    getProducts: async () => {
+    getProducts: async (field, value) => {
         try {
             const query = `
                 SELECT pr.product_id as id,
@@ -14,8 +14,9 @@ module.exports = {
                 FROM ${SCHEMA}.products pr
                 LEFT JOIN ${SCHEMA}.product_image pi
                 ON pr.product_id = pi.product_id
+                WHERE ${field} = $1
             `;
-            const products = await db.manyOrNone(query);
+            const products = await db.manyOrNone(query, [value]);
             return products;
         } catch (error) {
             throw error;
@@ -46,10 +47,13 @@ module.exports = {
                     pr.product_name as name,
                     pr.price as price,
                     pr.description as description,
-                    pi.image_url as image_url
+                    pi.image_url as image_url,
+                    m.manufacturer_name as manufacturer,
+                    c.category_name as category
                 FROM ${SCHEMA}.products pr
-                LEFT JOIN ${SCHEMA}.product_image pi
-                ON pr.product_id = pi.product_id
+                LEFT JOIN ${SCHEMA}.product_image pi ON pr.product_id = pi.product_id
+                LEFT JOIN ${SCHEMA}.manufacturer m ON pr.manufacturer_id = m.manufacturer_id
+                LEFT JOIN ${SCHEMA}.category c ON pr.category_id = c.category_id
                 WHERE pr.product_id = $1
             `;
             const product = await db.oneOrNone(query, [productId]);
