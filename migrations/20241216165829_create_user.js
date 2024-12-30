@@ -12,7 +12,7 @@ exports.up = async function(knex) {
             permission INT NOT NULL,
             login_provider INT,
             provider_id VARCHAR(255),
-            wallet_id INT,
+            account_id INT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )    
     `);
