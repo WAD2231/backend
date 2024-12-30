@@ -143,6 +143,7 @@ module.exports = {
         }
     },
 
+
     getUserDetail: async (id) => {
         try {
             const query = `
