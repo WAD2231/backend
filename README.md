@@ -184,3 +184,13 @@ GET /api/reviews?id=
     ]
 }
 ```
+
+# 5. ORDER PAYMENT
+## 5.1. Pay for an order
+POST /api/orders/payment
+```json
+{
+    "account_id": 7,
+    "amount": 1000000,
+}
+```
