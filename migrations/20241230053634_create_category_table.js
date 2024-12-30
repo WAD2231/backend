@@ -4,18 +4,15 @@
  */
 exports.up = async function(knex) {
     await knex.raw(`
-        CREATE TABLE IF NOT EXISTS product (
-            product_id SERIAL PRIMARY KEY,
-            product_name VARCHAR(255) NOT NULL,
-            price NUMERIC(10, 2) NOT NULL CHECK (price >= 0),
-            stock INT NOT NULL CHECK (stock >= 0),
+        CREATE TABLE IF NOT EXISTS category (
+            category_id SERIAL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            thumbnail VARCHAR(255),
             description TEXT,
-            category_id INT NOT NULL,
-            manufacturer_id INT NOT NULL,
+            super_category_id INT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE,
-            CONSTRAINT fk_manufacturer FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(manufacturer_id) ON DELETE CASCADE
+            CONSTRAINT fk_super_category FOREIGN KEY (super_category_id) REFERENCES category(category_id) ON DELETE SET NULL
         )
     `);
 };
@@ -26,6 +23,6 @@ exports.up = async function(knex) {
  */
 exports.down = async function(knex) {
     await knex.raw(`
-        DROP TABLE IF EXISTS product
+        DROP TABLE IF EXISTS category
     `);
 };

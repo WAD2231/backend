@@ -24,6 +24,6 @@ exports.up = async function(knex) {
  */
 exports.down = async function(knex) {
     await knex.raw(`
-        DROP TABLE user
+        DROP TABLE users
     `);
 };
