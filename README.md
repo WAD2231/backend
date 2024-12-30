@@ -6,8 +6,7 @@ POST /api/users
     "username": "quanghai@12",
     "password": "123456789",
     "email": "hainq@gmail.com",
-    "permission": 0,
-    "wallet_id": 3
+    "permission": 0
 }
 ```
 ## 1.2. Get all users

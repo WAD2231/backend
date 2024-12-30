@@ -12,6 +12,7 @@ const options = {
     cert: fs.readFileSync('./sslkeys/cert.pem')
 }
 
+app.use(require('./middlewares/verification.js'));
 app.use('/api/accounts', require('./routers/account.r.js'));
 app.use('/api/transactions', require('./routers/transaction.r.js'));
 
