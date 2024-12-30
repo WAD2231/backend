@@ -10,4 +10,5 @@ const cn = {
     password: process.env.DB_PASS
 }
 
+
 module.exports = pgp(cn);
