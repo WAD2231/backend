@@ -41,4 +41,43 @@ module.exports = {
             throw error;
         }
     },
+    getCategories: async () => {
+        try {
+            const query = `
+                SELECT *
+                FROM ${SCHEMA}.category
+            `;
+            const categories = await db.manyOrNone(query);
+            return categories;
+        } catch (error) {
+            throw error;
+        }
+    },
+    getCategoryDetail: async (categoryId) => {
+        try {
+            const query = `
+                SELECT *
+                FROM ${SCHEMA}.category
+                WHERE category_id = $1
+            `;
+            const category = await db.oneOrNone(query, [categoryId]);
+            return category;
+        } catch (error) {
+            throw error;
+        }
+    },
+    createCategory: async (category) => {
+        try {
+            const query = `
+                INSERT INTO ${SCHEMA}.category (category_name, category_thumbnail, category_description)
+                VALUES ($1)
+                RETURNING category_id
+            `;
+            const values = [category.name, category.thumbnail, category.description];
+            const result = await db.one(query, values);
+            return result.category_id;
+        } catch (error) {
+            throw error;
+        }
+    },
 };

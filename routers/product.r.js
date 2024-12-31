@@ -18,6 +18,18 @@ router.put('/:id', productController.updateProduct);
 router.delete('/:id', productController.deleteProduct);
 
 // Route to search for products
-router.get('/search', productController.getProduct);
+router.get('/search/:query', productController.getProduct);
+
+// Route to get products with valid coupons
+router.get('/with-coupons', productController.getProductsWithCoupon);
+
+// Route to add a coupon to a product
+router.post('/add-coupon', productController.addCouponProduct);
+
+// Route to update a coupon for a product
+router.put('/update-coupon', productController.updateCouponProduct);
+
+// Route to delete a coupon from a product
+router.delete('/delete-coupon', productController.deleteCouponProduct);
 
 module.exports = router;
