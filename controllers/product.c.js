@@ -1,7 +1,9 @@
 const Product = require('../models/product.m.js');
-const Manufacturer = require('../models/manufacturer.m.js'); // Assuming you have a model for manufacturer
-const Category = require('../models/category.m.js'); // Assuming you have a model for category
-
+const Manufacturer = require('../models/manufacturer.m.js'); 
+const Category = require('../models/category.m.js');
+const Attribute=require('../models/attribute.m.js');
+const Review = require('../models/review.m.js');
+const { up } = require('../migrations/20241231103744_create_coupon_table.js');
 module.exports = {
     getProducts: async (req, res) => {
         try {
@@ -20,7 +22,8 @@ module.exports = {
                 return;
             }
             const reviews = await Review.getReviews(id);
-            res.status(200).json({ ...product, reviews });
+            const attribute = await Attribute.getAttributes(id);
+            res.status(200).json({ ...product, reviews, attribute });
         } catch (err) {
             res.status(500).send('An error occurred while fetching product details');
         }
@@ -43,7 +46,9 @@ module.exports = {
 
             const product = { name, price, description, manufacturer_id, category_id, image_url };
             const newProduct = await Product.createProduct(product);
-            res.status(201).json(newProduct);
+            const attribute = { cpu, ram, storage, battery, screen, product_id: newProduct.product_id };
+            const newAttribute = await Attribute.createAttribute(attribute);
+            res.status(201).json({ product: newProduct, attribute: newAttribute });
         } catch (error) {
             res.status(500).send('An error occurred while creating product');
         }
@@ -98,13 +103,81 @@ module.exports = {
     getProduct: async(req,res) => {
         try {
             const query = req.params.query;
-            const productsByName = await Product.getProducts('product_name', query);
+            const productsByName = await Product.getProduct('product_name', query);
             const productsByCategory = await Category.getProductsInCategory('name', query);
-            const productsById = await Product.getProducts('product_id', query);
+            const productsById = await Product.getProduct('product_id', query);
             const products = [...productsByName, ...productsByCategory, ...productsById];
             res.status(200).json(products);
         } catch (error) {
             res.status(500).send('An error occurred while fetching products');
         }
+    },
+    getProductsWithCoupon: async(req,res) => {
+        try {
+            const products = await Product.getProductsWithCoupon();
+            res.status(200).json(products);
+        } catch (error) {
+            res.status(500).send('An error occurred while fetching products');
+        }
+    },
+    addCouponProduct: async(req,res) => {
+        try {
+            const { coupon_id, product_id } = req.body;
+
+            const product = await Product.getProductDetail(product_id);
+            if (!product) {
+                return res.status(404).json({ error: `Product with id ${product_id} not found` });
+            }
+
+            const coupon = await Coupon.getCouponById(coupon_id);
+            if (!coupon) {
+                return res.status(404).json({ error: `Coupon with id ${coupon_id} not found` });
+            }
+
+            const products = await Product.addCouponProduct(product_id, coupon_id);
+            res.status(200).json(products);
+        } catch (error) {
+            res.status(500).send('An error occurred while adding coupon to product');
+        }    
+    },
+    updateCouponProduct: async(req,res) => {
+        try {
+            const { coupon_id, product_id } = req.body;
+
+            const product = await Product.getProductDetail(product_id);
+            if (!product) {
+                return res.status(404).json({ error: `Product with id ${product_id} not found` });
+            }
+
+            const coupon = await Coupon.getCouponById(coupon_id);
+            if (!coupon) {
+                return res.status(404).json({ error: `Coupon with id ${coupon_id} not found` });
+            }
+
+            const products = await Product.updateCouponProduct(product_id, coupon_id);
+            res.status(200).json(products);
+        } catch (error) {
+            res.status(500).send('An error occurred while updating coupon to product');
+        }    
+    },
+    deleteCouponProduct: async(req,res) => {
+        try {
+            const { coupon_id, product_id } = req.body;
+
+            const product = await Product.getProductDetail(product_id);
+            if (!product) {
+                return res.status(404).json({ error: `Product with id ${product_id} not found` });
+            }
+
+            const coupon = await Coupon.getCouponById(coupon_id);
+            if (!coupon) {
+                return res.status(404).json({ error: `Coupon with id ${coupon_id} not found` });
+            }
+
+            const products = await Product.deleteCouponProduct(product_id, coupon_id);
+            res.status(200).json(products);
+        } catch (error) {
+            res.status(500).send('An error occurred while deleting coupon to product');
+        }    
     }
 };
