@@ -80,4 +80,30 @@ module.exports = {
             throw error;
         }
     },
+    updateCategory: async (id, category) => {
+        try {
+            const query = `
+                UPDATE ${SCHEMA}.category
+                SET category_name = $1, category_thumbnail = $2, category_description = $3
+                WHERE category_id = $4
+                RETURNING category_id
+            `;
+            const values = [category.name, category.thumbnail, category.description, id];
+            const result = await db.one(query, values);
+            return result.category_id;
+        } catch (error) {
+            throw error;
+        }
+    },
+    deleteCategory: async (id) => {
+        try {
+            const query = `
+                DELETE FROM ${SCHEMA}.category
+                WHERE category_id = $1
+            `;
+            await db.none(query, [id]);
+        } catch (error) {
+            throw error;
+        }
+    },
 };
