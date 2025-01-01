@@ -9,7 +9,8 @@ exports.up = async function(knex) {
             account_id INT NOT NULL,
             amount BIGINT NOT NULL,
             status VARCHAR(20) DEFAULT 'pending',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            order_id INT NOT NULL
         );    
     `);
 };
