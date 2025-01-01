@@ -185,12 +185,23 @@ GET /api/reviews?id=
 }
 ```
 
-# 5. ORDER PAYMENT
-## 5.1. Pay for an order
-POST /api/orders/payment
+# 5. ORDER 
+## 5.1. Create order
+POST /api/orders
 ```json
 {
-    "account_id": 7,
-    "amount": 1000000,
+  "total": 100000,
+  "details": [
+    {
+      "product_id": 1,
+      "quantity": 1,
+      "subtotal": 20000
+    },
+    {
+      "product_id": 2,
+      "quantity": 2,
+      "subtotal": 80000
+    } 
+  ]
 }
 ```
