@@ -211,4 +211,21 @@ module.exports = {
             throw error;
         }
     },
+
+    getAccountID: async(id) => {
+        try {
+            const query = `
+                SELECT account_id
+                FROM users 
+                WHERE user_id = $1
+            `;
+
+            const result = await db.one(query, [id]);
+            return result.account_id;
+        }
+        catch (err) {
+            console.log(err)
+            throw err;
+        }
+    }
 };

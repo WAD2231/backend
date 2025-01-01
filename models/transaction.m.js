@@ -3,14 +3,14 @@ const SCHEMA = process.env.DB_SCHEMA;
 const mainID = 1;
 
 module.exports = {
-    createTransaction: async (accountId, amount) => {
+    createTransaction: async (accountID, amount, orderID) => {
         db.tx(async t => {
             try {
                 const transactionID = await t.one(`
-                    INSERT INTO ${SCHEMA}.transactions (account_id, amount)
-                    VALUES ($1, $2)
+                    INSERT INTO ${SCHEMA}.transactions (account_id, amount, order_id)
+                    VALUES ($1, $2, $3)
                     RETURNING transaction_id
-                `, [accountId, amount]);
+                `, [accountID, amount, orderID]);
             
                 await t.none(`
                     UPDATE ${SCHEMA}.accounts
@@ -22,7 +22,7 @@ module.exports = {
                     UPDATE ${SCHEMA}.accounts
                     SET balance = balance - $1
                     WHERE account_id = $2
-                `, [amount, accountId]);
+                `, [amount, accountID]);
 
                 await t.none(`
                     UPDATE ${SCHEMA}.transactions
