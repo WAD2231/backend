@@ -298,3 +298,91 @@ PUT /api/carts/:id
 
 ## 6.4. Delete product from cart
 DELETE /api/carts/:id
+
+# 7. VIEW STATISTICS
+
+## 7.1. Get new user count by month
+GET /api/users/statistics/new-users
+
+```json
+[
+  {
+    "month": 12,
+    "year": 2024,
+    "quantity": 6
+  }
+]
+```
+
+## 7.2. Get total revenue by month
+GET /api/orders/statistics/revenue
+
+```json
+[
+  {
+    "month": 12,
+    "year": 2024,
+    "sales": 200000
+  },
+  {
+    "month": 1,
+    "year": 2025,
+    "sales": 100000
+  }
+]
+```
+
+## 7.3. Get top best-selling products
+GET /api/orders/statistics/best-sellers?limit=5
+
+```json
+[
+  {
+    "id": 5,
+    "name": "Date",
+    "quantity": 4
+  },
+  {
+    "id": 3,
+    "name": "Banana",
+    "quantity": 3
+  },
+  {
+    "id": 4,
+    "name": "Cherry",
+    "quantity": 2
+  },
+  {
+    "id": 2,
+    "name": "Apple",
+    "quantity": 2
+  },
+  {
+    "id": 1,
+    "name": "Product 1",
+    "quantity": 1
+  }
+]
+```
+
+## 7.4. Get top customers by total spending
+GET /api/orders/statistics/top-customer?limit=5
+
+```json
+[
+  {
+    "id": 8,
+    "name": "Nguyễn Khánh Du",
+    "total": 200000
+  },
+  {
+    "id": 7,
+    "name": "Bùi Công Anh",
+    "total": 100000
+  }
+]
+```
+
+## 7.5. Statistic product quantity by category
+
+## 7.6. Statistic product quantity by manufacturer

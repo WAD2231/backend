@@ -120,5 +120,15 @@ module.exports = {
         catch (error) {
             return res.status(500).json(error);
         }
+    },
+
+    getNewUserCount: async (req, res) => {
+        try {
+            const newUsers = await User.getUserCount();
+            return res.status(200).json(newUsers);
+        }
+        catch (error) {
+            return res.status(500).json({message: error.message});
+        }
     }
 };

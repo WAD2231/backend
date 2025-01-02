@@ -40,5 +40,34 @@ module.exports = {
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
+    },
+
+    getRevenueByMonth: async (req, res) => {
+        try {
+            const sales = await Order.getRevenueByMonth();
+            return res.status(200).json(sales);
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
+    },
+
+    getBestSellers: async (req, res) => {
+        try {
+            const limit = parseInt(req.query.limit) || 5;
+            const topProducts = await Order.getBestSellers(limit);
+            return res.status(200).json(topProducts);
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
+    },
+
+    getTopCustomers: async (req, res) => {
+        try {
+            const limit = parseInt(req.query.limit) || 5;
+            const topCustomers = await Order.getTopCustomers(limit);
+            return res.status(200).json(topCustomers);
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
     }
 };

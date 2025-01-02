@@ -36,5 +36,66 @@ module.exports = {
         catch (err) {
             throw err;
         }
-    }
+    },
+
+    getRevenueByMonth: async () => {
+        try {
+            const query = `
+                SELECT
+                    EXTRACT(MONTH FROM order_date)::INTEGER AS month,
+                    EXTRACT(YEAR FROM order_date)::INTEGER AS year,
+                    SUM(total)::REAL AS revenue
+                FROM ${SCHEMA}.orders
+                GROUP BY month, year
+                LIMIT 12
+            `;
+            const revenue = await db.any(query);
+            return revenue;
+        }
+        catch (err) {
+            throw err;
+        }
+    },
+
+    getBestSellers: async (limit) => {
+        try {
+            const query = `
+                SELECT 
+                    p.product_id as id, 
+                    p.product_name as name,  
+                    SUM(d.quantity)::INTEGER as quantity
+                FROM ${SCHEMA}.order_details d
+                JOIN ${SCHEMA}.products p ON d.product_id = p.product_id
+                GROUP BY p.product_id, p.product_name
+                ORDER BY quantity DESC 
+                LIMIT $1
+            `;
+            const result = await db.any(query, [limit]);
+            return result;
+        }
+        catch (error) {
+            throw error;
+        }
+    },
+
+    getTopCustomers: async (limit) => {
+        try {
+            const query = `
+                SELECT 
+                    p.user_id as id, 
+                    p.name as name,  
+                    SUM(o.total)::INTEGER as total
+                FROM ${SCHEMA}.orders o
+                JOIN ${SCHEMA}.profile p ON o.user_id = p.user_id
+                GROUP BY p.user_id, p.name
+                ORDER BY total DESC 
+                LIMIT $1
+            `;
+            const result = await db.any(query, [limit]);
+            return result;
+        }
+        catch (error) {
+            throw error;
+        }
+    },
 };
