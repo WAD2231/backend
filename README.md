@@ -298,3 +298,17 @@ PUT /api/carts/:id
 
 ## 6.4. Delete product from cart
 DELETE /api/carts/:id
+
+# 7. VIEW STATISTICS
+
+## 7.1. Get new users by month
+GET /api/users/statistics/new-users
+```json
+[
+  {
+    "month": 12,
+    "year": 2024,
+    "quantity": 6
+  }
+]
+```

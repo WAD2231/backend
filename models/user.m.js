@@ -227,5 +227,29 @@ module.exports = {
             console.log(err)
             throw err;
         }
+    },
+
+    getUserCount: async () => {
+        try {
+            const query = `
+                SELECT 
+                    EXTRACT(MONTH FROM created_at)::INTEGER AS month, 
+                    EXTRACT(YEAR FROM created_at)::INTEGER AS year, 
+                    COUNT(*)::INTEGER AS quantity
+                FROM ${SCHEMA}.users
+                GROUP BY 
+                    EXTRACT(MONTH FROM created_at), 
+                    EXTRACT(YEAR FROM created_at)
+                ORDER BY 
+                    year, month
+                LIMIT 12
+            `;
+
+            const result = await db.any(query);
+            return result;
+        }
+        catch (error) {
+            throw error;
+        }
     }
 };
