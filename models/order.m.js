@@ -47,6 +47,7 @@ module.exports = {
                     SUM(total)::REAL AS revenue
                 FROM ${SCHEMA}.orders
                 GROUP BY month, year
+                LIMIT 12
             `;
             const revenue = await db.any(query);
             return revenue;
