@@ -5,12 +5,13 @@
 exports.up = async function(knex) {
     await knex.raw(`
         CREATE TABLE IF NOT EXISTS carts (
-            cart_id SERIAL PRIMARY KEY,
-            user_id INT NOT NULL
+            user_id INT,
+            product_id INT,
+            quantity INT
         );
 
         ALTER TABLE carts
-        ADD CONSTRAINT fk_carts_users FOREIGN KEY (user_id) REFERENCES users(user_id);
+        ADD CONSTRAINT pk_carts PRIMARY KEY (user_id, product_id);
     `);
 };
 
@@ -20,6 +21,6 @@ exports.up = async function(knex) {
  */
 exports.down = async function(knex) {
     await knex.raw(`
-        DROP TABLE carts
+        DROP TABLE IF EXISTS carts
     `);
 };

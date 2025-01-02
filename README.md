@@ -185,3 +185,48 @@ GET /api/reviews?id=
     ]
 }
 ```
+
+# 5. CART
+## 5.1. Get cart by user id
+GET /api/carts?page=1&size=2
+``` json
+{
+  "user_id": 1,
+  "paging": {
+    "total_item": 5,
+    "total_page": 3,
+    "current_page": 1,
+    "page_size": 2
+  },
+  "items": [
+    {
+      "product": {
+        "id": 1,
+        "name": "Product 1",
+        "price": 100000,
+        "discount": 0.1,
+        "quantity": 20,
+        "images": [
+          "https://example.com/image1.jpg",
+          "https://example.com/image2.jpg"
+        ]
+      },
+      "quantity": 2
+    },
+    {
+      "product": {
+        "id": 2,
+        "name": "Apple",
+        "price": 1,
+        "discount": 0.1,
+        "quantity": 100,
+        "images": [
+          "https://example.com/image3.jpg",
+          "https://example.com/image4.jpg"
+        ]
+      },
+      "quantity": 2
+    }
+  ]
+}
+```
