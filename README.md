@@ -230,3 +230,11 @@ GET /api/carts?page=1&size=2
   ]
 }
 ```
+
+## 5.2. Add product to cart
+POST /api/carts
+```json
+{
+    "product_id": 1,
+}
+```

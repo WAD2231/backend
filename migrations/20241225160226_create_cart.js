@@ -7,7 +7,7 @@ exports.up = async function(knex) {
         CREATE TABLE IF NOT EXISTS carts (
             user_id INT,
             product_id INT,
-            quantity INT
+            quantity INT DEFAULT 1
         );
 
         ALTER TABLE carts

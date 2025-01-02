@@ -47,5 +47,20 @@ module.exports = {
         catch (err) {
             throw err;
         }
+    },
+
+    add: async (userID, productID) => {
+        try {
+            const sql = `
+                INSERT INTO ${SCHEMA}.carts (user_id, product_id)
+                VALUES ($1, $2)
+                ON CONFLICT (user_id, product_id) DO UPDATE
+                SET quantity = carts.quantity + 1
+            `;
+            await db.none(sql, [userID, productID]);
+        }
+        catch (err) {
+            throw err;
+        }
     }
 };
