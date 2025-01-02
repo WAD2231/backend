@@ -238,3 +238,11 @@ POST /api/carts
     "product_id": 1,
 }
 ```
+
+## 5.3. Update product quantity in cart
+PUT /api/carts/:id
+```json
+{
+    "quantity": 3
+}
+```

@@ -5,4 +5,6 @@ router.get('/', CartC.get);
 
 router.post('/', CartC.add);
 
+router.put('/:id', CartC.update);
+
 module.exports = router;

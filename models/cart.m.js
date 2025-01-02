@@ -62,5 +62,19 @@ module.exports = {
         catch (err) {
             throw err;
         }
+    },
+
+    update: async (userID, productID, quantity) => {
+        try {
+            const sql = `
+                UPDATE ${SCHEMA}.carts
+                SET quantity = $1
+                WHERE user_id = $2 AND product_id = $3
+            `;
+            await db.none(sql, [quantity, userID, productID]);
+        }
+        catch (err) {
+            throw err;
+        }
     }
 };
