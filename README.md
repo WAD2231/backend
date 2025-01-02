@@ -364,3 +364,21 @@ GET /api/orders/statistics/best-sellers?limit=5
   }
 ]
 ```
+
+## 7.4. Get top customers by total spending
+GET /api/orders/statistics/top-customer?limit=5
+
+```json
+[
+  {
+    "id": 8,
+    "name": "Nguyễn Khánh Du",
+    "total": 200000
+  },
+  {
+    "id": 7,
+    "name": "Bùi Công Anh",
+    "total": 100000
+  }
+]
+```

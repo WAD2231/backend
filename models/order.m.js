@@ -76,5 +76,26 @@ module.exports = {
         catch (error) {
             throw error;
         }
-    }
+    },
+
+    getTopCustomers: async (limit) => {
+        try {
+            const query = `
+                SELECT 
+                    p.user_id as id, 
+                    p.name as name,  
+                    SUM(o.total)::INTEGER as total
+                FROM ${SCHEMA}.orders o
+                JOIN ${SCHEMA}.profile p ON o.user_id = p.user_id
+                GROUP BY p.user_id, p.name
+                ORDER BY total DESC 
+                LIMIT $1
+            `;
+            const result = await db.any(query, [limit]);
+            return result;
+        }
+        catch (error) {
+            throw error;
+        }
+    },
 };
