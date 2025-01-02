@@ -295,3 +295,6 @@ PUT /api/carts/:id
     "quantity": 3
 }
 ```
+
+## 6.4. Delete product from cart
+DELETE /api/carts/:id
