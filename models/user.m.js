@@ -26,12 +26,12 @@ module.exports = {
     createUser: async (user) => {
         try {
             const query = `
-                INSERT INTO ${SCHEMA}.users (username, password, email, permission, login_provider, wallet_id)
+                INSERT INTO ${SCHEMA}.users (username, password, email, permission, login_provider, account_id)
                 VALUES ($1, $2, $3, $4, $5, $6)
                 RETURNING user_id
             `;
 
-            const values = [user.username, user.password, user.email, user.permission, LOCAL, user.wallet_id];
+            const values = [user.username, user.password, user.email, user.permission, LOCAL, user.account_id];
             const result = await db.one(query, values);
             return result.user_id;
         }
@@ -191,6 +191,41 @@ module.exports = {
         catch (error) {
             console.log(error);
             throw error;
+        }
+    },
+
+    updateAccountID: async (id, account_id) => {
+        try {
+            const query = `
+                UPDATE ${SCHEMA}.users
+                SET account_id = $1
+                WHERE user_id = $2
+                RETURNING *
+            `;
+
+            const values = [account_id, id];
+            const updatedUser = await db.one(query, values);
+            return updatedUser;
+        }
+        catch (error) {
+            throw error;
+        }
+    },
+
+    getAccountID: async(id) => {
+        try {
+            const query = `
+                SELECT account_id
+                FROM users 
+                WHERE user_id = $1
+            `;
+
+            const result = await db.one(query, [id]);
+            return result.account_id;
+        }
+        catch (err) {
+            console.log(err)
+            throw err;
         }
     }
 };

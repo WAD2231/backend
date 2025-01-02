@@ -16,37 +16,47 @@ module.exports = {
         }
     },
 
-    getReviews: async (id) => {
+    getReviews: async (id, size, page) => {
         try {
-            const query = `
+            const sql1 = `
                 SELECT 
-                    COUNT(r.rating) AS total,
-                    ROUND(AVG(r.rating), 1) AS average,
-                    json_agg(
-                        json_build_object(
-                            'id', r.review_id,
-                            'content', r.content,
-                            'rating', r.rating,
-                            'posted_at', r.posted_at,
-                            'user', json_build_object(
-                                'id', u.user_id,
-                                'name', p.name
-                            )
-                        )
-                    ) AS reviews
+                    r.review_id as id,
+                    r.content as content,
+                    r.rating as rating,
+                    r.posted_at as posted_at,
+                    json_build_object(
+                        'id', u.user_id,
+                        'name', p.name
+                    ) as user
                 FROM ${SCHEMA}.reviews r 
                 JOIN ${SCHEMA}.users u ON r.user_id = u.user_id
                 JOIN ${SCHEMA}.profile p ON p.user_id = u.user_id
                 WHERE product_id = $1
+                LIMIT $2 OFFSET $3
             `;
-            const result = await db.oneOrNone(query, [id]);
+    
+            const reviews = await db.any(sql1, [id, size, size * (page - 1)]) || [];
+            
+            const sql2 = `
+                SELECT 
+                    COALESCE(COUNT(*), 0) as total_item,
+                    COALESCE(ROUND(AVG(rating), 1), 0) as average_rating
+                FROM ${SCHEMA}.reviews
+                WHERE product_id = $1
+            `;
+
+            const info = await db.one(sql2, [id]);
             return {
-                product_id: id,
-                ...result
-            };
-        }
-        catch (error) {
-            console.log(error);
+                paging: {
+                    total_item: parseInt(info.total_item),
+                    total_page: Math.ceil(parseInt(info.total_item) / size),
+                    current_page: page,
+                    page_size: size
+                },
+                average_rating: Number(info.average_rating),
+                reviews: reviews
+            }
+        } catch (error) {
             throw error;
         }
     }

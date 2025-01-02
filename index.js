@@ -18,6 +18,7 @@ app.use('/api/auth', require('./routers/auth.r.js'));
 app.use('/api/profiles', require('./routers/profile.r.js'));
 app.use('/api/reviews', require('./routers/review.r.js'));
 app.use('/api/carts', require('./routers/cart.r.js'));
+app.use('/api/orders', require('./routers/order.r.js'));
 
 app.get('/', (req, res) => {
     if (req.isAuthenticated()) {

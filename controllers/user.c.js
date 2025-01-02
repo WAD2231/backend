@@ -1,5 +1,8 @@
 const User = require('../models/user.m.js');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const fs = require('fs');
+const priKey = fs.readFileSync('./sshkeys/private.pem', 'utf8');
 
 module.exports = {
     getUsers: async (req, res, next) => {
@@ -48,10 +51,23 @@ module.exports = {
             const hashedPassword = await bcrypt.hash(user.password, salt);
             user.password = hashedPassword
 
+            // Create account in sub-system
+            const token = jwt.sign({}, priKey, { algorithm: 'RS256' });
+            const response = await fetch(`https://localhost:${process.env.EPAY_PORT}/api/accounts`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({token})
+            });
+            const result = await response.json();
+            user.account_id = result.account_id;
+
             const newUser = await User.createUser(user);
             return res.status(201).json(newUser);
         }
         catch (error) {
+            console.log(error);
             return res.status(500).json(error);
         }
     },
