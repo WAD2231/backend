@@ -42,8 +42,7 @@ module.exports = {
 
     delete: async (req, res) => {
         try {
-            // const userID = req.user.user_id;
-            const userID = 1;
+            const userID = req.user.user_id;
             const productID = parseInt(req.params.id);
             await Cart.delete(userID, productID);
             return res.status(200).json({ message: 'Product deleted from cart' });
