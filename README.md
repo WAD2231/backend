@@ -382,3 +382,7 @@ GET /api/orders/statistics/top-customer?limit=5
   }
 ]
 ```
+
+## 7.5. Statistic product quantity by category
+
+## 7.6. Statistic product quantity by manufacturer
