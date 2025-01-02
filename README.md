@@ -331,3 +331,36 @@ GET /api/orders/statistics/revenue
   }
 ]
 ```
+
+## 7.3. Get top best-selling products
+GET /api/orders/statistics/best-sellers?limit=5
+
+```json
+[
+  {
+    "id": 5,
+    "name": "Date",
+    "quantity": 4
+  },
+  {
+    "id": 3,
+    "name": "Banana",
+    "quantity": 3
+  },
+  {
+    "id": 4,
+    "name": "Cherry",
+    "quantity": 2
+  },
+  {
+    "id": 2,
+    "name": "Apple",
+    "quantity": 2
+  },
+  {
+    "id": 1,
+    "name": "Product 1",
+    "quantity": 1
+  }
+]
+```

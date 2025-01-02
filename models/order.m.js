@@ -55,5 +55,26 @@ module.exports = {
         catch (err) {
             throw err;
         }
+    },
+
+    getBestSellers: async (limit) => {
+        try {
+            const query = `
+                SELECT 
+                    p.product_id as id, 
+                    p.product_name as name,  
+                    SUM(d.quantity)::INTEGER as quantity
+                FROM ${SCHEMA}.order_details d
+                JOIN ${SCHEMA}.products p ON d.product_id = p.product_id
+                GROUP BY p.product_id, p.product_name
+                ORDER BY quantity DESC 
+                LIMIT $1
+            `;
+            const result = await db.any(query, [limit]);
+            return result;
+        }
+        catch (error) {
+            throw error;
+        }
     }
 };

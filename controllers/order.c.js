@@ -49,5 +49,15 @@ module.exports = {
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
+    },
+
+    getBestSellers: async (req, res) => {
+        try {
+            const limit = parseInt(req.query.limit) || 5;
+            const topProducts = await Order.getBestSellers(limit);
+            return res.status(200).json(topProducts);
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
     }
 };
