@@ -36,5 +36,23 @@ module.exports = {
         catch (err) {
             throw err;
         }
+    },
+
+    getRevenueByMonth: async () => {
+        try {
+            const query = `
+                SELECT
+                    EXTRACT(MONTH FROM order_date)::INTEGER AS month,
+                    EXTRACT(YEAR FROM order_date)::INTEGER AS year,
+                    SUM(total)::REAL AS revenue
+                FROM ${SCHEMA}.orders
+                GROUP BY month, year
+            `;
+            const revenue = await db.any(query);
+            return revenue;
+        }
+        catch (err) {
+            throw err;
+        }
     }
 };

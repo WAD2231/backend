@@ -301,14 +301,33 @@ DELETE /api/carts/:id
 
 # 7. VIEW STATISTICS
 
-## 7.1. Get new users by month
+## 7.1. Get new user count by month
 GET /api/users/statistics/new-users
+
 ```json
 [
   {
     "month": 12,
     "year": 2024,
     "quantity": 6
+  }
+]
+```
+
+## 7.2. Get total revenue by month
+GET /api/orders/statistics/revenue
+
+```json
+[
+  {
+    "month": 12,
+    "year": 2024,
+    "sales": 200000
+  },
+  {
+    "month": 1,
+    "year": 2025,
+    "sales": 100000
   }
 ]
 ```
