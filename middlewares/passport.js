@@ -4,6 +4,22 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const bcrypt = require('bcrypt');
 const User = require('../models/user.m.js');
+const fs = require('fs');
+const priKey = fs.readFileSync('./sshkeys/private.pem', 'utf8');
+const jwt = require('jsonwebtoken');
+
+const createAccountInSubSystem = async () => {
+    const token = jwt.sign({}, priKey, { algorithm: 'RS256' });
+    const response = await fetch(`https://localhost:${process.env.EPAY_PORT}/api/accounts`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token })
+    });
+    const result = await response.json();
+    return result.account_id;
+};
 
 module.exports = (app) => {
     app.use(passport.initialize());
@@ -30,6 +46,10 @@ module.exports = (app) => {
     },
         async (accessToken, refreshToken, profile, cb) => {
             const user = await User.findOrCreateUserByGoogle(profile);
+            if (user.account_id === null) {
+                account_id = await createAccountInSubSystem();
+                await User.updateAccountID(user.user_id, account_id);
+            }
             return cb(null, user);
         }
     ));
@@ -41,6 +61,10 @@ module.exports = (app) => {
     },
         async (accessToken, refreshToken, profile, cb) => {
             const user = await User.findOrCreateUserByFacebook(profile);
+            if (user.account_id === null) {
+                account_id = await createAccountInSubSystem();
+                await User.updateAccountID(user.user_id, account_id);
+            }
             return cb(null, user);
         }
     ));

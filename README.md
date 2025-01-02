@@ -6,8 +6,7 @@ POST /api/users
     "username": "quanghai@12",
     "password": "123456789",
     "email": "hainq@gmail.com",
-    "permission": 0,
-    "wallet_id": 3
+    "permission": 0
 }
 ```
 ## 1.2. Get all users
@@ -183,5 +182,26 @@ GET /api/reviews?id=
         }
         }
     ]
+}
+```
+
+# 5. ORDER 
+## 5.1. Create order
+POST /api/orders
+```json
+{
+  "total": 100000,
+  "details": [
+    {
+      "product_id": 1,
+      "quantity": 1,
+      "subtotal": 20000
+    },
+    {
+      "product_id": 2,
+      "quantity": 2,
+      "subtotal": 80000
+    } 
+  ]
 }
 ```
