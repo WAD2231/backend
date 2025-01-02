@@ -76,5 +76,18 @@ module.exports = {
         catch (err) {
             throw err;
         }
+    },
+
+    delete: async(userID, productID) => {
+        try {
+            const sql = `
+                DELETE FROM ${SCHEMA}.carts
+                WHERE user_id = $1 AND product_id = $2
+            `;
+            await db.none(sql, [userID, productID]);
+        }
+        catch (err) {
+            throw err;
+        }
     }
 };

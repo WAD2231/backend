@@ -38,5 +38,18 @@ module.exports = {
         catch (err) {
             res.status(500).json({ message: err.message });
         }
+    },
+
+    delete: async (req, res) => {
+        try {
+            // const userID = req.user.user_id;
+            const userID = 1;
+            const productID = parseInt(req.params.id);
+            await Cart.delete(userID, productID);
+            return res.status(200).json({ message: 'Product deleted from cart' });
+        }
+        catch (err) {
+            res.status(500).json({ message: err.message });
+        }
     }
 };

@@ -7,4 +7,6 @@ router.post('/', CartC.add);
 
 router.put('/:id', CartC.update);
 
+router.delete('/:id', CartC.delete);
+
 module.exports = router;
