@@ -12,7 +12,7 @@ module.exports = {
             const filters = {
                 category_id: category_id ? parseInt(category_id) : null,
                 search: search || '',
-                page_size: page_size ? parseInt(page_size) : 10,
+                page_size: page_size ? parseInt(page_size) : 1,
                 current_page: current_page ? parseInt(current_page) : 1
             };
             const result = await Product.getProducts(filters);
@@ -24,16 +24,43 @@ module.exports = {
     },
     getProductDetails: async (req, res) => {
         try {
-            const id = parseInt(req.params.id);
-            const product = await Product.getProductDetail(id);
+            const productId = parseInt(req.query.product_id);
+            if (isNaN(productId)) {
+                return res.status(400).json({ error: 'Invalid product ID' });
+            }
+            const product = await Product.getProductDetail(productId);
+            console.log(product);
             if (!product) {
-                res.status(404).json({ error: `Product with id ${id} not found` });
+                res.status(404).json({ error: `Product with id ${productId} not found` });
                 return;
             }
-            const reviews = await Review.getReviews(id);
-            const attribute = await Attribute.getAttributes(id);
-            res.status(200).json({ product, reviews, ...attribute });
+            const attributes = await Attribute.getAttributes(productId);
+
+
+            const response = {
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                discount: product.discount,
+                stock: product.stock,
+                category: {
+                    
+                    name: product.category
+                },
+                manufacturer: {
+                    name: product.manufacturer
+                },
+                description: product.description,
+                images: product.image_url ? [product.image_url] : [],
+                attributes: attributes.map(attr => ({
+                    name: attr.attribute_name,
+                    value: attr.value
+                }))
+            };
+
+            res.status(200).json(response);
         } catch (err) {
+            console.error(err); // Log the error for debugging
             res.status(500).send('An error occurred while fetching product details');
         }
     },

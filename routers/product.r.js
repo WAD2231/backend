@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/product.c.js');
 const upload = require('../middlewares/upload');
-// Route to get all products
+
+// Route to get filtered products with pagination
 router.get('/', productController.getProducts);
 
 // Route to get product details by ID
-router.get('/:id', productController.getProductDetails);
+router.get('/details', productController.getProductDetails);
 
 // Route to create a new product
 router.post('/create', upload.single('image'), productController.createProduct);
@@ -19,6 +20,5 @@ router.delete('/:id', productController.deleteProduct);
 
 // Route to search for products
 router.get('/search/:query', productController.getProduct);
-
 
 module.exports = router;

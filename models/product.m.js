@@ -83,7 +83,7 @@ module.exports = {
             }
 
             const totalCountResult = await db.one(countQuery, countValues);
-            const totalItems = parseInt(totalCountResult.total, 10);
+            const totalItems = parseInt(totalCountResult.total, 0);
             const totalPages = Math.ceil(totalItems / page_size);
 
             return {
@@ -112,8 +112,8 @@ module.exports = {
                     pr.description as description,
                     pi.image_url as image_url,
                     m.manufacturer_name as manufacturer,
-                    c.category_name as category
-                FROM ${SCHEMA}.products pr
+                    c.name as category
+                FROM ${SCHEMA}.product pr
                 LEFT JOIN ${SCHEMA}.product_image pi ON pr.product_id = pi.product_id
                 LEFT JOIN ${SCHEMA}.manufacturer m ON pr.manufacturer_id = m.manufacturer_id
                 LEFT JOIN ${SCHEMA}.category c ON pr.category_id = c.category_id

@@ -27,5 +27,17 @@ module.exports = {
             throw error;
         }
     },
-    // other methods...
+    getManufacturerById: async (manufacturerId) => {
+        try {
+            const query = `
+                SELECT manufacturer_id, manufacturer_name
+                FROM ${SCHEMA}.manufacturer
+                WHERE manufacturer_id = $1
+            `;
+            const manufacturer = await db.oneOrNone(query, [manufacturerId]);
+            return manufacturer;
+        } catch (error) {
+            throw error;
+        }
+    }
 };
