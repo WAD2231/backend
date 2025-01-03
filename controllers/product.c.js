@@ -63,7 +63,6 @@ module.exports = {
             res.status(500).send('An error occurred while fetching product details');
         }
     },
-
     //To use this method we will get list of categories, manufacturers and attributes from the methods in their respective controllers.
     //After that we will send the response with category_id, manufacturer_id in the list of categories, manufacturers .
     createProduct: async (req, res) => {

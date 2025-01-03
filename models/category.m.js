@@ -45,7 +45,7 @@ module.exports = {
         try {
             const { page_size, current_page } = filters;
             let query = `
-                SELECT category_id as id, category_name as name
+                SELECT category_id as id, name as name
                 FROM ${SCHEMA}.category
             `;
             const values = [];

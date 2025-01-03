@@ -18,6 +18,8 @@ app.use('/api/auth', require('./routers/auth.r.js'));
 app.use('/api/profiles', require('./routers/profile.r.js'));
 app.use('/api/reviews', require('./routers/review.r.js'));
 app.use('/api/products', require('./routers/product.r.js'));
+app.use('/api/categories', require('./routers/category.r.js'));
+app.use('/api/manufacturers', require('./routers/manufacturer.r.js'));
 
 app.get('/', (req, res) => {
     if (req.isAuthenticated()) {
