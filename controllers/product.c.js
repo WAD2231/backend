@@ -64,7 +64,6 @@ module.exports = {
         }
     },
 
-
     //To use this method we will get list of categories, manufacturers and attributes from the methods in their respective controllers.
     //After that we will send the response with category_id, manufacturer_id in the list of categories, manufacturers .
     createProduct: async (req, res) => {
@@ -91,35 +90,42 @@ module.exports = {
             }
         });
     },
+    //This method will be use same as createProduct method for updating the product with category_id, manufacturer_id.
     updateProduct: async (req, res) => {
-        try {
-            const id = parseInt(req.params.id);
-            if (isNaN(id)) {
-                return res.status(400).json({ error: 'Invalid product ID' });
+        upload.single('image')(req, res, async (err) => {
+            if (err) {
+                return res.status(500).send('An error occurred while uploading the image');
             }
 
-            const { name, price, description, manufacturer_id, category_id, attributes } = req.body;
-            const image_url = req.file ? req.file.path : null;
-
-            const product = await Product.getProductDetail(id);
-            if (!product) {
-                return res.status(404).json({ error: `Product with id ${id} not found` });
-            }
-            const updatedProduct = { name, price, description, manufacturer_id, category_id, image_url };
-            const updated = await Product.updateProduct(id, updatedProduct);
-
-            if (attributes && Array.isArray(attributes)) {
-                await Attribute.deleteAttribute(id); // Assuming you have a method to delete existing attributes
-                for (const attr of attributes) {
-                    const attribute = { attribute_name: attr.name, value: attr.value, product_id: id };
-                    await Attribute.createAttribute(attribute);
+            try {
+                const id = parseInt(req.params.id);
+                if (isNaN(id)) {
+                    return res.status(400).json({ error: 'Invalid product ID' });
                 }
-            }
 
-            res.status(200).json({ product: updated, attributes });
-        } catch (error) {
-            res.status(500).send('An error occurred while updating product');
-        }
+                const { name, price, description, manufacturer_id, category_id, attributes } = req.body;
+                const image_url = req.file ? req.file.path : null;
+
+                const product = await Product.getProductDetail(id);
+                if (!product) {
+                    return res.status(404).json({ error: `Product with id ${id} not found` });
+                }
+                const updatedProduct = { name, price, description, manufacturer_id, category_id, image_url };
+                const updated = await Product.updateProduct(id, updatedProduct);
+
+                if (attributes && Array.isArray(attributes)) {
+                    await Attribute.deleteAttributesByProductId(id); // Assuming you have a method to delete existing attributes
+                    for (const attr of attributes) {
+                        const attribute = { attribute_name: attr.name, value: attr.value, product_id: id };
+                        await Attribute.createAttribute(attribute);
+                    }
+                }
+
+                res.status(200).json({ product: updated, attributes });
+            } catch (error) {
+                res.status(500).send('An error occurred while updating product');
+            }
+        });
     },
     deleteProduct: async (req, res) => {
         try {

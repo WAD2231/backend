@@ -41,14 +41,44 @@ module.exports = {
             throw error;
         }
     },
-    getCategories: async () => {
+    getCategories: async (filters) => {
         try {
-            const query = `
-                SELECT *
+            const { page_size, current_page } = filters;
+            let query = `
+                SELECT category_id as id, category_name as name
                 FROM ${SCHEMA}.category
             `;
-            const categories = await db.manyOrNone(query);
-            return categories;
+            const values = [];
+
+            if (page_size) {
+                const offset = (current_page - 1) * page_size;
+                query += ` LIMIT $1 OFFSET $2`;
+                values.push(page_size, offset);
+            }
+
+            const categories = await db.manyOrNone(query, values);
+
+            if (!page_size) {
+                return { categories };
+            }
+
+            const countQuery = `
+                SELECT COUNT(*) as total
+                FROM ${SCHEMA}.category
+            `;
+            const totalCountResult = await db.one(countQuery);
+            const totalItems = parseInt(totalCountResult.total, 10);
+            const totalPages = Math.ceil(totalItems / page_size);
+
+            return {
+                paging: {
+                    total_page: totalPages,
+                    total_item: totalItems,
+                    current_page: current_page,
+                    page_size: page_size
+                },
+                categories: categories
+            };
         } catch (error) {
             throw error;
         }

@@ -13,7 +13,7 @@ router.get('/details', productController.getProductDetails);
 router.post('/create', upload.single('image'), productController.createProduct);
 
 // Route to update an existing product by ID
-router.put('/:id', productController.updateProduct);
+router.put('/:id', upload.single('image'), productController.updateProduct);
 
 // Route to delete a product by ID
 router.delete('/:id', productController.deleteProduct);

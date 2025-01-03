@@ -13,13 +13,17 @@ module.exports = {
 
     getCategories: async (req, res) => {
         try {
-            const categories = await Category.getCategories();
-            res.status(200).json(categories);
+            const { page_size, current_page } = req.query;
+            const filters = {
+                page_size: page_size ? parseInt(page_size) : null,
+                current_page: current_page ? parseInt(current_page) : 1
+            };
+            const result = await Category.getCategories(filters);
+            res.status(200).json(result);
         } catch (error) {
             res.status(500).send('An error occurred while fetching categories');
         }
     },
-
     getCategoryDetail: async (req, res) => {
         try {
             const categoryId = parseInt(req.params.id);
