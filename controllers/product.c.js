@@ -1,7 +1,7 @@
 const Product = require('../models/product.m.js');
-const Manufacturer = require('../models/manufacturer.m.js'); 
+const Manufacturer = require('../models/manufacturer.m.js');
 const Category = require('../models/category.m.js');
-const Attribute=require('../models/attribute.m.js');
+const Attribute = require('../models/attribute.m.js');
 const Review = require('../models/review.m.js');
 const { up } = require('../migrations/20241231103744_create_coupon_table.js');
 const upload = require('../middlewares/upload');
@@ -44,7 +44,6 @@ module.exports = {
                 discount: product.discount,
                 stock: product.stock,
                 category: {
-                    
                     name: product.category
                 },
                 manufacturer: {
@@ -64,6 +63,10 @@ module.exports = {
             res.status(500).send('An error occurred while fetching product details');
         }
     },
+
+
+    //To use this method we will get list of categories, manufacturers and attributes from the methods in their respective controllers.
+    //After that we will send the response with category_id, manufacturer_id in the list of categories, manufacturers .
     createProduct: async (req, res) => {
         upload.single('image')(req, res, async (err) => {
             if (err) {
@@ -71,24 +74,10 @@ module.exports = {
             }
 
             try {
-                const { name, price, description, manufacturer_name, category_name, attributes } = req.body;
+                const { name, price, description, manufacturer_id, category_id, attributes } = req.body;
                 const image_url = req.file ? req.file.path : null;
-
-                const manufacturer = await Manufacturer.getManufacturerByName(manufacturer_name);
-                if (!manufacturer) {
-                    return res.status(404).json({ error: `Manufacturer with name ${manufacturer_name} not found` });
-                }
-                const manufacturer_id = manufacturer.manufacturer_id;
-
-                const category = await Category.getCategoryByName(category_name);
-                if (!category) {
-                    return res.status(404).json({ error: `Category with name ${category_name} not found` });
-                }
-                const category_id = category.category_id;
-
                 const product = { name, price, description, manufacturer_id, category_id, image_url };
                 const newProduct = await Product.createProduct(product);
-
                 if (attributes && Array.isArray(attributes)) {
                     for (const attr of attributes) {
                         const attribute = { attribute_name: attr.name, value: attr.value, product_id: newProduct.product_id };
@@ -105,33 +94,29 @@ module.exports = {
     updateProduct: async (req, res) => {
         try {
             const id = parseInt(req.params.id);
+            if (isNaN(id)) {
+                return res.status(400).json({ error: 'Invalid product ID' });
+            }
+
+            const { name, price, description, manufacturer_id, category_id, attributes } = req.body;
+            const image_url = req.file ? req.file.path : null;
+
             const product = await Product.getProductDetail(id);
             if (!product) {
-                res.status(404).json({ error: `Product with id ${id} not found` });
-                return;
+                return res.status(404).json({ error: `Product with id ${id} not found` });
             }
-
-            const { name, price, description, manufacturer_name, category_name, image_url } = req.body;
-
-            const manufacturer = await Manufacturer.getManufacturerByName(manufacturer_name);
-            if (!manufacturer) {
-                return res.status(404).json({ error: `Manufacturer with name ${manufacturer_name} not found` });
-            }
-            const manufacturer_id = manufacturer.manufacturer_id;
-
-            const category = await Category.getCategoryByName(category_name);
-            if (!category) {
-                return res.status(404).json({ error: `Category with name ${category_name} not found` });
-            }
-            const category_id = category.category_id;
-
-            const updatedProduct = { ...product, name, price, description, manufacturer_id, category_id, image_url };
+            const updatedProduct = { name, price, description, manufacturer_id, category_id, image_url };
             const updated = await Product.updateProduct(id, updatedProduct);
-            if (updated) {
-                res.status(200).json(updated);
-            } else {
-                res.status(404).json({ error: `Product with id ${id} not found` });
+
+            if (attributes && Array.isArray(attributes)) {
+                await Attribute.deleteAttribute(id); // Assuming you have a method to delete existing attributes
+                for (const attr of attributes) {
+                    const attribute = { attribute_name: attr.name, value: attr.value, product_id: id };
+                    await Attribute.createAttribute(attribute);
+                }
             }
+
+            res.status(200).json({ product: updated, attributes });
         } catch (error) {
             res.status(500).send('An error occurred while updating product');
         }
@@ -149,7 +134,7 @@ module.exports = {
             res.status(500).send('An error occurred while deleting product');
         }
     },
-    getProduct: async(req,res) => {
+    getProduct: async (req, res) => {
         try {
             const query = req.params.query;
             const productsByName = await Product.getProduct('product_name', query);

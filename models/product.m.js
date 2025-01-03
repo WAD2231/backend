@@ -128,11 +128,11 @@ module.exports = {
     createProduct: async (product) => {
         try {
             const query = `
-                INSERT INTO ${SCHEMA}.product (product_name, price, description)
-                VALUES ($1, $2, $3)
+                INSERT INTO ${SCHEMA}.product (product_name, price, description, stock, discount, category_id, manufacturer_id)
+                VALUES ($1, $2, $3, $4, $5, $6, $7)
                 RETURNING product_id
             `;
-            const values = [product.name, product.price, product.description];
+            const values = [product.name, product.price, product.description, product.stock, product.discount, product.category_id, product.manufacturer_id];
             const result = await db.one(query, values);
 
             if (product.image_url) {
