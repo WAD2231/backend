@@ -19,19 +19,13 @@ module.exports = {
     createAttribute: async (attribute) => {
         try {
             const query = `
-                INSERT INTO ${SCHEMA}.attributes (cpu, ram, storage, battery, screen)
-                VALUES ($1, $2, $3, $4, $5)
-                RETURNING product_id
+                INSERT INTO ${SCHEMA}.attributes (attribute_name, value, product_id)
+                VALUES ($1, $2, $3)
+                RETURNING attribute_id
             `;
-            const values = [
-                attribute.cpu,
-                attribute.ram,
-                attribute.storage,
-                attribute.battery,
-                attribute.screen
-            ];
+            const values = [attribute.attribute_name, attribute.value, attribute.product_id];
             const result = await db.one(query, values);
-            return result.product_id;
+            return result.attribute_id;
         } catch (error) {
             throw error;
         }
@@ -41,20 +35,11 @@ module.exports = {
         try {
             const query = `
                 UPDATE ${SCHEMA}.attributes
-                SET cpu = $1, ram = $2, storage = $3, battery = $4, screen = $5
-                WHERE product_id = $6
-                RETURNING *
+                SET attribute_name = $1, value = $2
+                WHERE attribute_id = $3
             `;
-            const values = [
-                attribute.cpu,
-                attribute.ram,
-                attribute.storage,
-                attribute.battery,
-                attribute.screen,
-                id
-            ];
-            const result = await db.one(query, values);
-            return result;
+            const values = [attribute.attribute_name, attribute.value, id];
+            await db.none(query, values);
         } catch (error) {
             throw error;
         }

@@ -23,20 +23,82 @@ module.exports = {
             throw error;
         }
     },
-    getProducts: async () => {
+    getProducts: async (filters) => {
         try {
-            const query = `
+            const { category_id, search, page_size, current_page } = filters;
+            const offset = (current_page - 1) * page_size;
+
+            let query = `
                 SELECT pr.product_id as id,
                     pr.product_name as name,
                     pr.price as price,
                     pr.description as description,
+                    pr.stock as stock,
+                    pr.discount as discount,
+                    pr.category_id as category_id,
+                    pr.manufacturer_id as manufacturer_id,
                     pi.image_url as image_url
                 FROM ${SCHEMA}.product pr
                 LEFT JOIN ${SCHEMA}.product_image pi
                 ON pr.product_id = pi.product_id
+                WHERE 1=1
             `;
-            const products = await db.manyOrNone(query);
-            return products;
+
+            const values = [];
+            let index = 1;
+
+            if (category_id) {
+                query += ` AND pr.category_id = $${index++}`;
+                values.push(category_id);
+            }
+
+            if (search) {
+                query += ` AND pr.product_name ILIKE $${index++}`;
+                values.push(`%${search}%`);
+            }
+
+            query += ` LIMIT $${index++} OFFSET $${index}`;
+            values.push(page_size, offset);
+
+            const products = await db.manyOrNone(query, values);
+
+            // Get total count for pagination
+            let countQuery = `
+                SELECT COUNT(*) as total
+                FROM ${SCHEMA}.product pr
+                WHERE 1=1
+            `;
+
+            const countValues = [];
+            let countIndex = 1;
+
+            if (category_id) {
+                countQuery += ` AND pr.category_id = $${countIndex++}`;
+                countValues.push(category_id);
+            }
+
+            if (search) {
+                countQuery += ` AND pr.product_name ILIKE $${countIndex++}`;
+                countValues.push(`%${search}%`);
+            }
+
+            const totalCountResult = await db.one(countQuery, countValues);
+            const totalItems = parseInt(totalCountResult.total, 10);
+            const totalPages = Math.ceil(totalItems / page_size);
+
+            return {
+                paging: {
+                    total_page: totalPages,
+                    total_item: totalItems,
+                    current_page: current_page,
+                    page_size: page_size
+                },
+                query: {
+                    search: search,
+                    category_id: category_id
+                },
+                products: products
+            };
         } catch (error) {
             throw error;
         }
@@ -129,61 +191,4 @@ module.exports = {
             throw error;
         }
     },
-    addCouponProduct: async (productId, couponId) => {
-        try {
-            const query = `
-                INSERT INTO ${SCHEMA}.coupon_product (product_id, coupon_id)
-                VALUES ($1, $2)
-            `;
-            await db.none(query, [productId, couponId]);
-        } catch (error) {
-            throw error;
-        }
-    },
-    getProductsWithCoupon: async () => {
-        try {
-            const query = `
-                SELECT pr.product_id as id,
-                    pr.product_name as name,
-                    pr.price as price,
-                    pr.description as description,
-                    pi.image_url as image_url,
-                    cp.coupon_code as coupon_code,
-                    c.expired_at as coupon_expired_at
-                FROM ${SCHEMA}.products pr
-                LEFT JOIN ${SCHEMA}.product_image pi ON pr.product_id = pi.product_id
-                LEFT JOIN ${SCHEMA}.coupon_product cp ON pr.product_id = cp.product_id
-                LEFT JOIN ${SCHEMA}.coupons c ON cp.coupon_id = c.coupon_id
-                WHERE c.expired_at > NOW()
-            `;
-            const products = await db.manyOrNone(query);
-            return products;
-        } catch (error) {
-            throw error;
-        }
-    },
-    updateCouponProduct: async (productId, couponId) => {
-        try {
-            const query = `
-                UPDATE ${SCHEMA}.coupon_product
-                SET coupon_id = $2
-                WHERE product_id = $1
-            `;
-            await db.none(query, [productId, couponId]);
-        } catch (error) {
-            throw error;
-        }
-    },
-    deleteCouponProduct: async (productId, couponId) => {
-        try {
-            const query = `
-                DELETE FROM ${SCHEMA}.coupon_product
-                WHERE product_id = $1
-                AND coupon_id = $2
-            `;
-            await db.none(query, [productId, couponId]);
-        } catch (error) {
-            throw error;
-        }
-    }
-}
+};
