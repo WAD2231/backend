@@ -1,4 +1,5 @@
 const Profile = require('../models/profile.m');
+const defaultAvatar = 'https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA?rs=1&pid=ImgDetMain';
 
 module.exports = {
     getProfile: async (req, res) => {
@@ -22,6 +23,9 @@ module.exports = {
         try {
             const profile = req.body;
             profile.user_id = req.user.user_id;
+            profile.avatar = req.file 
+                ? `${process.env.SERVER_URL}/uploads/users/${req.file.filename}` 
+                : defaultAvatar;
             const existedProfile = await Profile.getProfile('u.user_id', profile.user_id);
 
             if (existedProfile) {
@@ -40,6 +44,9 @@ module.exports = {
         try {
             const id = parseInt(req.params.id);
             const profile = req.body;
+            if (req.file) {
+                profile.avatar = `${process.env.SERVER_URL}/uploads/users/${req.file.filename}`;
+            }
             const existedProfile = await Profile.getProfile('profile_id', id);
 
             if (!existedProfile) {

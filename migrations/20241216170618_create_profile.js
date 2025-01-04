@@ -9,7 +9,8 @@ exports.up = async function(knex) {
             name VARCHAR(255),
             phone VARCHAR(20),
             address VARCHAR(255),
-            user_id INT
+            user_id INT,
+            avatar TEXT DEFAULT 'https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA?rs=1&pid=ImgDetMain'
         );    
 
         ALTER TABLE profile

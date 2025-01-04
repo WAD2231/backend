@@ -57,7 +57,8 @@ GET /api/users/:id
     "id": 1,
     "name": "Tô An An",
     "phone": "0334191260",
-    "address": "Quận Tân Bình, TP Hồ Chí Minh"
+    "address": "Quận Tân Bình, TP Hồ Chí Minh",
+    "avatar": "https://example.com/avatar.jpg"
   }
 }
 ```
@@ -114,6 +115,7 @@ GET /api/profiles/:id
   "name": "Tô An An",
   "phone": "0334191260",
   "address": "Quận Tân Bình, TP Hồ Chí Minh",
+  "avatar": "https://example.com/avatar.jpg",
   "user": {
     "id": 7,
     "username": "anan1997"
@@ -129,7 +131,8 @@ POST /api/profiles
 {
   "name": "Nguyễn Khánh Du",
   "phone": "01668823429",
-  "address": "TP Biên Hòa, Tỉnh Đồng Nai"
+  "address": "TP Biên Hòa, Tỉnh Đồng Nai",
+  "avatar": "...",
 }
 ```
 
@@ -141,7 +144,8 @@ PUT /api/profiles/:id
 {
   "name": "Tô An An",
   "address": "Quận Tân Phú, TP Hồ Chí Minh",
-  "phone": "0935127671"
+  "phone": "0935127671",
+  "avatar": "..."
 }
 ```
 
