@@ -2,6 +2,43 @@ const db = require('./db');
 const SCHEMA = process.env.DB_SCHEMA;
 
 module.exports = {
+    getProfiles: async (page, size) => {
+        try {
+            const query = `
+                SELECT 
+                    p.profile_id as id,
+                    p.name,
+                    p.phone, 
+                    p.address,
+                    p.avatar,
+                    json_object (
+                        'id': u.user_id,
+                        'username': u.username
+                    ) as user
+                FROM ${SCHEMA}.profile p 
+                    JOIN ${SCHEMA}.users u 
+                    ON p.user_id = u.user_id
+                ORDER BY p.profile_id
+                LIMIT $1 OFFSET $2
+            `;
+            const profiles = await db.any(query, [size, (page - 1) * size]);
+            const totalItem = await db.one(`SELECT COUNT(*)::INTEGER as total FROM ${SCHEMA}.profile`);
+
+            return {
+                paging: {
+                    current_page: page,
+                    page_size: size,
+                    total_item: totalItem.total,
+                    total_page: Math.ceil(totalItem.total / size)
+                },
+                profiles: profiles
+            }
+        }
+        catch (err) {
+            throw err;
+        }
+    },
+
     getProfile: async (field, value) => {
         try {
             const query = `

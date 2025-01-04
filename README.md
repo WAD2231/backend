@@ -153,6 +153,53 @@ PUT /api/profiles/:id
 
 DELETE /api/profiles/:id
 
+## 3.5. Get profiles
+GET /api/profiles?page=1&size=4
+```json
+{
+  "paging": {
+    "current_page": 1,
+    "page_size": 3,
+    "total_item": 4,
+    "total_page": 2
+  },
+  "profiles": [
+    {
+      "id": 3,
+      "name": "Nguyễn Khánh Du",
+      "phone": "01668823429",
+      "address": "TP Biên Hòa, Tỉnh Đồng Nai",
+      "avatar": "https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA?rs=1&pid=ImgDetMain",
+      "user": {
+        "id": 8,
+        "username": "tiendat123"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Bùi Công Anh",
+      "phone": "0223160827",
+      "address": "Quận 1, TP Hồ Chí Minh",
+      "avatar": "https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA?rs=1&pid=ImgDetMain",
+      "user": {
+        "id": 7,
+        "username": "anan1997"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Vân Anh",
+      "phone": "0123456789",
+      "address": "Việt Nam",
+      "avatar": null,
+      "user": {
+        "id": 15,
+        "username": "yenvicute"
+      }
+    }
+  ]
+}
+```
 # 4. PRODUCT REVIEW
 
 ## 4.1. Post a review

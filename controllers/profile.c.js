@@ -2,6 +2,19 @@ const Profile = require('../models/profile.m');
 const defaultAvatar = 'https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA?rs=1&pid=ImgDetMain';
 
 module.exports = {
+    getProfiles: async (req, res) => {
+        try {
+            const page = parseInt(req.query.page) || 1;
+            const size = parseInt(req.query.size) || 10;
+            const profiles = await Profile.getProfiles(page, size);
+
+            res.status(200).json(profiles);
+        }
+        catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    },
+    
     getProfile: async (req, res) => {
         try {
             const id = parseInt(req.params.id);

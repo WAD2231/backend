@@ -12,6 +12,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage })
 
+router.get('/', ProfileC.getProfiles);
+
 router.get('/:id', ProfileC.getProfile);
 
 router.post('/', upload.single('avatar'), ProfileC.createProfile);
