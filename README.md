@@ -3,6 +3,7 @@
 ## 1.1. Create a new user
 
 POST /api/users
+permission: 0 - user, 1 - admin
 
 ```json
 {
@@ -57,7 +58,8 @@ GET /api/users/:id
     "id": 1,
     "name": "Tô An An",
     "phone": "0334191260",
-    "address": "Quận Tân Bình, TP Hồ Chí Minh"
+    "address": "Quận Tân Bình, TP Hồ Chí Minh",
+    "avatar": "https://example.com/avatar.jpg"
   }
 }
 ```
@@ -114,6 +116,7 @@ GET /api/profiles/:id
   "name": "Tô An An",
   "phone": "0334191260",
   "address": "Quận Tân Bình, TP Hồ Chí Minh",
+  "avatar": "https://example.com/avatar.jpg",
   "user": {
     "id": 7,
     "username": "anan1997"
@@ -129,7 +132,8 @@ POST /api/profiles
 {
   "name": "Nguyễn Khánh Du",
   "phone": "01668823429",
-  "address": "TP Biên Hòa, Tỉnh Đồng Nai"
+  "address": "TP Biên Hòa, Tỉnh Đồng Nai",
+  "avatar": "...",
 }
 ```
 
@@ -141,13 +145,78 @@ PUT /api/profiles/:id
 {
   "name": "Tô An An",
   "address": "Quận Tân Phú, TP Hồ Chí Minh",
-  "phone": "0935127671"
+  "phone": "0935127671",
+  "avatar": "..."
 }
 ```
 
 ## 3.4. Delete profile
 
 DELETE /api/profiles/:id
+
+## 3.5. Get profiles
+GET /api/profiles?page=1&size=4
+```json
+{
+  "paging": {
+    "current_page": 1,
+    "page_size": 3,
+    "total_item": 4,
+    "total_page": 2
+  },
+  "profiles": [
+    {
+      "id": 3,
+      "name": "Nguyễn Khánh Du",
+      "phone": "01668823429",
+      "address": "TP Biên Hòa, Tỉnh Đồng Nai",
+      "avatar": "https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA?rs=1&pid=ImgDetMain",
+      "user": {
+        "id": 8,
+        "username": "tiendat123"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Bùi Công Anh",
+      "phone": "0223160827",
+      "address": "Quận 1, TP Hồ Chí Minh",
+      "avatar": "https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA?rs=1&pid=ImgDetMain",
+      "user": {
+        "id": 7,
+        "username": "anan1997"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Vân Anh",
+      "phone": "0123456789",
+      "address": "Việt Nam",
+      "avatar": null,
+      "user": {
+        "id": 15,
+        "username": "yenvicute"
+      }
+    }
+  ]
+}
+```
+
+## 3.6. Get my profile
+GET /api/profiles/me
+```json
+{
+    "id": 14,
+    "name": "Hạ Mơ",
+    "phone": "0123321234",
+    "address": "Q1, TP HCM",
+    "avatar": "http://localhost:3000/uploads/users/avatar-1735962682015-794170293bubble.jpg",
+    "user": {
+        "id": 17,
+        "username": null
+    }
+}
+```
 
 # 4. PRODUCT REVIEW
 
