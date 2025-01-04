@@ -11,15 +11,18 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage })
+const {verifyUser} = require('../middlewares/authorize');
 
-router.get('/', ProfileC.getProfiles);
+router.get('/', verifyUser, ProfileC.getProfiles);
 
-router.get('/:id', ProfileC.getProfile);
+router.get('/me', verifyUser, ProfileC.getMyProfile);
 
-router.post('/', upload.single('avatar'), ProfileC.createProfile);
+router.get('/:id', verifyUser, ProfileC.getProfile);
 
-router.put('/:id', upload.single('avatar'), ProfileC.updateProfile);
+router.post('/', verifyUser, upload.single('avatar'), ProfileC.createProfile);
 
-router.delete('/:id', ProfileC.deleteProfile);
+router.put('/:id', verifyUser, upload.single('avatar'), ProfileC.updateProfile);
+
+router.delete('/:id', verifyUser, ProfileC.deleteProfile);
 
 module.exports = router;

@@ -14,21 +14,38 @@ module.exports = {
             res.status(500).json({ error: err.message });
         }
     },
-    
+
     getProfile: async (req, res) => {
         try {
             const id = parseInt(req.params.id);
             const profile = await Profile.getProfile('profile_id', id);
 
             if (!profile) {
-                res.status(404).json({ error: `Profile with id ${id} not found` });
+                res.status(404).json({ message: `Profile with id ${id} not found` });
                 return;
             }
 
             res.status(200).json(profile);
         }
         catch (err) {
-            res.status(500).json({ error: err.message });
+            res.status(500).json({ message: err.message });
+        }
+    },
+
+    getMyProfile: async (req, res) => {
+        try {
+            const id = parseInt(req.user.user_id);
+            const profile = await Profile.getProfile('p.user_id', id);
+
+            if (!profile) {
+                res.status(404).json({ message: `Profile with id ${id} not found` });
+                return;
+            }
+
+            res.status(200).json(profile);
+        }
+        catch (err) {
+            res.status(500).json({ message: err.message });
         }
     },
 
@@ -42,14 +59,14 @@ module.exports = {
             const existedProfile = await Profile.getProfile('u.user_id', profile.user_id);
 
             if (existedProfile) {
-                return res.status(409).json({ error: 'Profile already exists' });
+                return res.status(409).json({ message: 'Profile already exists' });
             }
 
             const newProfile = await Profile.createProfile(profile);
             res.status(201).json(newProfile);
         }
         catch (err) {
-            res.status(500).json({ error: err.message });
+            res.status(500).json({ message: err.message });
         }
     },
 
@@ -63,7 +80,7 @@ module.exports = {
             const existedProfile = await Profile.getProfile('profile_id', id);
 
             if (!existedProfile) {
-                res.status(404).json({ error: `Profile with id ${id} not found` });
+                res.status(404).json({ message: `Profile with id ${id} not found` });
                 return;
             }
 

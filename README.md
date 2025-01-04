@@ -3,6 +3,7 @@
 ## 1.1. Create a new user
 
 POST /api/users
+permission: 0 - user, 1 - admin
 
 ```json
 {
@@ -200,6 +201,23 @@ GET /api/profiles?page=1&size=4
   ]
 }
 ```
+
+## 3.6. Get my profile
+GET /api/profiles/me
+```json
+{
+    "id": 14,
+    "name": "Hạ Mơ",
+    "phone": "0123321234",
+    "address": "Q1, TP HCM",
+    "avatar": "http://localhost:3000/uploads/users/avatar-1735962682015-794170293bubble.jpg",
+    "user": {
+        "id": 17,
+        "username": null
+    }
+}
+```
+
 # 4. PRODUCT REVIEW
 
 ## 4.1. Post a review

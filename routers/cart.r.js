@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const CartC = require('../controllers/cart.c');
+const {verifyUser} = require('../middlewares/authorize');
 
-router.get('/', CartC.get);
+router.get('/', verifyUser, CartC.get);
 
-router.post('/', CartC.add);
+router.post('/', verifyUser, CartC.add);
 
-router.put('/:id', CartC.update);
+router.put('/:id', verifyUser, CartC.update);
 
-router.delete('/:id', CartC.delete);
+router.delete('/:id', verifyUser, CartC.delete);
 
 module.exports = router;
