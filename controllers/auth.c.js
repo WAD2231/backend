@@ -8,7 +8,7 @@ module.exports = {
             }
 
             if (!user) {
-                return res.status(400).send(info.message);
+                return res.status(400).json({ message: info.message });
             }
 
             req.logIn(user, (err) => {
@@ -26,7 +26,7 @@ module.exports = {
             if (err) {
                 console.log(err);
             }
-            return res.status(200).send('Logged out');
+            return res.status(200).json({ message: 'Logged out' });
         });
     },
 
@@ -37,16 +37,16 @@ module.exports = {
     googleCallback: (req, res, next) => {
         passport.authenticate('google', (err, user, info) => {
             if (err) {
-                return res.status(500).send(err);
+                return res.status(500).json({message: err.message});
             }
 
             if (!user) {
-                return res.status(400).send(info.message);
+                return res.status(400).json({message: info.message});
             }
 
             req.logIn(user, (err) => {
                 if (err) {
-                    return next(err);
+                    return res.status(500).json({message: err.message});
                 }
 
                 return res.status(200).json({ message: 'Logged in'});
@@ -61,11 +61,11 @@ module.exports = {
     facebookCallback: (req, res, next) => {
         passport.authenticate('facebook', (err, user, info) => {
             if (err) {
-                return res.status(500).send(err);
+                return res.status(500).json({message: err.message});
             }
 
             if (!user) {
-                return res.status(400).send(info.message);
+                return res.status(400).json({message: info.message});
             }
 
             req.logIn(user, (err) => {
