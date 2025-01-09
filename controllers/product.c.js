@@ -29,14 +29,13 @@ module.exports = {
                 return res.status(400).json({ error: 'Invalid product ID' });
             }
             const product = await Product.getProductDetail(productId);
-            console.log(product);
             if (!product) {
-                res.status(404).json({ error: `Product with id ${productId} not found` });
-                return;
+                return res.status(404).json({ error: `Product with id ${productId} not found` });
             }
             const attributes = await Attribute.getAttributes(productId);
-            const relatedProducts =await Product.getSameTypeProductInCategory(product.id)
-
+            const relatedProducts = await Product.getSameTypeProductInCategory(product.id);
+            const reviews = await Review.getReviews(productId) || [];
+            console.log(reviews);
             const response = {
                 id: product.id,
                 name: product.name,
@@ -50,6 +49,16 @@ module.exports = {
                     name: product.manufacturer
                 },
                 description: product.description,
+                reviews: reviews.reviews.map(review => ({
+                    id: review.review_id,
+                    content: review.content,
+                    rating: review.rating,
+                    posted_at: review.posted_at,
+                    user: {
+                        id: review.user.id,
+                        name: review.user.name
+                    }
+                })),
                 images: product.image_url ? [product.image_url] : [],
                 attributes: attributes.map(attr => ({
                     name: attr.attribute_name,
