@@ -42,10 +42,15 @@ module.exports = (app) => {
     passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: 'http://localhost:3000/api/auth/login/google/callback'
+        callbackURL: 'http://localhost:3000/api/auth/login/google/callback',
+        profileFields: ['id', 'displayName', 'photos']
     },
         async (accessToken, refreshToken, profile, cb) => {
-            const user = await User.findOrCreateUserByGoogle(profile);
+            const user = await User.findOrCreateUserByGoogle({
+                id: profile.id,
+                fullname: profile.displayName,
+                avatar: profile.photos[0].value
+            });
             if (user.account_id === null) {
                 account_id = await createAccountInSubSystem();
                 await User.updateAccountID(user.user_id, account_id);
@@ -57,10 +62,15 @@ module.exports = (app) => {
     passport.use(new FacebookStrategy({
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: "http://localhost:3000/api/auth/login/facebook/callback"
+        callbackURL: "http://localhost:3000/api/auth/login/facebook/callback",
+        profileFields: ['id', 'displayName', 'photos']
     },
         async (accessToken, refreshToken, profile, cb) => {
-            const user = await User.findOrCreateUserByFacebook(profile);
+            const user = await User.findOrCreateUserByFacebook({
+                id: profile.id,
+                fullname: profile.displayName,
+                avatar: profile.photos[0].value
+            });
             if (user.account_id === null) {
                 account_id = await createAccountInSubSystem();
                 await User.updateAccountID(user.user_id, account_id);
