@@ -1,5 +1,4 @@
 
-const { updateCoupon } = require('./coupon.m');
 const db = require('./db');
 const SCHEMA = process.env.DB_SCHEMA;
 
@@ -135,12 +134,14 @@ module.exports = {
             const values = [product.name, product.price, product.description, product.stock, product.discount, product.category_id, product.manufacturer_id];
             const result = await db.one(query, values);
 
-            if (product.image_url) {
+            if (product.image_urls && product.image_urls.length > 0) {
                 const imageQuery = `
                     INSERT INTO ${SCHEMA}.product_image (product_id, image_url)
                     VALUES ($1, $2)
                 `;
-                await db.none(imageQuery, [result.product_id, product.image_url]);
+                for (const image_url of product.image_urls) {
+                    await db.none(imageQuery, [result.product_id, image_url]);
+                }
             }
 
             return result.product_id;
@@ -191,4 +192,24 @@ module.exports = {
             throw error;
         }
     },
+    getSameTypeProductInCategory: async (productId) => {
+        try {
+            const query = `
+                SELECT pr.product_id as id,
+                    pr.product_name as name,
+                    pr.price as price,
+                    pr.description as description,
+                    pi.image_url as image_url
+                FROM ${SCHEMA}.product pr
+                LEFT JOIN ${SCHEMA}.product_image pi ON pr.product_id = pi.product_id
+                WHERE pr.category_id = (SELECT category_id FROM ${SCHEMA}.product WHERE product_id = $1) AND
+                pr.type = (SELECT type FROM ${SCHEMA}.product WHERE product_id = $1)
+                AND pr.product_id != $1
+            `;
+            const products = await db.manyOrNone(query, [productId]);
+            return products;
+        } catch (error) {
+            throw error;
+        }
+    }
 };

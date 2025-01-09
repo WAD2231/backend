@@ -35,7 +35,7 @@ module.exports = {
                 return;
             }
             const attributes = await Attribute.getAttributes(productId);
-
+            const relatedProducts =await Product.getSameTypeProductInCategory(product.id)
 
             const response = {
                 id: product.id,
@@ -54,6 +54,13 @@ module.exports = {
                 attributes: attributes.map(attr => ({
                     name: attr.attribute_name,
                     value: attr.value
+                })),
+                relatedProducts: relatedProducts.map(relatedProduct => ({
+                    id: relatedProduct.id,
+                    name: relatedProduct.name,
+                    price: relatedProduct.price,
+                    discount: relatedProduct.discount,
+                    image_url: relatedProduct.image_url
                 }))
             };
 
@@ -66,14 +73,14 @@ module.exports = {
     //To use this method we will get list of categories, manufacturers and attributes from the methods in their respective controllers.
     //After that we will send the response with category_id, manufacturer_id in the list of categories, manufacturers .
     createProduct: async (req, res) => {
-        upload.single('image')(req, res, async (err) => {
+        upload.array('image',10)(req, res, async (err) => {
             if (err) {
                 return res.status(500).send('An error occurred while uploading the image');
             }
 
             try {
                 const { name, price, description, manufacturer_id, category_id, attributes } = req.body;
-                const image_url = req.file ? req.file.path : null;
+                const image_urls = req.files ? req.files.map(file => file.path) : [];
                 const product = { name, price, description, manufacturer_id, category_id, image_url };
                 const newProduct = await Product.createProduct(product);
                 if (attributes && Array.isArray(attributes)) {
