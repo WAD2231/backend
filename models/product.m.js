@@ -129,22 +129,22 @@ module.exports = {
             const query = `
                 INSERT INTO ${SCHEMA}.product (product_name, price, description, stock, discount, category_id, manufacturer_id)
                 VALUES ($1, $2, $3, $4, $5, $6, $7)
-                RETURNING product_id
+                RETURNING *
             `;
             const values = [product.name, product.price, product.description, product.stock, product.discount, product.category_id, product.manufacturer_id];
             const result = await db.one(query, values);
 
-            if (product.image_urls && product.image_urls.length > 0) {
+            if (product.images && product.images.length > 0) {
                 const imageQuery = `
                     INSERT INTO ${SCHEMA}.product_image (product_id, image_url)
                     VALUES ($1, $2)
                 `;
-                for (const image_url of product.image_urls) {
+                for (const image_url of product.images) {
                     await db.none(imageQuery, [result.product_id, image_url]);
                 }
             }
 
-            return result.product_id;
+            return result;
         } catch (error) {
             throw error;
         }
