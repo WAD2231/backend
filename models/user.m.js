@@ -104,13 +104,20 @@ module.exports = {
                         permission, 
                         login_provider, 
                         provider_id,
-                        fullname
+                        fullname,
+                        avatar 
                     )
-                    VALUES ($1, $2, $3, $4)
+                    VALUES ($1, $2, $3, $4, $5)
                     RETURNING *
                 `;
 
-                user = await db.one(query, [USER, FACEBOOK, profile.id, profile.displayName]);
+                user = await db.one(query, [
+                    USER, 
+                    FACEBOOK, 
+                    profile.id, 
+                    profile.fullname, 
+                    profile.avatar
+                ]);
             }
 
             return user;
@@ -135,13 +142,20 @@ module.exports = {
                         permission, 
                         login_provider, 
                         provider_id,
-                        fullname
+                        fullname,
+                        avatar
                     )
-                    VALUES ($1, $2, $3, $4)
+                    VALUES ($1, $2, $3, $4, $5)
                     RETURNING *
                 `;
 
-                user = await db.one(query, [USER, GOOGLE, profile.id, profile.displayName]);
+                user = await db.one(query, [
+                    USER, 
+                    GOOGLE, 
+                    profile.id, 
+                    profile.fullname,
+                    profile.avatar
+                ]);
             }
 
             return user;
