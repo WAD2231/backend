@@ -26,11 +26,10 @@ module.exports = {
                     r.posted_at as posted_at,
                     json_build_object(
                         'id', u.user_id,
-                        'name', p.name
+                        'fullname', u.fullname
                     ) as user
                 FROM ${SCHEMA}.reviews r 
                 JOIN ${SCHEMA}.users u ON r.user_id = u.user_id
-                JOIN ${SCHEMA}.profile p ON p.user_id = u.user_id
                 WHERE product_id = $1
                 LIMIT $2 OFFSET $3
             `;

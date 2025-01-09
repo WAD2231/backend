@@ -82,12 +82,12 @@ module.exports = {
         try {
             const query = `
                 SELECT 
-                    p.user_id as id, 
-                    p.name as name,  
+                    u.user_id as id, 
+                    u.fullname as fullname,  
                     SUM(o.total)::INTEGER as total
                 FROM ${SCHEMA}.orders o
-                JOIN ${SCHEMA}.profile p ON o.user_id = p.user_id
-                GROUP BY p.user_id, p.name
+                JOIN ${SCHEMA}.users u ON o.user_id = u.user_id
+                GROUP BY u.user_id, u.fullname
                 ORDER BY total DESC 
                 LIMIT $1
             `;

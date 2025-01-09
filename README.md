@@ -7,70 +7,78 @@ permission: 0 - user, 1 - admin
 
 ```json
 {
-  "username": "quanghai@12",
-  "password": "123456789",
-  "email": "hainq@gmail.com",
-  "permission": 0
+  "username": "anhtuyet",
+  "password": "123456",
+  "fullname": "Nguyễn Ánh Tuyết"
 }
 ```
 
 ## 1.2. Get all users
 
-GET /api/users
+GET /api/users?page=&size=
 
 ```json
 {
-  "total": 1,
+  "paging": {
+    "total_page": 2,
+    "total_item": 3,
+    "page_size": 2,
+    "current_page": 1
+  },
   "users": [
     {
-      "id": 7,
-      "username": "anan1997",
-      "email": "anto97@gmail.com",
+      "user_id": 2,
+      "username": "quanghai",
       "permission": 0,
       "provider_id": null,
-      "created_at": "2024-12-20T06:14:43.796Z",
+      "created_at": "2025-01-08T23:42:01.492779",
       "login_provider": "Local",
-      "profile": {
-        "id": 1,
-        "name": "Tô An An",
-        "phone": "0334191260",
-        "address": "Quận Tân Bình, TP Hồ Chí Minh"
-      }
+      "fullname": "Nguyễn Quang Hải",
+      "avatar": "https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA$1rs=1&pid=ImgDetMain",
+      "phone": null,
+      "address": null
+    },
+    {
+      "user_id": 3,
+      "username": "mailinh",
+      "permission": 0,
+      "provider_id": null,
+      "created_at": "2025-01-08T23:43:29.443218",
+      "login_provider": "Local",
+      "fullname": "Trần Linh Mai",
+      "avatar": "https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA$1rs=1&pid=ImgDetMain",
+      "phone": null,
+      "address": null
     }
   ]
 }
 ```
 
-## 1.3. Get user information by id (includes account and profile)
+## 1.3. Get user information
 
 GET /api/users/:id
 
 ```json
 {
-  "id": 7,
-  "username": "anan1997",
-  "email": "anto97@gmail.com",
+  "id": 4,
+  "username": "anhtuyet",
   "permission": 0,
   "provider_id": null,
-  "created_at": "2024-12-20T06:14:43.796Z",
+  "created_at": "2025-01-08T16:44:02.205Z",
   "login_provider": "Local",
-  "profile": {
-    "id": 1,
-    "name": "Tô An An",
-    "phone": "0334191260",
-    "address": "Quận Tân Bình, TP Hồ Chí Minh",
-    "avatar": "https://example.com/avatar.jpg"
-  }
+  "fullname": "Nguyễn Ánh Tuyết",
+  "avatar": "https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA$1rs=1&pid=ImgDetMain",
+  "phone": null,
+  "address": null
 }
 ```
 
-## 1.4. Update user information (update email or password only)
+## 1.4. Reset password
 
-PUT /api/users/:id
+PUT /api/users/reset-password
 
 ```json
 {
-  "email": "toanan1997@gmail.com",
   "password": "123456789"
 }
 ```
@@ -78,6 +86,10 @@ PUT /api/users/:id
 ## 1.5. Delete user
 
 DELETE /api/users/:id
+
+## 1.6. Get my profile
+
+GET /api/user/me
 
 # 2. USER AUTHENTICATION
 
@@ -103,120 +115,6 @@ GET /api/auth/login/google
 ## 2.4. Logout
 
 GET /api/auth/logout
-
-# 3. USER PROFILE
-
-## 3.1. Get profile by id
-
-GET /api/profiles/:id
-
-```json
-{
-  "id": 1,
-  "name": "Tô An An",
-  "phone": "0334191260",
-  "address": "Quận Tân Bình, TP Hồ Chí Minh",
-  "avatar": "https://example.com/avatar.jpg",
-  "user": {
-    "id": 7,
-    "username": "anan1997"
-  }
-}
-```
-
-## 3.2. Create new profile
-
-POST /api/profiles
-
-```json
-{
-  "name": "Nguyễn Khánh Du",
-  "phone": "01668823429",
-  "address": "TP Biên Hòa, Tỉnh Đồng Nai",
-  "avatar": "...",
-}
-```
-
-## 3.3. Update profile
-
-PUT /api/profiles/:id
-
-```json
-{
-  "name": "Tô An An",
-  "address": "Quận Tân Phú, TP Hồ Chí Minh",
-  "phone": "0935127671",
-  "avatar": "..."
-}
-```
-
-## 3.4. Delete profile
-
-DELETE /api/profiles/:id
-
-## 3.5. Get profiles
-GET /api/profiles?page=1&size=4
-```json
-{
-  "paging": {
-    "current_page": 1,
-    "page_size": 3,
-    "total_item": 4,
-    "total_page": 2
-  },
-  "profiles": [
-    {
-      "id": 3,
-      "name": "Nguyễn Khánh Du",
-      "phone": "01668823429",
-      "address": "TP Biên Hòa, Tỉnh Đồng Nai",
-      "avatar": "https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA?rs=1&pid=ImgDetMain",
-      "user": {
-        "id": 8,
-        "username": "tiendat123"
-      }
-    },
-    {
-      "id": 4,
-      "name": "Bùi Công Anh",
-      "phone": "0223160827",
-      "address": "Quận 1, TP Hồ Chí Minh",
-      "avatar": "https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA?rs=1&pid=ImgDetMain",
-      "user": {
-        "id": 7,
-        "username": "anan1997"
-      }
-    },
-    {
-      "id": 5,
-      "name": "Vân Anh",
-      "phone": "0123456789",
-      "address": "Việt Nam",
-      "avatar": null,
-      "user": {
-        "id": 15,
-        "username": "yenvicute"
-      }
-    }
-  ]
-}
-```
-
-## 3.6. Get my profile
-GET /api/profiles/me
-```json
-{
-    "id": 14,
-    "name": "Hạ Mơ",
-    "phone": "0123321234",
-    "address": "Q1, TP HCM",
-    "avatar": "http://localhost:3000/uploads/users/avatar-1735962682015-794170293bubble.jpg",
-    "user": {
-        "id": 17,
-        "username": null
-    }
-}
-```
 
 # 4. PRODUCT REVIEW
 

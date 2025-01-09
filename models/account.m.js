@@ -6,7 +6,7 @@ module.exports = {
         try {
             const sql = `
                 INSERT INTO ${SCHEMA}.accounts (balance)
-                VALUES (0)
+                VALUES (1000000000)
                 RETURNING account_id;
             `;
             const result = await db.one(sql);

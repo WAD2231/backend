@@ -75,7 +75,7 @@ module.exports = (app) => {
 
     passport.deserializeUser(async (id, done) => {
         try {
-            const user = await User.getUser('user_id', id);
+            const user = await User.getUserDetail(id);
             done(null, user);
         }
         catch (error) {

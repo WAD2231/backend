@@ -5,6 +5,40 @@ const GOOGLE = process.env.PROVIDER_GOOGLE;
 const FACEBOOK = process.env.PROVIDER_FACEBOOK;
 const USER = process.env.PERMISSION_USER;
 const ADMIN = process.env.PERMISSION_ADMIN;
+const bcrypt = require('bcrypt');
+
+const init = async () => {
+    const userCount = await db.one(`
+        SELECT COUNT(*)::INTEGER as total
+        FROM ${SCHEMA}.users    
+    `);
+    
+    if (userCount.total != 0) {
+        return;
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, salt);
+
+    await db.none(`
+        INSERT INTO ${SCHEMA}.users (
+            username, 
+            password, 
+            permission, 
+            fullname,
+            login_provider
+        )
+        VALUES ($1, $2, $3, $4, $5)
+    `, [
+        process.env.ADMIN_USERNAME,
+        hashedPassword,
+        ADMIN,
+        'Admin',
+        LOCAL
+    ]);
+}
+
+init();
 
 module.exports = {
     getUser: async (field, value) => {
@@ -26,13 +60,27 @@ module.exports = {
     createUser: async (user) => {
         try {
             const query = `
-                INSERT INTO ${SCHEMA}.users (username, password, email, permission, login_provider, account_id)
+                INSERT INTO ${SCHEMA}.users (
+                    username, 
+                    password, 
+                    permission, 
+                    account_id,
+                    fullname,
+                    login_provider
+                )
                 VALUES ($1, $2, $3, $4, $5, $6)
                 RETURNING user_id
             `;
 
-            const values = [user.username, user.password, user.email, user.permission, LOCAL, user.account_id];
-            const result = await db.one(query, values);
+            const result = await db.one(query, [
+                user.username,
+                user.password,
+                user.permission,
+                user.account_id,
+                user.fullname,
+                LOCAL
+            ]);
+            
             return result.user_id;
         }
         catch (error) {
@@ -45,18 +93,24 @@ module.exports = {
             const query = `
                 SELECT *
                 FROM ${SCHEMA}.users
-                WHERE login_provider = $1 AND provider_id = $2
+                WHERE login_provider = $1 
+                AND provider_id = $2
             `;
             let user = await db.oneOrNone(query, [FACEBOOK, profile.id]);
 
             if (!user) {
                 const query = `
-                    INSERT INTO ${SCHEMA}.users (permission, login_provider, provider_id)
-                    VALUES ($1, $2, $3)
+                    INSERT INTO ${SCHEMA}.users (
+                        permission, 
+                        login_provider, 
+                        provider_id,
+                        fullname
+                    )
+                    VALUES ($1, $2, $3, $4)
                     RETURNING *
                 `;
 
-                user = await db.one(query, [USER, FACEBOOK, profile.id]);
+                user = await db.one(query, [USER, FACEBOOK, profile.id, profile.displayName]);
             }
 
             return user;
@@ -71,18 +125,23 @@ module.exports = {
             const query = `
                 SELECT *
                 FROM ${SCHEMA}.users
-                WHERE login_provider = $1 AND provider_id = $2
+                WHERE login_provider = $1 
+                AND provider_id = $2
             `;
             let user = await db.oneOrNone(query, [GOOGLE, profile.id]);
-
             if (!user) {
                 const query = `
-                    INSERT INTO ${SCHEMA}.users (permission, login_provider, provider_id)
-                    VALUES ($1, $2, $3)
+                    INSERT INTO ${SCHEMA}.users (
+                        permission, 
+                        login_provider, 
+                        provider_id,
+                        fullname
+                    )
+                    VALUES ($1, $2, $3, $4)
                     RETURNING *
                 `;
 
-                user = await db.one(query, [USER, GOOGLE, profile.id]);
+                user = await db.one(query, [USER, GOOGLE, profile.id, profile.displayName]);
             }
 
             return user;
@@ -92,38 +151,58 @@ module.exports = {
         }
     },
 
-    getUsers: async () => {
+    getUsers: async (page, size) => {
         try {
             const query = `
+                WITH total_users AS (
+                    SELECT COUNT(*) AS total_item
+                    FROM ${SCHEMA}.users
+                ),
+                user_details AS (
+                    SELECT 
+                        user_id, 
+                        username, 
+                        permission, 
+                        provider_id, 
+                        created_at,
+                        CASE
+                            WHEN login_provider = $1 THEN 'Local'
+                            WHEN login_provider = $2 THEN 'Google'
+                            WHEN login_provider = $3 THEN 'Facebook'
+                        END AS login_provider,
+                        fullname,
+                        avatar,
+                        phone,
+                        address
+                    FROM ${SCHEMA}.users
+                    LIMIT $4
+                    OFFSET $5
+                )
                 SELECT 
-                    s.user_id as id, 
-                    s.username, 
-                    s.email, 
-                    s.permission, 
-                    s.provider_id, 
-                    s.created_at,
-                    CASE
-                        WHEN s.login_provider = $1 THEN 'Local'
-                        WHEN s.login_provider = $2 THEN 'Google'
-                        WHEN s.login_provider = $3 THEN 'Facebook'
-                    END AS login_provider,
-                    json_build_object (
-                        'id', p.profile_id,
-                        'name', p.name,
-                        'phone', p.phone,
-                        'address', p.address
-                    ) AS profile
-                FROM ${SCHEMA}.users s 
-                LEFT JOIN ${SCHEMA}.profile p 
-                ON s.user_id = p.user_id
+                    (SELECT json_object('total_item': total_item) FROM total_users) AS paging,
+                    json_agg(user_details) AS users
+                FROM user_details;
             `;
-            const users = await db.manyOrNone(query, [LOCAL, GOOGLE, FACEBOOK]);
+            const data = await db.one(query, [
+                LOCAL, 
+                GOOGLE, 
+                FACEBOOK,
+                size,
+                (page - 1) * size
+            ]);
+
             return {
-                total: users.length,
-                users: users
+                paging: {
+                    total_page: Math.ceil(data.paging.total_item / size),
+                    total_item: data.paging.total_item,
+                    page_size: size,
+                    current_page: page,
+                },
+                users: data.users
             }
         }
         catch (error) {
+            console.log(error);
             throw error;
         }
     },
@@ -133,10 +212,11 @@ module.exports = {
             const query = `
                 DELETE FROM ${SCHEMA}.users
                 WHERE user_id = $1
+                RETURNING *
             `;
 
-            const result = await db.result(query, [id], r => r.rowCount);
-            return result;
+            const result = await db.any(query, [id]);
+            return result.length;
         }
         catch (error) {
             throw error;
@@ -147,25 +227,22 @@ module.exports = {
         try {
             const query = `
                 SELECT 
-                    s.user_id as id, 
-                    s.username, 
-                    s.email, 
-                    s.permission, 
-                    s.provider_id, 
-                    s.created_at,
+                    user_id, 
+                    username, 
+                    permission, 
+                    provider_id, 
+                    created_at,
                     CASE
-                        WHEN s.login_provider = $1 THEN 'Local'
-                        WHEN s.login_provider = $2 THEN 'Google'
-                        WHEN s.login_provider = $3 THEN 'Facebook'
+                        WHEN login_provider = $1 THEN 'Local'
+                        WHEN login_provider = $2 THEN 'Google'
+                        WHEN login_provider = $3 THEN 'Facebook'
                     END as login_provider,
-                    json_object (
-                        'id': p.profile_id,
-                        'name': p.name,
-                        'phone': p.phone,
-                        'address': p.address
-                    ) as profile
-                FROM USERS s LEFT JOIN PROFILE p ON s.user_id = p.user_id
-                WHERE s.user_id = $4
+                    fullname,
+                    avatar,
+                    phone,
+                    address
+                FROM USERS
+                WHERE user_id = $4
             `;
             const user = await db.oneOrNone(query, [LOCAL, GOOGLE, FACEBOOK, id]);
             return user;
@@ -175,21 +252,17 @@ module.exports = {
         }
     },
 
-    updateUser: async (id, user) => {
+    resetPassword: async (id, password) => {
         try {
             const query = `
                 UPDATE ${SCHEMA}.users
-                SET email = $1, password = $2
-                WHERE user_id = $3
-                RETURNING *
+                SET password = $1
+                WHERE user_id = $2
             `;
 
-            const values = [user.email, user.password, id];
-            const updatedUser = await db.one(query, values);
-            return updatedUser;
+            await db.none(query, [password, id]);
         }
         catch (error) {
-            console.log(error);
             throw error;
         }
     },
@@ -204,7 +277,7 @@ module.exports = {
             `;
 
             const values = [account_id, id];
-            const updatedUser = await db.one(query, values);
+            const updatedUser = await db.any(query, values);
             return updatedUser;
         }
         catch (error) {
@@ -251,5 +324,26 @@ module.exports = {
         catch (error) {
             throw error;
         }
-    }
+    },
+
+    updateUser: async (id, user) => {
+        try {
+            const query = `
+                UPDATE ${SCHEMA}.users
+                SET 
+                    fullname = $1,
+                    phone = $2,
+                    address = $3,
+                    avatar = CASE WHEN $4 IS NOT NULL THEN $4 ELSE avatar END
+                WHERE user_id = $5
+                RETURNING *
+            `;
+
+            const result = await db.oneOrNone(query, [user.fullname, user.phone, user.address, user.avatar, id]);
+            return result.length;
+        }
+        catch (error) {
+            throw error;
+        }
+    },
 };

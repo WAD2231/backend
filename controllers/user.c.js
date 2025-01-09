@@ -7,7 +7,9 @@ const priKey = fs.readFileSync('./sshkeys/private.pem', 'utf8');
 module.exports = {
     getUsers: async (req, res, next) => {
         try {
-            const users = await User.getUsers();
+            const page = parseInt(req.query.page) || 1;
+            const size = parseInt(req.query.size) || 10;
+            const users = await User.getUsers(page, size);
             return res.status(200).json(users);
         }
         catch (error) {
@@ -17,7 +19,7 @@ module.exports = {
 
     getUser: async (req, res, next) => {
         try {
-            const id = parseInt(req.params.id);
+            const id = parseInt(req.params.id) || req.user.user_id;
             const user = await User.getUserDetail(id);
 
             if (!user) {
@@ -34,11 +36,6 @@ module.exports = {
     createUser: async (req, res, next) => {
         try {
             const user = req.body;
-            // Check if email already exists
-            const emailExists = await User.getUser('email', user.email);
-            if (emailExists) {
-                return res.status(400).json({ message: 'Email already exists' });
-            }
 
             // Check if username already exists
             const usernameExists = await User.getUser('username', user.username);
@@ -62,19 +59,19 @@ module.exports = {
             });
             const result = await response.json();
             user.account_id = result.account_id;
+            user.permission = process.env.PERMISSION_USER;
 
             const newUser = await User.createUser(user);
-            return res.status(201).json(newUser);
+            return res.status(201).json({user_id: newUser});
         }
         catch (error) {
-            console.log(error);
-            return res.status(500).json(error);
+            return res.status(500).json({ message: error.message });
         }
     },
 
-    updateUser: async (req, res, next) => {
+    resetPassword: async (req, res, next) => {
         try {
-            const id = parseInt(req.params.id);
+            const id = req.user.user_id;
             const user = await User.getUser('user_id', id);
 
             // Check if user exists
@@ -82,13 +79,8 @@ module.exports = {
                 return res.status(404).json({ message: 'User not found' });
             }
 
-            // Check if email already exists
-            if (req.body.email) {
-                const emailExists = await User.getUser('email', req.body.email);
-                if (emailExists) {
-                    return res.status(400).json({ message: 'Email already exists' });
-                }
-                user.email = req.body.email;
+            if (user.login_provider !== process.env.LOCAL) {
+                return res.status(400).json({ message: 'Password reset only available for local accounts' });
             }
 
             // Hash password (if provided)
@@ -98,27 +90,25 @@ module.exports = {
                 user.password = hashedPassword;
             }
 
-            const updatedUser = await User.updateUser(id, user);
-            return res.status(200).json(updatedUser);
+            await User.resetPassword(id, user.password);
+            return res.status(200).json({ message: 'Password reset successfully' });
         }
         catch (error) {
-            return res.status(500).json(error);
+            return res.status(500).json({ message: error.message });
         }
     },
 
     deleteUser: async (req, res, next) => {
         try {
             const id = parseInt(req.params.id);
-            const rowsAffected = await User.deleteUser(id);
-
-            if (rowsAffected === 0) {
-                return res.status(404).json({ message: 'User not found' });
+            const effectedRows = await User.deleteUser(id);
+            if (effectedRows === 0) {
+                return res.status(400).json({ message: 'User not found'});
             }
-
-            return res.status(204);
+            return res.status(204).send();
         }
         catch (error) {
-            return res.status(500).json(error);
+            return res.status(500).json({ message: error.message });
         }
     },
 
@@ -129,6 +119,24 @@ module.exports = {
         }
         catch (error) {
             return res.status(500).json({message: error.message});
+        }
+    },
+
+    updateUser: async (req, res) => {
+        try {
+            const id = req.user.user_id;
+            const user = {
+                ...req.body,
+                avatar: `${process.env.SERVER_URL}/uploads/users/${req.file.filename}`
+            }
+            const effectedRows = await User.updateUser(id, user);
+            if (effectedRows === 0) {
+                return res.status(400).json({ message: 'User not found' });
+            }
+            return res.status(200).json({ message: 'User updated successfully' });
+        }
+        catch (error) {
+            return res.status(500).json({ message: error.message });
         }
     }
 };
