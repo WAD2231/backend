@@ -71,28 +71,22 @@ module.exports = {
     //To use this method we will get list of categories, manufacturers and attributes from the methods in their respective controllers.
     //After that we will send the response with category_id, manufacturer_id in the list of categories, manufacturers .
     createProduct: async (req, res) => {
-        upload.array('image',10)(req, res, async (err) => {
-            if (err) {
-                return res.status(500).send('An error occurred while uploading the image');
-            }
-
-            try {
-                const { name, price, description, manufacturer_id, category_id, attributes } = req.body;
-                const image_urls = req.files ? req.files.map(file => file.path) : [];
-                const product = { name, price, description, manufacturer_id, category_id, image_url };
-                const newProduct = await Product.createProduct(product);
-                if (attributes && Array.isArray(attributes)) {
-                    for (const attr of attributes) {
-                        const attribute = { attribute_name: attr.name, value: attr.value, product_id: newProduct.product_id };
-                        await Attribute.createAttribute(attribute);
-                    }
+        try {
+            const { name, price, description, manufacturer_id, category_id, attributes, images, stock, discount } = req.body;
+            const product = { name, price: parseInt(price), discount: parseFloat(discount), description, stock: parseInt(stock), manufacturer_id: parseInt(manufacturer_id), category_id: parseInt(category_id), images };
+            const newProduct = await Product.createProduct(product);
+            if (attributes && Array.isArray(attributes)) {
+                for (const attr of attributes) {
+                    const attribute = { attribute_name: attr.name, value: attr.value, product_id: newProduct.product_id };
+                    await Attribute.createAttribute(attribute);
                 }
-
-                res.status(201).json({ product: newProduct, attributes });
-            } catch (error) {
-                res.status(500).send('An error occurred while creating product');
             }
-        });
+
+            res.status(201).json({ product: newProduct, attributes });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send('An error occurred while creating product');
+        }
     },
     //This method will be use same as createProduct method for updating the product with category_id, manufacturer_id.
     updateProduct: async (req, res) => {

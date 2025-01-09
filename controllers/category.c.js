@@ -1,10 +1,10 @@
 const Category = require('../models/category.m.js');
-
+const createRecursiveCategories = require("../helpers/createRecursiveCategories.js")
 module.exports = {
     getProductsInCategory: async (req, res) => {
         try {
-            const { field, value } = req.params;
-            const products = await Category.getProductsInCategory(field, value);
+            const id = parseInt(req.params.id);
+            const products = await Category.getProductsInCategory(id);
             res.status(200).json(products);
         } catch (error) {
             res.status(500).send('An error occurred while fetching products in category');
@@ -13,13 +13,11 @@ module.exports = {
 
     getCategories: async (req, res) => {
         try {
-            const { page_size, current_page } = req.query;
-            const filters = {
-                page_size: page_size ? parseInt(page_size) : null,
-                current_page: current_page ? parseInt(current_page) : 1
-            };
-            const result = await Category.getCategories(filters);
-            res.status(200).json(result);
+            const categories = await Category.getCategories();
+            const recursiveCategories = createRecursiveCategories(categories);
+            res.status(200).json({
+                categories: recursiveCategories
+            });
         } catch (error) {
             console.error(error);
             res.status(500).send('An error occurred while fetching categories');
@@ -42,11 +40,12 @@ module.exports = {
 
     createCategory: async (req, res) => {
         try {
-            const { name, thumbnail, description } = req.body;
-            const category = { name, thumbnail, description };
-            const newCategoryId = await Category.createCategory(category);
-            res.status(201).json({ category_id: newCategoryId });
+            const { name, thumbnail, description, super_category_id } = req.body;
+            const category = { name, thumbnail, description, super_category_id };
+            const newCategory = await Category.createCategory(category);
+            res.status(201).json({ category: newCategory });
         } catch (error) {
+            console.log(error);
             res.status(500).send('An error occurred while creating category');
         }
     },
@@ -54,11 +53,15 @@ module.exports = {
     updateCategory: async (req, res) => {
         try {
             const id = parseInt(req.params.id);
-            const { name, thumbnail, description } = req.body;
-            const category = { name, thumbnail, description };
-            const updatedCategoryId = await Category.updateCategory(id, category);
-            res.status(200).json({ category_id: updatedCategoryId });
+            const { name, description, thumbnail_url, super_category_id } = req.body;
+
+            const thumbnail = thumbnail_url ? thumbnail_url : req.body.thumbnail
+
+            const category = { name, thumbnail, description, super_category_id: parseInt(super_category_id)};
+            const updatedCategory = await Category.updateCategory(id, category);
+            res.status(200).json({ category: updatedCategory });
         } catch (error) {
+            console.log(error);
             res.status(500).send('An error occurred while updating category');
         }
     },

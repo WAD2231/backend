@@ -164,8 +164,8 @@ module.exports = {
                     await db.none(imageQuery, [result.product_id, image_url]);
                 }
             }
-
-            return result.product_id;
+            
+            return result;
         } catch (error) {
             throw error;
         }
