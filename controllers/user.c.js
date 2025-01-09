@@ -5,7 +5,7 @@ const fs = require('fs');
 const priKey = fs.readFileSync('./sshkeys/private.pem', 'utf8');
 
 module.exports = {
-    getUsers: async (req, res, next) => {
+    getUsers: async (req, res) => {
         try {
             const page = parseInt(req.query.page) || 1;
             const size = parseInt(req.query.size) || 10;
@@ -13,11 +13,11 @@ module.exports = {
             return res.status(200).json(users);
         }
         catch (error) {
-            return res.status(500).json(error);
+            return res.status(500).json({ message: error.message });
         }
     },
 
-    getUser: async (req, res, next) => {
+    getUser: async (req, res) => {
         try {
             const id = parseInt(req.params.id) || req.user.user_id;
             const user = await User.getUserDetail(id);
@@ -29,11 +29,11 @@ module.exports = {
             return res.status(200).json(user);
         }
         catch (error) {
-            return res.status(500).json(error);
+            return res.status(500).json({ message: error.message });
         }
     },
 
-    createUser: async (req, res, next) => {
+    createUser: async (req, res) => {
         try {
             const user = req.body;
 
@@ -62,7 +62,7 @@ module.exports = {
             user.permission = process.env.PERMISSION_USER;
 
             const newUser = await User.createUser(user);
-            return res.status(201).json({user_id: newUser});
+            return res.status(201).json({ user_id: newUser });
         }
         catch (error) {
             return res.status(500).json({ message: error.message });
@@ -105,7 +105,7 @@ module.exports = {
             if (effectedRows === 0) {
                 return res.status(400).json({ message: 'User not found'});
             }
-            return res.status(204).send();
+            return res.status(204).json();
         }
         catch (error) {
             return res.status(500).json({ message: error.message });

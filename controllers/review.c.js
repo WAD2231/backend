@@ -6,10 +6,10 @@ module.exports = {
             const review = req.body;
             review.user_id = req.user.user_id;
             await Review.postReview(review);
-            res.status(201).send('Review posted');
+            res.status(201).json({ message: 'Review posted' });
         }
         catch (error) {
-            res.status(500).send('An error occurred while posting the review');
+            res.status(500).json({ message: 'An error occurred while posting the review' });
         }
     },
 
@@ -22,7 +22,7 @@ module.exports = {
             res.status(200).json(data);
         }
         catch (error) {
-            res.status(500).send({ message: error.message });
+            res.status(500).json({ message: error.message });
         }
     }
 };
