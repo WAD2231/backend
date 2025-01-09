@@ -4,8 +4,6 @@
  */
 exports.up = async function(knex) {
     await knex.raw(`
-        DROP TABLE IF EXISTS attributes;
-        
         CREATE TABLE IF NOT EXISTS attributes (
             attribute_id SERIAL PRIMARY KEY,
             attribute_name VARCHAR(255) NOT NULL,

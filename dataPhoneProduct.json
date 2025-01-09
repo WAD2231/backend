@@ -1,0 +1,485 @@
+{
+    "responseStatus": "PRODUCT_FOUND_RESPONSE",
+    "responseMessage": "Product successfully found!",
+    "sortStrategy": "relevanceblender",
+    "domainCode": "com",
+    "keyword": "Phone",
+    "numberOfProducts": 16,
+    "numberOfSponsoredProducts": 0,
+    "resultCount": 100000,
+    "currentPage": 1,
+    "lastPage": 20,
+    "selectedCategory": "aps",
+    "foundSponsoredProducts": [],
+    "foundProducts": ["B0CSB14R7J", "B0CSB22F9C", "B0CP6DDN1H", "B0CRWT7WF1", "B086QCGQ8C", "B0CTW8TXGH", "B0CWHXVLXG", "B08PP5MSVB", "B0CJCTW1C5", "B0BZG14KFJ", "B0C1Q3MVBP", "B0D1ZFS9GH", "B0BN96CCM6", "B08VLMQ3KS", "B0DLBFLPKH", "B00FRSYS12"],
+    "searchProductDetails": [{
+        "productDescription": "Samsung Galaxy A15 A155M 128GB Dual-SIM GSM Unlocked Android Smartphone (Latin America Version) - Blue Black",
+        "asin": "B0CSB14R7J",
+        "countReview": 815,
+        "imgUrl": "https://m.media-amazon.com/images/I/515zGEaozeL._AC_UY218_.jpg",
+        "price": 148.7,
+        "retailPrice": 0.0,
+        "productRating": "4.3 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/Samsung-SM-155M-DSN-Unlocked-International/dp/B0CSB14R7J/ref=sr_1_1?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-1",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tue, Jan 14 ",
+        "variations": [],
+        "productDetails": [],
+        "salesVolume": "4K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "Samsung Galaxy A15 (SM-155M/DSN), 128GB 6GB RAM, Dual SIM, Factory Unlocked GSM, International Version (Wall Charger Bundle) (Light Blue)",
+        "asin": "B0CSB22F9C",
+        "countReview": 1374,
+        "imgUrl": "https://m.media-amazon.com/images/I/51rp0nqaPoL._AC_UY218_.jpg",
+        "price": 154.99,
+        "retailPrice": 164.7,
+        "productRating": "4.2 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/Samsung-SM-155M-DSN-Unlocked-International/dp/B0CSB22F9C/ref=sr_1_2?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-2",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tue, Jan 14 ",
+        "variations": [],
+        "productDetails": [],
+        "salesVolume": "5K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "Moto G Play | 2024 | Unlocked | Made for US 4/64GB | 50MP Camera | Sapphire Blue",
+        "asin": "B0CP6DDN1H",
+        "countReview": 1742,
+        "imgUrl": "https://m.media-amazon.com/images/I/61xk4XNRktL._AC_UY218_.jpg",
+        "price": 109.99,
+        "retailPrice": 149.99,
+        "productRating": "4.0 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/Moto-Play-Unlocked-Camera-Sapphire/dp/B0CP6DDN1H/ref=sr_1_3?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-3",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tue, Jan 14 ",
+        "variations": [{
+            "value": "Sapphire Blue",
+            "dpUrl": "/Moto-Play-Unlocked-Camera-Sapphire/dp/B0CP6DDN1H/ref=cs_sr_dp_1?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-3",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Navy Blue",
+            "dpUrl": "/Moto-Play-Unlocked-Camera-Sapphire/dp/B0BQ118F2T/ref=cs_sr_dp_2?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-3",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }],
+        "productDetails": [],
+        "salesVolume": "4K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "Samsung Galaxy A05 A055M 64GB Dual-SIM GSM Unlocked Android Smartphone (Latin America Version) - Black",
+        "asin": "B0CRWT7WF1",
+        "countReview": 326,
+        "imgUrl": "https://m.media-amazon.com/images/I/61UjBLFlH2L._AC_UY218_.jpg",
+        "price": 89.67,
+        "retailPrice": 94.5,
+        "productRating": "4.2 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/Samsung-Dual-SIM-Unlocked-Android-Smartphone/dp/B0CRWT7WF1/ref=sr_1_4?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-4",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tue, Jan 14 ",
+        "variations": [{
+            "value": "Black",
+            "dpUrl": "/Samsung-Dual-SIM-Unlocked-Android-Smartphone/dp/B0CRWT7WF1/ref=cs_sr_dp_1?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-4",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Light Green",
+            "dpUrl": "/Samsung-Dual-SIM-Unlocked-Android-Smartphone/dp/B0D64375G1/ref=cs_sr_dp_2?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-4",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Silver",
+            "dpUrl": "/Samsung-Dual-SIM-Unlocked-Android-Smartphone/dp/B0CRWKNP7S/ref=cs_sr_dp_3?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-4",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }],
+        "productDetails": [],
+        "salesVolume": "1K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "AT&T BL102-3 DECT 6.0 3-Handset Cordless Phone for Home with Answering Machine, Call Blocking, Caller ID Announcer, Audio Assist, Intercom, and Unsurpassed Range, Silver/Black",
+        "asin": "B086QCGQ8C",
+        "countReview": 28114,
+        "imgUrl": "https://m.media-amazon.com/images/I/81xDumBYGBL._AC_UY218_.jpg",
+        "price": 68.95,
+        "retailPrice": 78.95,
+        "productRating": "4.3 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/AT-BL102-3-3-Handset-Answering-Unsurpassed/dp/B086QCGQ8C/ref=sr_1_5?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-5",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tue, Jan 14 ",
+        "variations": [],
+        "productDetails": [],
+        "salesVolume": "2K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "Tracfone | Motorola Moto g Play 2024 | Locked | 64GB | 5000mAh Battery | 50MP Quad Pixel Camera | 6.5-in. HD+ 90Hz Display | Sapphire Blue",
+        "asin": "B0CTW8TXGH",
+        "countReview": 194,
+        "imgUrl": "https://m.media-amazon.com/images/I/71CxUvG46rL._AC_UY218_.jpg",
+        "price": 49.88,
+        "retailPrice": 0.0,
+        "productRating": "4.3 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/Tracfone-Motorola-5000mAh-Battery-Sapphire/dp/B0CTW8TXGH/ref=sr_1_6?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-6",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tue, Jan 14 ",
+        "variations": [],
+        "productDetails": [],
+        "salesVolume": "3K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "Moto G 5G | 2024 | Unlocked | Made for US 4/128GB | 50MP Camera | Sage Green",
+        "asin": "B0CWHXVLXG",
+        "countReview": 1330,
+        "imgUrl": "https://m.media-amazon.com/images/I/71Sbx9zQN3L._AC_UY218_.jpg",
+        "price": 185.98,
+        "retailPrice": 199.99,
+        "productRating": "4.2 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/Moto-Unlocked-128GB-Camera-Green/dp/B0CWHXVLXG/ref=sr_1_7?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-7",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tue, Jan 14 ",
+        "variations": [{
+            "value": "Sage Green",
+            "dpUrl": "/Moto-Unlocked-128GB-Camera-Green/dp/B0CWHXVLXG/ref=cs_sr_dp_1?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-7",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Ink Blue",
+            "dpUrl": "/Moto-Unlocked-128GB-Camera-Green/dp/B0C2SWQBMB/ref=cs_sr_dp_2?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-7",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Midnight Blue",
+            "dpUrl": "/Moto-Unlocked-128GB-Camera-Green/dp/B0CT6BQV81/ref=cs_sr_dp_3?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-7",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Pale Lilac",
+            "dpUrl": "/Moto-Unlocked-128GB-Camera-Green/dp/B0CVR23QCR/ref=cs_sr_dp_4?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-7",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }],
+        "productDetails": [],
+        "salesVolume": "4K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "Apple iPhone 12, 64GB, Black - Fully Unlocked (Renewed)",
+        "asin": "B08PP5MSVB",
+        "countReview": 27905,
+        "imgUrl": "https://m.media-amazon.com/images/I/51fYXSnSu9L._AC_UY218_.jpg",
+        "price": 263.0,
+        "retailPrice": 0.0,
+        "productRating": "4.1 out of 5 stars",
+        "prime": false,
+        "dpUrl": "/Apple-iPhone-12-64GB-Black/dp/B08PP5MSVB/ref=sr_1_8?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-8",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tomorrow, Jan 10 ",
+        "variations": [{
+            "value": "Black",
+            "dpUrl": "/Apple-iPhone-12-64GB-Black/dp/B08PP5MSVB/ref=cs_sr_dp_1?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-8",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "(Product)Red",
+            "dpUrl": "/Apple-iPhone-12-64GB-Black/dp/B0DLDXYCCJ/ref=cs_sr_dp_2?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-8",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Blue",
+            "dpUrl": "/Apple-iPhone-12-64GB-Black/dp/B08PP4TRMH/ref=cs_sr_dp_3?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-8",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Green",
+            "dpUrl": "/Apple-iPhone-12-64GB-Black/dp/B08PNZJGK3/ref=cs_sr_dp_4?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-8",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Purple",
+            "dpUrl": "/Apple-iPhone-12-64GB-Black/dp/B09KMJDRX3/ref=cs_sr_dp_5?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-8",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Red",
+            "dpUrl": "/Apple-iPhone-12-64GB-Black/dp/B08PP2KMCY/ref=cs_sr_dp_6?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-8",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }],
+        "productDetails": [],
+        "salesVolume": "4K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "Nokia C2 2E | Android 11 (Go Edition) | Unlocked Smartphone | All Day Battery | 2/32GB | 5.7-Inch Screen | International Version | Blue",
+        "asin": "B0CJCTW1C5",
+        "countReview": 191,
+        "imgUrl": "https://m.media-amazon.com/images/I/71PGVVHz08L._AC_UY218_.jpg",
+        "price": 59.99,
+        "retailPrice": 0.0,
+        "productRating": "3.3 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/Nokia-Android-Unlocked-Smartphone-5-7-Inch/dp/B0CJCTW1C5/ref=sr_1_9?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-9",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tue, Jan 14 ",
+        "variations": [],
+        "productDetails": [],
+        "salesVolume": "1K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "Panasonic Cordless Phone with Answering Machine, Advanced Call Block, Bilingual Caller ID and Easy to Read High-Contrast Display, Expandable System with 2 Handsets - KX-TGD832M (Metallic Black)",
+        "asin": "B0BZG14KFJ",
+        "countReview": 4774,
+        "imgUrl": "https://m.media-amazon.com/images/I/81nkYlfA5ZL._AC_UY218_.jpg",
+        "price": 59.99,
+        "retailPrice": 0.0,
+        "productRating": "4.4 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/Panasonic-Answering-Bilingual-High-Contrast-Expandable/dp/B0BZG14KFJ/ref=sr_1_10?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-10",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tue, Jan 14 ",
+        "variations": [],
+        "productDetails": [],
+        "salesVolume": "4K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "Samsung Galaxy A14 5G A Series, Factory Unlocked, 64GB, US Version, Black (Renewed)",
+        "asin": "B0C1Q3MVBP",
+        "countReview": 999,
+        "imgUrl": "https://m.media-amazon.com/images/I/71L1ezoIH9L._AC_UY218_.jpg",
+        "price": 94.49,
+        "retailPrice": 168.0,
+        "productRating": "3.7 out of 5 stars",
+        "prime": false,
+        "dpUrl": "/SAMSUNG-Factory-Unlocked-Android-Smartphone/dp/B0C1Q3MVBP/ref=sr_1_11?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-11",
+        "series": null,
+        "deliveryMessage": "FREE delivery Sat, Jan 11 Only 3 left in stock - order soon.",
+        "variations": [],
+        "productDetails": [],
+        "salesVolume": "2K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "Moto G Stylus 5G | 2024 | Unlocked | Made for US 8/256GB | 50MP Camera | Caramel Latte",
+        "asin": "B0D1ZFS9GH",
+        "countReview": 253,
+        "imgUrl": "https://m.media-amazon.com/images/I/61LE9-6KxdL._AC_UY218_.jpg",
+        "price": 249.99,
+        "retailPrice": 399.99,
+        "productRating": "4.6 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/Stylus-Unlocked-256GB-Camera-Caramel/dp/B0D1ZFS9GH/ref=sr_1_12?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-12",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tue, Jan 14 ",
+        "variations": [],
+        "productDetails": [],
+        "salesVolume": "2K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "Apple iPhone 14 Pro, 256GB, Space Black - Unlocked (Renewed)",
+        "asin": "B0BN96CCM6",
+        "countReview": 2701,
+        "imgUrl": "https://m.media-amazon.com/images/I/41al5-lNvML._AC_UY218_.jpg",
+        "price": 534.95,
+        "retailPrice": 0.0,
+        "productRating": "4.0 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/Apple-iPhone-14-Pro-256GB/dp/B0BN96CCM6/ref=sr_1_13?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-13",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tomorrow, Jan 10 ",
+        "variations": [{
+            "value": "Space Black",
+            "dpUrl": "/Apple-iPhone-14-Pro-256GB/dp/B0BN96CCM6/ref=cs_sr_dp_1?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-13",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Deep Purple",
+            "dpUrl": "/Apple-iPhone-14-Pro-256GB/dp/B0BN96BS1P/ref=cs_sr_dp_2?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-13",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Gold",
+            "dpUrl": "/Apple-iPhone-14-Pro-256GB/dp/B0BN951PJG/ref=cs_sr_dp_3?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-13",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Silver",
+            "dpUrl": "/Apple-iPhone-14-Pro-256GB/dp/B0BN96R5T4/ref=cs_sr_dp_4?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-13",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Sliver",
+            "dpUrl": "/Apple-iPhone-14-Pro-256GB/dp/B0BN8ZH9L2/ref=cs_sr_dp_5?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-13",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Space black",
+            "dpUrl": "/Apple-iPhone-14-Pro-256GB/dp/B0BN93JTWW/ref=cs_sr_dp_6?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-13",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }],
+        "productDetails": [],
+        "salesVolume": "1K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "Samsung Galaxy S21 5G, US Version, 128GB, Phantom Gray - Unlocked (Renewed)",
+        "asin": "B08VLMQ3KS",
+        "countReview": 14646,
+        "imgUrl": "https://m.media-amazon.com/images/I/61XyNdmvr6L._AC_UY218_.jpg",
+        "price": 205.0,
+        "retailPrice": 389.95,
+        "productRating": "4.0 out of 5 stars",
+        "prime": false,
+        "dpUrl": "/Samsung-Galaxy-S21-5G-Version/dp/B08VLMQ3KS/ref=sr_1_14?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-14",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tomorrow, Jan 10 Only 12 left in stock - order soon.",
+        "variations": [{
+            "value": "Phantom Gray",
+            "dpUrl": "/Samsung-Galaxy-S21-5G-Version/dp/B08VLMQ3KS/ref=cs_sr_dp_1?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-14",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Phantom Black",
+            "dpUrl": "/Samsung-Galaxy-S21-5G-Version/dp/B0947B285Z/ref=cs_sr_dp_2?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-14",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Phantom Navy",
+            "dpUrl": "/Samsung-Galaxy-S21-5G-Version/dp/B09LG9WLPP/ref=cs_sr_dp_3?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-14",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Phantom Silver",
+            "dpUrl": "/Samsung-Galaxy-S21-5G-Version/dp/B09479QN92/ref=cs_sr_dp_4?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-14",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Phantom Violet",
+            "dpUrl": "/Samsung-Galaxy-S21-5G-Version/dp/B09478TZZY/ref=cs_sr_dp_5?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-14",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Phantom White",
+            "dpUrl": "/Samsung-Galaxy-S21-5G-Version/dp/B09479NQC1/ref=cs_sr_dp_6?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-14",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }],
+        "productDetails": [],
+        "salesVolume": "2K+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "S24 Ultra Unlocked Phone 8GB+256GB Android Cell Phone 7 inch HD Screen Mobile Phone 108MP+48MP Camera 6800 mAh Extra Large Battery 5G Dual SIM (Titanium Black)",
+        "asin": "B0DLBFLPKH",
+        "countReview": 11,
+        "imgUrl": "https://m.media-amazon.com/images/I/61pmLlKbSTL._AC_UY218_.jpg",
+        "price": 169.99,
+        "retailPrice": 0.0,
+        "productRating": "2.3 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/Livinyteb-Unlocked-Android-Battery-Titanium/dp/B0DLBFLPKH/ref=sr_1_15?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-15",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tue, Jan 14 ",
+        "variations": [{
+            "value": "Titanium Black",
+            "dpUrl": "/Livinyteb-Unlocked-Android-Battery-Titanium/dp/B0DLBFLPKH/ref=cs_sr_dp_1?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-15",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Titanium Deep Blue",
+            "dpUrl": "/Livinyteb-Unlocked-Android-Battery-Titanium/dp/B0DLBCFN27/ref=cs_sr_dp_2?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-15",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Titanium Gray",
+            "dpUrl": "/Livinyteb-Unlocked-Android-Battery-Titanium/dp/B0DLBDF7CS/ref=cs_sr_dp_3?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-15",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Titanium White",
+            "dpUrl": "/Livinyteb-Unlocked-Android-Battery-Titanium/dp/B0DLBBD7Q8/ref=cs_sr_dp_4?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-15",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }, {
+            "value": "Titanium Yellow",
+            "dpUrl": "/Livinyteb-Unlocked-Android-Battery-Titanium/dp/B0DLBBWMFD/ref=cs_sr_dp_5?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-15",
+            "price": 0.0,
+            "prime": false,
+            "kindleUnlimited": false
+        }],
+        "productDetails": [],
+        "salesVolume": "50+ bought in past month",
+        "manufacturer": null
+    }, {
+        "productDescription": "VTech CS6719-2 2-Handset Expandable Cordless Phone with Caller ID/Call Waiting, Handset Intercom & Backlit Display/Keypad, Silver",
+        "asin": "B00FRSYS12",
+        "countReview": 38168,
+        "imgUrl": "https://m.media-amazon.com/images/I/71HLNfFVCcL._AC_UY218_.jpg",
+        "price": 38.95,
+        "retailPrice": 0.0,
+        "productRating": "4.4 out of 5 stars",
+        "prime": true,
+        "dpUrl": "/VTech-CS6719-2-2-Handset-Expandable-Cordless/dp/B00FRSYS12/ref=sr_1_16?dib=eyJ2IjoiMSJ9.Wn0-seQH8boHXQmfsv2nctF-9rceQSysRpg09aXsc1Bte48WXv3jVMyePUYkkwQQSO1uwfBFWz_P_Hf4Hrt78zBKLMcoETRKHTJuJPc6d6oou9_8TDjGlFJ3kUEp_MgqlpK4Szp4Nfw1GZ7kf1F-Vl3iBGDbg77jIk4Na0r5yjbU4MMaAdtpu34Kb7AYVX_fv7lHOczGdtJbtO5VZqywHtR3wVt20V7S23Ie1lbFlpQ.e2ybtOIeDacl9hH05x7ZfyQIHUWdhHexqN3prY5xXFQ&dib_tag=se&keywords=Phone&qid=1736428302&sr=8-16",
+        "series": null,
+        "deliveryMessage": "FREE delivery Tue, Jan 14 ",
+        "variations": [],
+        "productDetails": [],
+        "salesVolume": "3K+ bought in past month",
+        "manufacturer": null
+    }],
+    "categories": ["Cell Phones", "Telephones", "Landline Phones", "Cell Phone Cases & Covers", "Cell Phone Basic Cases"],
+    "starFilterParam": {},
+    "similarKeywords": [{
+        "keyword": "iphone",
+        "url": "/s?k=iphone&ref=rsl_sug_0_0&pd_rd_w=dNPiq&content-id=amzn1.sym.cbdf6bba-7ab9-4372-9637-a37602620190:amzn1.sym.cbdf6bba-7ab9-4372-9637-a37602620190&pf_rd_p=cbdf6bba-7ab9-4372-9637-a37602620190&pf_rd_r=HHK2EPMQH6J41KQ32PJ3&pd_rd_wg=VMxHK&pd_rd_r=b9dccae8-398b-491e-b7f5-14e1b5447649&qid=1736428302"
+    }, {
+        "keyword": "samsung phone",
+        "url": "/s?k=samsung+phone&ref=rsl_sug_0_3&pd_rd_w=dNPiq&content-id=amzn1.sym.cbdf6bba-7ab9-4372-9637-a37602620190:amzn1.sym.cbdf6bba-7ab9-4372-9637-a37602620190&pf_rd_p=cbdf6bba-7ab9-4372-9637-a37602620190&pf_rd_r=HHK2EPMQH6J41KQ32PJ3&pd_rd_wg=VMxHK&pd_rd_r=b9dccae8-398b-491e-b7f5-14e1b5447649&qid=1736428302"
+    }, {
+        "keyword": "phone case",
+        "url": "/s?k=phone+case&ref=rsl_sug_0_1&pd_rd_w=dNPiq&content-id=amzn1.sym.cbdf6bba-7ab9-4372-9637-a37602620190:amzn1.sym.cbdf6bba-7ab9-4372-9637-a37602620190&pf_rd_p=cbdf6bba-7ab9-4372-9637-a37602620190&pf_rd_r=HHK2EPMQH6J41KQ32PJ3&pd_rd_wg=VMxHK&pd_rd_r=b9dccae8-398b-491e-b7f5-14e1b5447649&qid=1736428302"
+    }, {
+        "keyword": "phones for kids",
+        "url": "/s?k=phones+for+kids&ref=rsl_sug_0_4&pd_rd_w=dNPiq&content-id=amzn1.sym.cbdf6bba-7ab9-4372-9637-a37602620190:amzn1.sym.cbdf6bba-7ab9-4372-9637-a37602620190&pf_rd_p=cbdf6bba-7ab9-4372-9637-a37602620190&pf_rd_r=HHK2EPMQH6J41KQ32PJ3&pd_rd_wg=VMxHK&pd_rd_r=b9dccae8-398b-491e-b7f5-14e1b5447649&qid=1736428302"
+    }, {
+        "keyword": "phones unlocked",
+        "url": "/s?k=phones+unlocked&ref=rsl_sug_0_2&pd_rd_w=dNPiq&content-id=amzn1.sym.cbdf6bba-7ab9-4372-9637-a37602620190:amzn1.sym.cbdf6bba-7ab9-4372-9637-a37602620190&pf_rd_p=cbdf6bba-7ab9-4372-9637-a37602620190&pf_rd_r=HHK2EPMQH6J41KQ32PJ3&pd_rd_wg=VMxHK&pd_rd_r=b9dccae8-398b-491e-b7f5-14e1b5447649&qid=1736428302"
+    }, {
+        "keyword": "iphone 11",
+        "url": "/s?k=iphone+11&ref=rsl_sug_0_5&pd_rd_w=dNPiq&content-id=amzn1.sym.cbdf6bba-7ab9-4372-9637-a37602620190:amzn1.sym.cbdf6bba-7ab9-4372-9637-a37602620190&pf_rd_p=cbdf6bba-7ab9-4372-9637-a37602620190&pf_rd_r=HHK2EPMQH6J41KQ32PJ3&pd_rd_wg=VMxHK&pd_rd_r=b9dccae8-398b-491e-b7f5-14e1b5447649&qid=1736428302"
+    }]
+}

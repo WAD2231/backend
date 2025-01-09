@@ -24,67 +24,86 @@ module.exports = {
     },
     getProducts: async (filters) => {
         try {
-            const { category_id, search, page_size, current_page } = filters;
-            const offset = (current_page - 1) * page_size;
+            const { category_id, search, page_size, current_page, exclude_product_id } = filters;
 
+            const offset = (current_page - 1) * page_size;
+    
             let query = `
                 SELECT pr.product_id as id,
-                    pr.product_name as name,
-                    pr.price as price,
-                    pr.description as description,
-                    pr.stock as stock,
-                    pr.discount as discount,
-                    pr.category_id as category_id,
-                    pr.manufacturer_id as manufacturer_id,
-                    pi.image_url as image_url
+                       pr.product_name as name,
+                       pr.price as price,
+                       pr.description as description,
+                       pr.stock as stock,
+                       pr.discount as discount,
+                       pr.created_at as created_at,
+                       c.name as category,
+                       m.manufacturer_name as manufacturer,
+                       COALESCE(
+                           json_agg(
+                               json_build_object('image_url', pi.image_url)
+                           ) FILTER (WHERE pi.image_url IS NOT NULL), '[]'
+                       ) as images
                 FROM ${SCHEMA}.product pr
-                LEFT JOIN ${SCHEMA}.product_image pi
-                ON pr.product_id = pi.product_id
+                LEFT JOIN ${SCHEMA}.product_image pi ON pr.product_id = pi.product_id
+                LEFT JOIN ${SCHEMA}.category c ON pr.category_id = c.category_id
+                LEFT JOIN ${SCHEMA}.manufacturer m ON pr.manufacturer_id = m.manufacturer_id
                 WHERE 1=1
             `;
-
+    
             const values = [];
             let index = 1;
-
+    
             if (category_id) {
                 query += ` AND pr.category_id = $${index++}`;
                 values.push(category_id);
             }
-
+    
             if (search) {
                 query += ` AND pr.product_name ILIKE $${index++}`;
                 values.push(`%${search}%`);
             }
-
-            query += ` LIMIT $${index++} OFFSET $${index}`;
+    
+            if (exclude_product_id) {
+                query += ` AND pr.product_id != $${index++}`;
+                values.push(exclude_product_id);
+            }
+    
+            query += `
+                GROUP BY pr.product_id, c.name, m.manufacturer_name
+                LIMIT $${index++} OFFSET $${index}`;
             values.push(page_size, offset);
-
+    
             const products = await db.manyOrNone(query, values);
-
+    
             // Get total count for pagination
             let countQuery = `
                 SELECT COUNT(*) as total
                 FROM ${SCHEMA}.product pr
                 WHERE 1=1
             `;
-
+    
             const countValues = [];
             let countIndex = 1;
-
+    
             if (category_id) {
                 countQuery += ` AND pr.category_id = $${countIndex++}`;
                 countValues.push(category_id);
             }
-
+    
             if (search) {
                 countQuery += ` AND pr.product_name ILIKE $${countIndex++}`;
                 countValues.push(`%${search}%`);
             }
-
+    
+            if (exclude_product_id) {
+                countQuery += ` AND pr.product_id != $${countIndex++}`;
+                countValues.push(exclude_product_id);
+            }
+    
             const totalCountResult = await db.one(countQuery, countValues);
-            const totalItems = parseInt(totalCountResult.total, 0);
+            const totalItems = parseInt(totalCountResult.total, 10);
             const totalPages = Math.ceil(totalItems / page_size);
-
+    
             return {
                 paging: {
                     total_page: totalPages,
@@ -101,7 +120,8 @@ module.exports = {
         } catch (error) {
             throw error;
         }
-    },
+    }
+    ,
     getProductDetail: async (productId) => {
         try {
             const query = `
@@ -109,6 +129,7 @@ module.exports = {
                     pr.product_name as name,
                     pr.price as price,
                     pr.description as description,
+                    pr.created_at as created_at,
                     pi.image_url as image_url,
                     m.manufacturer_name as manufacturer,
                     c.name as category

@@ -2,17 +2,16 @@ const Product = require('../models/product.m.js');
 const Manufacturer = require('../models/manufacturer.m.js');
 const Category = require('../models/category.m.js');
 const Attribute = require('../models/attribute.m.js');
-const Review = require('../models/review.m.js');
-const { up } = require('../migrations/20241231103744_create_coupon_table.js');
 const upload = require('../middlewares/upload');
 module.exports = {
     getProducts: async (req, res) => {
         try {
             const { category_id, search, page_size, current_page } = req.query;
+            
             const filters = {
                 category_id: category_id ? parseInt(category_id) : null,
                 search: search || '',
-                page_size: page_size ? parseInt(page_size) : 1,
+                page_size: page_size ? parseInt(page_size) : 10,
                 current_page: current_page ? parseInt(current_page) : 1
             };
             const result = await Product.getProducts(filters);
@@ -29,19 +28,19 @@ module.exports = {
                 return res.status(400).json({ error: 'Invalid product ID' });
             }
             const product = await Product.getProductDetail(productId);
+            console.log(product);
             if (!product) {
                 return res.status(404).json({ error: `Product with id ${productId} not found` });
             }
             const attributes = await Attribute.getAttributes(productId);
             const relatedProducts = await Product.getSameTypeProductInCategory(product.id);
-            const reviews = await Review.getReviews(productId) || [];
-            console.log(reviews);
             const response = {
                 id: product.id,
                 name: product.name,
                 price: product.price,
                 discount: product.discount,
                 stock: product.stock,
+                created_at: product.created_at,
                 category: {
                     name: product.category
                 },
@@ -49,16 +48,6 @@ module.exports = {
                     name: product.manufacturer
                 },
                 description: product.description,
-                reviews: reviews.reviews.map(review => ({
-                    id: review.review_id,
-                    content: review.content,
-                    rating: review.rating,
-                    posted_at: review.posted_at,
-                    user: {
-                        id: review.user.id,
-                        name: review.user.name
-                    }
-                })),
                 images: product.image_url ? [product.image_url] : [],
                 attributes: attributes.map(attr => ({
                     name: attr.attribute_name,
