@@ -8,12 +8,15 @@ exports.up = async function(knex) {
             user_id SERIAL PRIMARY KEY,
             username VARCHAR(40),
             password VARCHAR(255),
-            email VARCHAR(255),
             permission INT NOT NULL,
             login_provider INT,
             provider_id VARCHAR(255),
-            wallet_id INT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            account_id INT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            fullname VARCHAR(255),
+            phone VARCHAR(10),
+            address VARCHAR(255),
+            avatar TEXT DEFAULT 'https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA?rs=1&pid=ImgDetMain'
         )    
     `);
 };
