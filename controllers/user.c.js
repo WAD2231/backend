@@ -125,11 +125,7 @@ module.exports = {
     updateUser: async (req, res) => {
         try {
             const id = req.user.user_id;
-            const user = {
-                ...req.body,
-                avatar: `${process.env.SERVER_URL}/uploads/users/${req.file.filename}`
-            }
-            const effectedRows = await User.updateUser(id, user);
+            const effectedRows = await User.updateUser(id, req.body);
             if (effectedRows === 0) {
                 return res.status(400).json({ message: 'User not found' });
             }
