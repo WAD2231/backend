@@ -4,7 +4,7 @@ module.exports = {
     localLogin: async (req, res, next) => {
         passport.authenticate('local', (err, user, info) => {
             if (err) {
-                return next(err);
+                return res.status(500).json({ message: err.message });
             }
 
             if (!user) {
