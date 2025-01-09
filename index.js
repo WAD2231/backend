@@ -4,7 +4,11 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 require('dotenv').config();
+const cors = require("cors");
+const corsOptions = require("./config/cors.js");
 const app = express();
+
+app.use(cors(corsOptions));
 
 app.use(cookieParser());
 app.use(session({
