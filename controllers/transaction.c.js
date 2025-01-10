@@ -7,7 +7,7 @@ module.exports = {
             const accountID = req.transaction.account_id;
             const balance = await Account.getBalance(accountID);
             if (balance < req.transaction.amount) {
-                throw res.status(400).json({message: 'Balance is not enough'});
+                return res.status(400).json({message: 'Balance is not enough'});
             }
             const amount = req.transaction.amount;
             const orderID = req.transaction.order_id

@@ -26,9 +26,10 @@ const init = async () => {
             password, 
             permission, 
             fullname,
-            login_provider
+            login_provider,
+            account_id
         )
-        VALUES ($1, $2, $3, $4, $5)
+        VALUES ($1, $2, $3, $4, $5, 1)
     `, [
         process.env.ADMIN_USERNAME,
         hashedPassword,

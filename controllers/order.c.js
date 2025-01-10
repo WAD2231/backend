@@ -3,6 +3,49 @@ const jwt = require('jsonwebtoken');
 const priKey = fs.readFileSync('./sshkeys/private.pem', 'utf8');
 const Order = require('../models/order.m');
 const User = require('../models/user.m');
+const TIMEOUT = 3000;  
+const MAX_RETRY_ATTEMPTS = 5;
+
+const fetchWithTimeout = (url, options, timeout = TIMEOUT) => {
+    return Promise.race([
+        fetch(url, options),
+        new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('Request timed out')), timeout)
+        )
+    ]);
+};
+
+const processPayment = async (token, attempts) => {
+    if (attempts > MAX_RETRY_ATTEMPTS) {
+        return {
+            status: 500,
+            message: 'Server error'
+        }
+    }
+
+    try {
+        const response = await fetchWithTimeout(`https://localhost:${process.env.EPAY_PORT}/api/transactions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({token})
+        });
+
+        if (response.status === 500) {
+            throw new Error('Server error');
+        }
+
+        return {
+            status: response.status,
+            message: await response.json()
+        }
+    }
+    catch (err) {
+        await new Promise((resolve) => setTimeout(resolve, TIMEOUT));
+        return processPayment(token, attempts + 1);
+    }
+};
 
 module.exports = { 
     createOrder: async (req, res) => {
@@ -17,26 +60,19 @@ module.exports = {
             // Get account id
             const accountID = await User.getAccountID(req.user.user_id);
 
-            // Process payment
+            // Create token
             const token = jwt.sign({
                 order_id: orderID,
                 account_id: accountID,
                 amount: req.body.total
             }, priKey, {algorithm: 'RS256'});
-            const response = await fetch(`https://localhost:${process.env.EPAY_PORT}/api/transactions`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({token})
-            });
+
+            const response = await processPayment(token, 1);
 
             if (response.status === 201) {
                 await Order.updateStatus(orderID);
             }
-
-            const result = await response.json();
-            return res.status(response.status).json(result);
+            return res.status(response.status).json(response.message);
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
