@@ -26,7 +26,7 @@ module.exports = {
                     r.posted_at as posted_at,
                     json_build_object(
                         'id', u.user_id,
-                        'fullname', u.username
+                        'fullname', u.fullname
                     ) as user
                 FROM ${SCHEMA}.reviews r 
                 JOIN ${SCHEMA}.users u ON r.user_id = u.user_id

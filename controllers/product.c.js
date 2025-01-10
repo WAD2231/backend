@@ -3,6 +3,7 @@ const Manufacturer = require('../models/manufacturer.m.js');
 const Category = require('../models/category.m.js');
 const Attribute = require('../models/attribute.m.js');
 const upload = require('../middlewares/upload');
+const Review = require('../models/review.m.js');
 module.exports = {
     getProducts: async (req, res) => {
         try {
@@ -34,6 +35,7 @@ module.exports = {
             }
             const attributes = await Attribute.getAttributes(productId);
             const relatedProducts = await Product.getSameTypeProductInCategory(product.id);
+            const reviews = await Review.getReviews(productId, 5, 1);
             const response = {
                 id: product.id,
                 name: product.name,
@@ -53,6 +55,7 @@ module.exports = {
                     name: attr.attribute_name,
                     value: attr.value
                 })),
+                reviews: reviews,
                 relatedProducts: relatedProducts.map(relatedProduct => ({
                     id: relatedProduct.id,
                     name: relatedProduct.name,

@@ -70,35 +70,6 @@ module.exports = {
             throw error;
         }
     },
-    createManufacturer: async (manufacturer) => {
-        try {
-            const query = `
-                INSERT INTO ${SCHEMA}.manufacturer (manufacturer_name)
-                VALUES ($1)
-                RETURNING manufacturer_id
-            `;
-            const values = [manufacturer.name];
-            const result = await db.one(query, values);
-            return result.manufacturer_id;
-        } catch (error) {
-            throw error;
-        }
-    },
-    updateManufacturer: async (id, manufacturer) => {
-        try {
-            const query = `
-                UPDATE ${SCHEMA}.manufacturer
-                SET manufacturer_name = $1
-                WHERE manufacturer_id = $2
-                RETURNING manufacturer_id
-            `;
-            const values = [manufacturer.name, id];
-            const result = await db.one(query, values);
-            return result.manufacturer_id;
-        } catch (error) {
-            throw error;
-        }
-    },
     deleteManufacturer: async (id) => {
         try {
             const query = `
