@@ -48,7 +48,7 @@ module.exports = {
                     name: product.manufacturer
                 },
                 description: product.description,
-                images: product.image_url ? [product.image_url] : [],
+                images: product.images,
                 attributes: attributes.map(attr => ({
                     name: attr.attribute_name,
                     value: attr.value
@@ -58,7 +58,7 @@ module.exports = {
                     name: relatedProduct.name,
                     price: relatedProduct.price,
                     discount: relatedProduct.discount,
-                    image_url: relatedProduct.image_url
+                    images: relatedProduct.images
                 }))
             };
 
