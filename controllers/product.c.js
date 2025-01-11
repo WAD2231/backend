@@ -122,12 +122,8 @@ module.exports = {
     deleteProduct: async (req, res) => {
         try {
             const id = parseInt(req.params.id);
-            const deleted = await Product.deleteProduct(id);
-            if (deleted) {
-                res.status(204).send('Product deleted successfully');
-            } else {
-                res.status(404).json({ error: `Product with id ${id} not found` });
-            }
+            await Product.deleteProduct(id);
+            res.status(200).json({ message: 'Product deleted successfully' });
         } catch (error) {
             console.log(error);
             res.status(500).send('An error occurred while deleting product');
