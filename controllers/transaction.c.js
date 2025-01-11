@@ -17,5 +17,19 @@ module.exports = {
         catch (err) {
             return res.status(500).json({message: err.message});
         }
+    },
+
+    reconcileTransaction: async (req, res) => {
+        try {
+            const transaction = await Transaction.getTransaction(req.transaction.order_id);
+            if (transaction) {
+                return res.status(200).json({message: 'Transaction reconciled.'})
+            }
+
+            return res.status(404).json({message: 'Transaction not found.'});
+        }
+        catch (error) {
+            return res.status(500).json({message: error.message});
+        }
     }
 };

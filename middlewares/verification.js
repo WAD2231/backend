@@ -4,7 +4,7 @@ const pubKey = fs.readFileSync('./sshkeys/public.pem', 'utf8');
 
 module.exports = async(req, res, next) => {
     try {
-        const token = req.body.token;
+        const token = req.body.token || req.query.token;
         if (!token) {
             return res.status(401).json({message: 'No token provided'});
         }

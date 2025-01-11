@@ -98,4 +98,21 @@ module.exports = {
             throw error;
         }
     },
+
+    getPendingOrders: async () => {
+        try {
+            return await db.any(`
+                SELECT 
+                    o.order_id as order_id,
+                    o.total as amount,
+                    u.account_id as account_id
+                FROM ${SCHEMA}.orders o
+                JOIN ${SCHEMA}.users u ON u.user_id = o.user_id
+                WHERE status = 'pending'    
+            `);
+        }
+        catch (error) {
+            throw error;
+        }
+    }
 };

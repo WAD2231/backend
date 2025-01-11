@@ -38,4 +38,17 @@ module.exports = {
             throw error;
         });       
     },
+
+    getTransaction: async (orderID) => {
+        try {
+            return await db.any(`
+                SELECT * 
+                FROM ${SCHEMA}.transactions
+                WHERE order_id = $1    
+            `, [orderID]);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 };

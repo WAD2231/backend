@@ -29,6 +29,7 @@ app.use('/api/manufacturers', require('./routers/manufacturer.r.js'));
 app.use('/api/users', require('./routers/user.r.js'));
 app.use('/api/carts', require('./routers/cart.r.js'));
 app.use('/api/orders', require('./routers/order.r.js'));
+require('./helpers/reconcileTransaction');
 
 app.listen(process.env.SERVER_PORT, () => {
     console.log(`Main server is running on port ${process.env.SERVER_PORT}`);
