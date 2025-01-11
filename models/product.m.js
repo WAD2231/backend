@@ -241,5 +241,43 @@ module.exports = {
         } catch (error) {
             throw error;
         }
+    },
+
+    statisticProductByCategory: async () => {
+        try {
+            const query = `
+                SELECT
+                    c.category_id as id,
+                    c.name as name,
+                    SUM(p.stock)::INTEGER as quantity
+                FROM ${SCHEMA}.product p 
+                JOIN ${SCHEMA}.category c ON p.category_id = c.category_id
+                GROUP BY c.category_id, c.name
+                ORDER BY quantity DESC
+            `;
+            const result = await db.any(query);
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    },
+
+    statisticProductByManufacturer: async () => {
+        try {
+            const query = `
+                SELECT
+                    m.manufacturer_id as id,
+                    m.manufacturer_name as name,
+                    SUM(p.stock)::INTEGER as quantity
+                FROM ${SCHEMA}.product p 
+                JOIN ${SCHEMA}.manufacturer m ON p.manufacturer_id = m.manufacturer_id
+                GROUP BY m.manufacturer_id, m.manufacturer_name
+                ORDER BY quantity DESC
+            `;
+            const result = await db.any(query);
+            return result;
+        } catch (error) {
+            throw error;
+        }
     }
 };

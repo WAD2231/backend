@@ -351,5 +351,52 @@ GET /api/orders/statistics/top-customer?limit=5
 ```
 
 ## 7.5. Statistic product quantity by category
+GET /api/products/statistics/category
+
+```json
+[
+  {
+    "id": 1,
+    "name": "PC Game Headsets",
+    "quantity": 528
+  },
+  {
+    "id": 2,
+    "name": "Computers & Tablets",
+    "quantity": 372
+  },
+  {
+    "id": 6,
+    "name": "Computer Keyboards, Mice & Accessories",
+    "quantity": 249
+  },
+  {
+    "id": 3,
+    "name": "PlayStation 5 Headsets",
+    "quantity": 211
+  }
+]
+```
 
 ## 7.6. Statistic product quantity by manufacturer
+GET /api/products/statistics/manufacturer
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Logitech",
+    "quantity": 391
+  },
+  {
+    "id": 2,
+    "name": "Samsung",
+    "quantity": 384
+  },
+  {
+    "id": 3,
+    "name": "Sony",
+    "quantity": 380
+  }
+]
+```
