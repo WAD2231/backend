@@ -57,7 +57,7 @@ module.exports = {
 
             const thumbnail = thumbnail_url ? thumbnail_url : req.body.thumbnail
 
-            const category = { name, thumbnail, description, super_category_id: parseInt(super_category_id)};
+            const category = { name, thumbnail, description, super_category_id };
             const updatedCategory = await Category.updateCategory(id, category);
             res.status(200).json({ category: updatedCategory });
         } catch (error) {
