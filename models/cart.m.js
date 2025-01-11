@@ -20,7 +20,7 @@ module.exports = {
                     ) AS product,
                     c.quantity AS quantity
                 FROM ${SCHEMA}.carts c
-                JOIN ${SCHEMA}.products p ON c.product_id = p.product_id
+                JOIN ${SCHEMA}.product p ON c.product_id = p.product_id
                 WHERE c.user_id = $1
                 LIMIT $2 OFFSET $3
             `;

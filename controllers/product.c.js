@@ -149,4 +149,22 @@ module.exports = {
             res.status(500).send('An error occurred while fetching products');
         }
     },
+
+    statisticProductByCategory: async (req, res) => {
+        try {
+            const result = await Product.statisticProductByCategory();
+            res.status(200).json(result);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+
+    statisticProductByManufacturer: async (req, res) => {
+        try {
+            const result = await Product.statisticProductByManufacturer();
+            res.status(200).json(result);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
 };

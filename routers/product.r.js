@@ -25,4 +25,12 @@ router.delete('/:id', productController.deleteProduct);
 // Route to search for products
 router.get('/search/:query', productController.getProduct);
 
+router.get('/statistic/category', 
+            verifyAdmin,
+            productController.statisticProductByCategory);
+
+router.get('/statistic/manufacturer', 
+            verifyAdmin,
+            productController.statisticProductByManufacturer);
+
 module.exports = router;
