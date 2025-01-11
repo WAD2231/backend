@@ -14,10 +14,11 @@ exports.up = async function(knex) {
             account_id INT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             fullname VARCHAR(255),
-            phone VARCHAR(10),
+            phone VARCHAR(20),
             address VARCHAR(255),
             avatar TEXT DEFAULT 'https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA?rs=1&pid=ImgDetMain'
-        )    
+        );
+        
     `);
 };
 

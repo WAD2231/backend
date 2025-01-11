@@ -6,7 +6,7 @@ exports.up = async function(knex) {
     await knex.raw(`
         CREATE TABLE IF NOT EXISTS accounts (
             account_id SERIAL PRIMARY KEY,
-            balance BIGINT NOT NULL
+            balance NUMERIC(10, 2) NOT NULL
         );    
     `);
 };

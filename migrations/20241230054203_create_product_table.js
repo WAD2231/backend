@@ -19,7 +19,7 @@ exports.up = async function(knex) {
             tag VARCHAR(100),
             CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE,
             CONSTRAINT fk_manufacturer FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(manufacturer_id) ON DELETE CASCADE
-        )
+        );
     `);
 };
 

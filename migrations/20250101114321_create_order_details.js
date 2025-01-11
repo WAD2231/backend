@@ -8,12 +8,9 @@ exports.up = async function(knex) {
             order_detail_id SERIAL PRIMARY KEY,
             product_id INT,
             quantity INT,
-            subtotal BIGINT,
+            subtotal NUMERIC(10, 2),
             order_id INT
         );
-
-        ALTER TABLE order_details
-        ADD CONSTRAINT fk_details_orders FOREIGN KEY (order_id) REFERENCES orders(order_id);
     `);
 };
 
