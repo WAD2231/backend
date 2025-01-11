@@ -214,12 +214,6 @@ module.exports = {
     },
     deleteProduct: async (id) => {
         try {
-            const imageQuery = `
-                DELETE FROM ${SCHEMA}.product_image
-                WHERE product_id = $1
-            `;
-            await db.none(imageQuery, [id]);
-
             const query = `
                 DELETE FROM ${SCHEMA}.product
                 WHERE product_id = $1

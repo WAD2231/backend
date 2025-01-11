@@ -69,8 +69,8 @@ module.exports = {
     //After that we will send the response with category_id, manufacturer_id in the list of categories, manufacturers .
     createProduct: async (req, res) => {
         try {
-            const { name, price, description, manufacturer_id, category_id, attributes, images, stock, discount } = req.body;
-            const product = { name, price: parseInt(price), discount: parseFloat(discount), description, stock: parseInt(stock), manufacturer_id: parseInt(manufacturer_id), category_id: parseInt(category_id), images };
+            const { name, price, description, manufacturer_id, category_id, attributes, images, stock, discount, tag } = req.body;
+            const product = { name, price: parseInt(price), discount: parseFloat(discount), description, stock: parseInt(stock), manufacturer_id: parseInt(manufacturer_id), category_id: parseInt(category_id), images, tag };
             const newProduct = await Product.createProduct(product);
             if (attributes && Array.isArray(attributes)) {
                 for (const attr of attributes) {
@@ -129,6 +129,7 @@ module.exports = {
                 res.status(404).json({ error: `Product with id ${id} not found` });
             }
         } catch (error) {
+            console.log(error);
             res.status(500).send('An error occurred while deleting product');
         }
     },
