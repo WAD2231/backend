@@ -37,7 +37,10 @@ module.exports = {
                     pr.discount as discount,
                     pr.created_at as created_at,
                     c.name as category,
+                    c.category_id as category_id,
                     m.manufacturer_name as manufacturer,
+                    m.manufacturer_id as manufacturer_id,
+                    pr.tag as tag,
                     COALESCE(
                         json_agg(
                             json_build_object('image_url', pi.image_url)
@@ -68,7 +71,7 @@ module.exports = {
                 values.push(exclude_product_id);
             }
 
-            query += ` GROUP BY pr.product_id, c.name, m.manufacturer_name ORDER BY pr.product_id LIMIT $${index++} OFFSET $${index}`;
+            query += ` GROUP BY pr.product_id, c.name, m.manufacturer_name, c.category_id, m.manufacturer_id ORDER BY pr.product_id LIMIT $${index++} OFFSET $${index}`;
             values.push(page_size, offset);
 
             const products = await db.manyOrNone(query, values);
@@ -131,6 +134,9 @@ module.exports = {
                     pr.created_at as created_at,
                     c.name as category,
                     m.manufacturer_name as manufacturer,
+                    c.category_id as category_id,
+                    m.manufacturer_id as manufacturer_id,
+                    pr.tag as tag,
                     COALESCE(
                         json_agg(
                             json_build_object('image_url', pi.image_url)
@@ -141,7 +147,7 @@ module.exports = {
                 LEFT JOIN ${SCHEMA}.category c ON pr.category_id = c.category_id
                 LEFT JOIN ${SCHEMA}.manufacturer m ON pr.manufacturer_id = m.manufacturer_id
                 WHERE pr.product_id = $1
-                GROUP BY pr.product_id, c.name, m.manufacturer_name
+                GROUP BY pr.product_id, c.name, m.manufacturer_name, c.category_id, m.manufacturer_id
             `;
             const product = await db.oneOrNone(query, [productId]);
             return product;
@@ -152,11 +158,11 @@ module.exports = {
     createProduct: async (product) => {
         try {
             const query = `
-                INSERT INTO ${SCHEMA}.product (product_name, price, description, stock, discount, category_id, manufacturer_id)
-                VALUES ($1, $2, $3, $4, $5, $6, $7)
+                INSERT INTO ${SCHEMA}.product (product_name, price, description, stock, discount, category_id, manufacturer_id, tag)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
                 RETURNING *
             `;
-            const values = [product.name, product.price, product.description, product.stock, product.discount, product.category_id, product.manufacturer_id];
+            const values = [product.name, product.price, product.description, product.stock, product.discount, product.category_id, product.manufacturer_id, product.tag];
             const result = await db.one(query, values);
 
             if (product.images && product.images.length > 0) {
@@ -178,21 +184,27 @@ module.exports = {
         try {
             const query = `
                 UPDATE ${SCHEMA}.product
-                SET product_name = $1, price = $2, description = $3
-                WHERE product_id = $4
+                SET product_name = $1, price = $2, description = $3, stock = $4, discount = $5, category_id = $6, manufacturer_id = $7, tag = $8
+                WHERE product_id = $9
                 RETURNING *
             `;
-            const values = [product.name, product.price, product.description, id];
+            const values = [product.name, product.price, product.description, product.stock, product.discount, product.category_id, product.manufacturer_id, product.tag, id];
             const result = await db.one(query, values);
+
+            const deleteImageQuery = `
+                DELETE FROM ${SCHEMA}.product_image WHERE product_id = $1
+            `
+
+            await db.none(deleteImageQuery, [id]);
 
             if (product.image_url) {
                 const imageQuery = `
                     INSERT INTO ${SCHEMA}.product_image (product_id, image_url)
                     VALUES ($1, $2)
-                    ON CONFLICT (product_id) DO UPDATE
-                    SET image_url = EXCLUDED.image_url
                 `;
-                await db.none(imageQuery, [id, product.image_url]);
+                for (const image_url of product.image_url) {
+                    await db.none(imageQuery, [id, image_url]);
+                }
             }
 
             return result;
@@ -202,17 +214,17 @@ module.exports = {
     },
     deleteProduct: async (id) => {
         try {
-            const query = `
-                DELETE FROM ${SCHEMA}.product
-                WHERE product_id = $1
-            `;
-            await db.none(query, [id]);
-
             const imageQuery = `
                 DELETE FROM ${SCHEMA}.product_image
                 WHERE product_id = $1
             `;
             await db.none(imageQuery, [id]);
+
+            const query = `
+                DELETE FROM ${SCHEMA}.product
+                WHERE product_id = $1
+            `;
+            await db.none(query, [id]);
         } catch (error) {
             throw error;
         }

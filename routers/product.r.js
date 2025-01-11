@@ -17,7 +17,7 @@ router.get('/details', productController.getProductDetails);
 router.post('/create', verifyAdmin, upload.array('image', 10), uploadArray, productController.createProduct);
 
 // Route to update an existing product by ID
-router.put('/:id', verifyAdmin, upload.single('image'), uploadSingle, productController.updateProduct);
+router.put('/:id', verifyAdmin, upload.array('newImages'), uploadArray, productController.updateProduct);
 
 // Route to delete a product by ID
 router.delete('/:id', productController.deleteProduct);
