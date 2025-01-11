@@ -9,9 +9,6 @@ exports.up = async function(knex) {
             product_id INT,
             quantity INT DEFAULT 1
         );
-
-        ALTER TABLE carts
-        ADD CONSTRAINT pk_carts PRIMARY KEY (user_id, product_id);
     `);
 };
 

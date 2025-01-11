@@ -11,7 +11,7 @@ exports.up = async function(knex) {
             posted_at TIMESTAMP DEFAULT NOW(),
             product_id INTEGER NOT NULL,
             user_id INTEGER NOT NULL
-        );    
+        );  
     `);
 };
 
