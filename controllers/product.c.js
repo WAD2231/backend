@@ -27,7 +27,6 @@ module.exports = {
                 return res.status(400).json({ error: 'Invalid product ID' });
             }
             const product = await Product.getProductDetail(productId);
-            console.log(product);
             if (!product) {
                 return res.status(404).json({ error: `Product with id ${productId} not found` });
             }
@@ -94,7 +93,7 @@ module.exports = {
                 return res.status(400).json({ error: 'Invalid product ID' });
             }
 
-            const { name, price, description, manufacturer_id, category_id, stock, images = [], oldImages, attributes, discount, tag } = req.body;
+            const { name, price, description, manufacturer_id, category_id, stock, images = [], oldImages = [], attributes, discount, tag } = req.body;
 
             const image_url = [...oldImages, ...images];
 
