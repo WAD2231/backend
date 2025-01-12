@@ -1,30 +1,67 @@
 const db = require('./db');
+const { TransactionMode, isolationLevel } = require('pg-promise').txMode;
 const SCHEMA = process.env.DB_SCHEMA;
+const MAX_RETRIES = 5;
+const RETRY_DELAY = 1000;
 
-module.exports = {
-    createOrder: async (order) => {
-        try {
-            const newOrder = await db.one(`
-                INSERT INTO ${SCHEMA}.orders (total, user_id)
-                VALUES ($1, $2)
-                RETURNING order_id
-            `, [order.total, order.user_id]);
+const createOrder = async (order, retries = 0) => {
+    try {
+        const orderID = await db.tx({
+            mode: new TransactionMode({
+                tiLevel: isolationLevel.repeatableRead
+            })
+        }, async t => {
+            for (let detail of order.details) {
+                const result = await t.one(`
+                    SELECT stock
+                    FROM ${SCHEMA}.product
+                    WHERE product_id = $1  
+                    FOR UPDATE
+                `, [detail.product_id]);
+
+                if (result.stock < detail.quantity) {
+                    throw new Error('Insufficient stock');
+                }
+            };
+
+            const newOrder = await t.one(`
+                    INSERT INTO ${SCHEMA}.orders (total, user_id)
+                    VALUES ($1, $2)
+                    RETURNING order_id
+                `, [order.total, order.user_id]);
 
             for (let detail of order.details) {
-                await db.none(`
-                    INSERT INTO ${SCHEMA}.order_details (order_id, product_id, quantity, subtotal)
-                    VALUES ($1, $2, $3, $4)
-                `, [newOrder.order_id, detail.product_id, detail.quantity, detail.subtotal]);
+                await t.none(`
+                        INSERT INTO ${SCHEMA}.order_details (order_id, product_id, quantity, subtotal)
+                        VALUES ($1, $2, $3, $4)
+                    `, [newOrder.order_id, detail.product_id, detail.quantity, detail.subtotal]);
+
+                await t.none(`
+                        UPDATE ${SCHEMA}.product
+                        SET stock = stock - $1
+                        WHERE product_id = $2    
+                    `, [detail.quantity, detail.product_id]);
             }
 
             return newOrder.order_id;
-        }
-        catch (err) {
+        })
+
+        return orderID;
+    }
+    catch (err) {
+        if (err.code === '40001' && retries < MAX_RETRIES) { 
+            await new Promise(resolve => setTimeout(resolve, RETRY_DELAY)); 
+            return createOrder(order, retries + 1);
+        } else {
             throw err;
         }
-    },
+    }
+};
 
-    updateStatus: async(id) => {
+module.exports = {
+    createOrder,
+
+    updateStatus: async (id) => {
         try {
             const query = `
                 UPDATE ${SCHEMA}.orders
