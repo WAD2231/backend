@@ -230,6 +230,8 @@ module.exports = {
                     pr.product_name as name,
                     pr.price as price,
                     pr.description as description,
+                    pr.tag as tag,
+                    pr.discount as discount,
                     COALESCE(
                         json_agg(
                             json_build_object('image_url', pi.image_url)

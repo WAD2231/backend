@@ -16,7 +16,7 @@ module.exports = {
     }
   },
 
-  getProductsInCategory: async (id) => {
+  getProductsInCategory: async (id, page, size) => {
     try {
       const query = `
       SELECT 
@@ -29,6 +29,7 @@ module.exports = {
         pr.discount AS discount,
         mn.manufacturer_name AS manufacturer,
         ct.name AS category,
+        pr.tag as tag,
         COALESCE(
           JSON_AGG(pi.image_url) 
           FILTER (WHERE pi.image_url IS NOT NULL), 
@@ -46,9 +47,25 @@ module.exports = {
         pr.category_id = $1
       GROUP BY 
         pr.product_id, pr.product_name, pr.price, pr.description, pr.created_at, pr.stock, pr.discount, mn.manufacturer_name, ct.name
+      LIMIT $2 OFFSET $3
     `;
-      const products = await db.manyOrNone(query, [id]);
-      return products;
+      const products = await db.manyOrNone(query, [id, size, (page - 1) * size]);
+
+      const sql = `
+        SELECT COUNT(*) AS total_item FROM ${SCHEMA}.product WHERE category_id = $1 
+      `
+
+      const total = await db.one(sql, [id]);
+
+      return {
+        products,
+        paging: {
+          total_item: parseInt(total.total_item),
+          total_page: Math.ceil(total.total_item / size),
+          current_page: page,
+          page_size: size
+        }
+      };
     } catch (error) {
       console.error("Error fetching products:", error);
       throw error;

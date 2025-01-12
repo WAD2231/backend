@@ -55,7 +55,8 @@ module.exports = {
                     name: relatedProduct.name,
                     price: relatedProduct.price,
                     discount: relatedProduct.discount,
-                    images: relatedProduct.images
+                    images: relatedProduct.images,
+                    tag: relatedProduct.tag
                 }))
             };
 

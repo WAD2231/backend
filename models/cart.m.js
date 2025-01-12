@@ -11,10 +11,10 @@ module.exports = {
                         'name', p.product_name,
                         'price', p.price,
                         'discount', p.discount,
-                        'quantity', p.quantity,
+                        'quantity', p.stock,
                         'images', (
                             SELECT json_agg (image_url)
-                            FROM ${SCHEMA}.images
+                            FROM ${SCHEMA}.product_image
                             WHERE product_id = p.product_id
                         )
                     ) AS product,
