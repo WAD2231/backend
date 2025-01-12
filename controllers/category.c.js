@@ -18,7 +18,8 @@ module.exports = {
             const categories = await Category.getCategories();
             const recursiveCategories = createRecursiveCategories(categories);
             res.status(200).json({
-                categories: recursiveCategories
+                categories: recursiveCategories,
+                normalCategories: categories
             });
         } catch (error) {
             console.error(error);
