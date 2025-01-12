@@ -1,4 +1,5 @@
 
+const { fi } = require('@faker-js/faker');
 const db = require('./db');
 const SCHEMA = process.env.DB_SCHEMA;
 
@@ -22,9 +23,119 @@ module.exports = {
             throw error;
         }
     },
+    getProductsForHome: async (filters) => {
+        try {
+            const { page_size, current_page } = filters;
+            const offset = (current_page - 1) * page_size;
+    
+            // Query for new products
+            const newProductsQuery = `
+                SELECT pr.product_id as id,
+                    pr.product_name as name,
+                    pr.price as price,
+                    pr.description as description,
+                    pr.stock as stock,
+                    pr.discount as discount,
+                    pr.created_at as created_at,
+                    c.name as category,
+                    c.category_id as category_id,
+                    m.manufacturer_name as manufacturer,
+                    m.manufacturer_id as manufacturer_id,
+                    pr.tag as tag,
+                    COALESCE(
+                        json_agg(
+                            json_build_object('image_url', pi.image_url)
+                        ) FILTER (WHERE pi.image_url IS NOT NULL), '[]'
+                    ) as images
+                FROM ${SCHEMA}.product pr
+                LEFT JOIN ${SCHEMA}.product_image pi ON pr.product_id = pi.product_id
+                LEFT JOIN ${SCHEMA}.category c ON pr.category_id = c.category_id
+                LEFT JOIN ${SCHEMA}.manufacturer m ON pr.manufacturer_id = m.manufacturer_id
+                WHERE pr.tag = 'new'
+                GROUP BY pr.product_id, c.name, m.manufacturer_name, c.category_id, m.manufacturer_id
+                ORDER BY pr.created_at DESC
+                LIMIT $1 OFFSET $2
+            `;
+            const newProducts = await db.manyOrNone(newProductsQuery, [page_size, offset]);
+    
+            // Query for best-selling products
+            const bestSellingProductsQuery = `
+            WITH top_products AS (
+                SELECT pr.product_id
+                FROM ${SCHEMA}.product pr
+                LEFT JOIN ${SCHEMA}.order_details od ON pr.product_id = od.product_id
+                GROUP BY pr.product_id
+                ORDER BY COUNT(od.product_id) DESC
+                LIMIT $1 OFFSET $2
+            )
+            SELECT pr.product_id as id,
+                pr.product_name as name,
+                pr.price as price,
+                pr.description as description,
+                pr.stock as stock,
+                pr.discount as discount,
+                pr.created_at as created_at,
+                c.name as category,
+                c.category_id as category_id,
+                m.manufacturer_name as manufacturer,
+                m.manufacturer_id as manufacturer_id,
+                pr.tag as tag,
+                COALESCE(
+                    json_agg(
+                        json_build_object('image_url', pi.image_url)
+                    ) FILTER (WHERE pi.image_url IS NOT NULL), '[]'
+                ) as images
+            FROM ${SCHEMA}.product pr
+            LEFT JOIN ${SCHEMA}.product_image pi ON pr.product_id = pi.product_id
+            LEFT JOIN ${SCHEMA}.category c ON pr.category_id = c.category_id
+            LEFT JOIN ${SCHEMA}.manufacturer m ON pr.manufacturer_id = m.manufacturer_id
+            WHERE pr.product_id IN (SELECT product_id FROM top_products)
+            GROUP BY pr.product_id, c.name, m.manufacturer_name, c.category_id, m.manufacturer_id
+        `;
+            const bestSellingProducts = await db.manyOrNone(bestSellingProductsQuery, [page_size, offset]);
+    
+            // Query for highest discount products
+            const highestDiscountProductsQuery = `
+                SELECT pr.product_id as id,
+                    pr.product_name as name,
+                    pr.price as price,
+                    pr.description as description,
+                    pr.stock as stock,
+                    pr.discount as discount,
+                    pr.created_at as created_at,
+                    c.name as category,
+                    c.category_id as category_id,
+                    m.manufacturer_name as manufacturer,
+                    m.manufacturer_id as manufacturer_id,
+                    pr.tag as tag,
+                    COALESCE(
+                        json_agg(
+                            json_build_object('image_url', pi.image_url)
+                        ) FILTER (WHERE pi.image_url IS NOT NULL), '[]'
+                    ) as images
+                FROM ${SCHEMA}.product pr
+                LEFT JOIN ${SCHEMA}.product_image pi ON pr.product_id = pi.product_id
+                LEFT JOIN ${SCHEMA}.category c ON pr.category_id = c.category_id
+                LEFT JOIN ${SCHEMA}.manufacturer m ON pr.manufacturer_id = m.manufacturer_id
+                WHERE pr.discount > 0
+                GROUP BY pr.product_id, c.name, m.manufacturer_name, c.category_id, m.manufacturer_id
+                ORDER BY pr.discount DESC
+                LIMIT $1 OFFSET $2
+            `;
+            const highestDiscountProducts = await db.manyOrNone(highestDiscountProductsQuery, [page_size, offset]);
+    
+            return {
+                newProducts,
+                bestSellingProducts,
+                highestDiscountProducts
+            };
+        } catch (error) {
+            throw error;
+        }
+    },
     getProducts: async (filters) => {
         try {
-            const { category_id, search, page_size, current_page, exclude_product_id } = filters;
+            const { category_id, tag, price_min, price_max, search, page_size, current_page, exclude_product_id } = filters;
 
             const offset = (current_page - 1) * page_size;
 
@@ -61,6 +172,21 @@ module.exports = {
                 values.push(category_id);
             }
 
+            if (tag) {
+                query += ` AND pr.tag = $${index++}`;
+                values.push(tag);
+            }
+
+            if (price_min) {
+                query += ` AND pr.price >= $${index++}`;
+                values.push(price_min);
+            }
+
+            if (price_max) {
+                query += ` AND pr.price <= $${index++}`;
+                values.push(price_max);
+            }
+
             if (search) {
                 query += ` AND pr.product_name ILIKE $${index++}`;
                 values.push(`%${search}%`);
@@ -91,6 +217,21 @@ module.exports = {
                 countValues.push(category_id);
             }
 
+            if (tag) {
+                countQuery += ` AND pr.tag = $${countIndex++}`;
+                countValues.push(tag);
+            }
+
+            if (price_min) {
+                countQuery += ` AND pr.price >= $${countIndex++}`;
+                countValues.push(price_min);
+            }
+
+            if (price_max) {
+                countQuery += ` AND pr.price <= $${countIndex++}`;
+                countValues.push(price_max);
+            }
+
             if (search) {
                 countQuery += ` AND pr.product_name ILIKE $${countIndex++}`;
                 countValues.push(`%${search}%`);
@@ -114,7 +255,10 @@ module.exports = {
                 },
                 query: {
                     search: search,
-                    category_id: category_id
+                    category_id: category_id,
+                    tag: tag,
+                    price_min: price_min,
+                    price_max: price_max
                 },
                 products: products
             };

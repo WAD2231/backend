@@ -29,6 +29,6 @@ exports.up = async function(knex) {
  */
 exports.down = async function(knex) {
     await knex.raw(`
-        DROP TABLE IF EXISTS product
+        DROP TABLE  product
     `);
 };

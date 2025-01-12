@@ -10,6 +10,7 @@ const upload = multer();
 // Route to get filtered products with pagination
 router.get('/', productController.getProducts);
 
+router.get('/home', productController.getProductsForHome);
 // Route to get product details by ID
 router.get('/details', productController.getProductDetails);
 
