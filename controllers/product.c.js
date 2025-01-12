@@ -5,9 +5,10 @@ const upload = require('../middlewares/upload');
 module.exports = {
     getProductsForHome: async (req, res) => {
         try {
-            const{page_size, current_page} = req.query;
+            const{max, page_size, current_page} = req.query;
             const filters = {
-                page_size: page_size ? parseInt(page_size) : null,
+                max: max ? parseInt(max) : 20,
+                page_size: page_size ? parseInt(page_size) : 10,
                 current_page: current_page ? parseInt(current_page) : 1
             };
             const result = await Product.getProductsForHome(filters);

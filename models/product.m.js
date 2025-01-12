@@ -25,7 +25,7 @@ module.exports = {
     },
     getProductsForHome: async (filters) => {
         try {
-            const { page_size, current_page } = filters;
+            const { max, page_size, current_page } = filters;
             const offset = (current_page - 1) * page_size;
     
             // Query for new products
@@ -56,43 +56,46 @@ module.exports = {
                 ORDER BY pr.created_at DESC
                 LIMIT $1 OFFSET $2
             `;
-            const newProducts = await db.manyOrNone(newProductsQuery, [page_size, offset]);
+            const newProducts = await db.manyOrNone(newProductsQuery, [max, offset]);
     
             // Query for best-selling products
             const bestSellingProductsQuery = `
-            WITH top_products AS (
-                SELECT pr.product_id
+                WITH top_products AS (
+                    SELECT pr.product_id
+                    FROM ${SCHEMA}.product pr
+                    LEFT JOIN ${SCHEMA}.order_details od ON pr.product_id = od.product_id
+                    GROUP BY pr.product_id
+                    ORDER BY COUNT(od.product_id) DESC
+                    LIMIT $1 OFFSET $2
+                )
+                SELECT pr.product_id as id,
+                    pr.product_name as name,
+                    pr.price as price,
+                    pr.description as description,
+                    pr.stock as stock,
+                    pr.discount as discount,
+                    pr.created_at as created_at,
+                    c.name as category,
+                    c.category_id as category_id,
+                    m.manufacturer_name as manufacturer,
+                    m.manufacturer_id as manufacturer_id,
+                    pr.tag as tag,
+                    COALESCE(
+                        json_agg(
+                            json_build_object('image_url', pi.image_url)
+                        ) FILTER (WHERE pi.image_url IS NOT NULL), '[]'
+                    ) as images
                 FROM ${SCHEMA}.product pr
-                LEFT JOIN ${SCHEMA}.order_details od ON pr.product_id = od.product_id
-                GROUP BY pr.product_id
-                ORDER BY COUNT(od.product_id) DESC
-                LIMIT $1 OFFSET $2
-            )
-            SELECT pr.product_id as id,
-                pr.product_name as name,
-                pr.price as price,
-                pr.description as description,
-                pr.stock as stock,
-                pr.discount as discount,
-                pr.created_at as created_at,
-                c.name as category,
-                c.category_id as category_id,
-                m.manufacturer_name as manufacturer,
-                m.manufacturer_id as manufacturer_id,
-                pr.tag as tag,
-                COALESCE(
-                    json_agg(
-                        json_build_object('image_url', pi.image_url)
-                    ) FILTER (WHERE pi.image_url IS NOT NULL), '[]'
-                ) as images
-            FROM ${SCHEMA}.product pr
-            LEFT JOIN ${SCHEMA}.product_image pi ON pr.product_id = pi.product_id
-            LEFT JOIN ${SCHEMA}.category c ON pr.category_id = c.category_id
-            LEFT JOIN ${SCHEMA}.manufacturer m ON pr.manufacturer_id = m.manufacturer_id
-            WHERE pr.product_id IN (SELECT product_id FROM top_products)
-            GROUP BY pr.product_id, c.name, m.manufacturer_name, c.category_id, m.manufacturer_id
-        `;
-            const bestSellingProducts = await db.manyOrNone(bestSellingProductsQuery, [page_size, offset]);
+                LEFT JOIN (
+                    SELECT DISTINCT ON (product_id, image_url) product_id, image_url
+                    FROM ${SCHEMA}.product_image
+                ) pi ON pr.product_id = pi.product_id
+                LEFT JOIN ${SCHEMA}.category c ON pr.category_id = c.category_id
+                LEFT JOIN ${SCHEMA}.manufacturer m ON pr.manufacturer_id = m.manufacturer_id
+                WHERE pr.product_id IN (SELECT product_id FROM top_products)
+                GROUP BY pr.product_id, c.name, m.manufacturer_name, c.category_id, m.manufacturer_id
+            `;
+            const bestSellingProducts = await db.manyOrNone(bestSellingProductsQuery, [max, offset]);
     
             // Query for highest discount products
             const highestDiscountProductsQuery = `
@@ -122,9 +125,19 @@ module.exports = {
                 ORDER BY pr.discount DESC
                 LIMIT $1 OFFSET $2
             `;
-            const highestDiscountProducts = await db.manyOrNone(highestDiscountProductsQuery, [page_size, offset]);
+            const highestDiscountProducts = await db.manyOrNone(highestDiscountProductsQuery, [max, offset]);
+    
+            // Calculate total pages
+            const totalItems = Math.min(max * 3, newProducts.length + bestSellingProducts.length + highestDiscountProducts.length);
+            const totalPages = Math.ceil(totalItems / page_size);
     
             return {
+                paging: {
+                    current_page,
+                    page_size,
+                    total_pages: totalPages,
+                    total_items: totalItems
+                },
                 newProducts,
                 bestSellingProducts,
                 highestDiscountProducts
