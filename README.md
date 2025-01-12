@@ -202,6 +202,109 @@ POST /api/orders
 }
 ```
 
+## 5.2. Get order by user id
+GET api/orders/history?
+
+order=[id_asc|id_desc|total_asc|total_desc|date_asc|date_desc]
+date=YYYY-MM-DD
+status=[completed|pending]
+page=1&size=10
+
+``` json
+{
+  "paging": {
+    "current_page": 1,
+    "page_size": 10,
+    "total_item": 1,
+    "total_page": 1
+  },
+  "filter": {
+    "order": "id_asc",
+    "date": "2024-09-23"
+  },
+  "orders": [
+    {
+      "total_item": 1,
+      "order_id": 210,
+      "total": "1243",
+      "status": "completed",
+      "order_date": "2024-09-22T18:00:09.000Z",
+      "details": [
+        {
+          "id": 452,
+          "product": {
+            "id": 32,
+            "name": "HP 15 Laptop",
+            "price": 599.99,
+            "images": [
+              "https://m.media-amazon.com/images/I/71yaP7euNAL._AC_UY218_.jpg",
+              "https://m.media-amazon.com/images/I/61Wc1fDGJuL._AC_UY218_.jpg",
+              "https://m.media-amazon.com/images/I/51PsNbMd-CL._AC_UY218_.jpg"
+            ],
+            "category": {
+              "id": 1,
+              "name": "PC Game Headsets"
+            },
+            "manufacturer": {
+              "id": 5,
+              "name": "Asus"
+            }
+          },
+          "quantity": 1,
+          "subtotal": 480
+        },
+        {
+          "id": 453,
+          "product": {
+            "id": 74,
+            "name": "Vivo X70 Pro, 256GB, Cosmic Black",
+            "price": 729.99,
+            "images": [
+              "https://m.media-amazon.com/images/I/51fYXSnSu9L._AC_UY218_.jpg",
+              "https://m.media-amazon.com/images/I/515zGEaozeL._AC_UY218_.jpg",
+              "https://m.media-amazon.com/images/I/71L1ezoIH9L._AC_UY218_.jpg"
+            ],
+            "category": {
+              "id": 10,
+              "name": "Mac Gaming Keyboards"
+            },
+            "manufacturer": {
+              "id": 5,
+              "name": "Asus"
+            }
+          },
+          "quantity": 1,
+          "subtotal": 693
+        },
+        {
+          "id": 454,
+          "product": {
+            "id": 30,
+            "name": "SteelSeries Arctis 3 - All-Platform Gaming Headset",
+            "price": 69.99,
+            "images": [
+              "https://m.media-amazon.com/images/I/71IvAZyaR0L._AC_UY218_.jpg",
+              "https://m.media-amazon.com/images/I/61dVV8sjTLL._AC_UY218_.jpg",
+              "https://m.media-amazon.com/images/I/71hGqu8tSCL._AC_UY218_.jpg"
+            ],
+            "category": {
+              "id": 3,
+              "name": "PlayStation 5 Headsets"
+            },
+            "manufacturer": {
+              "id": 3,
+              "name": "Sony"
+            }
+          },
+          "quantity": 1,
+          "subtotal": 70
+        }
+      ]
+    }
+  ]
+}
+```
+
 # 6. CART
 ## 6.1. Get cart by user id
 GET /api/carts?page=1&size=2
