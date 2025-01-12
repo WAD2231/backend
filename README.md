@@ -800,3 +800,4 @@ GET /api/products/statistics/manufacturer
 ```
 # 8. CATEGORY MANAGEMENT
 
+## 8.1. 

@@ -58,7 +58,11 @@ module.exports = {
   getCategories: async () => {
     try {
       let query = `
-            SELECT * FROM ${SCHEMA}.category ORDER BY created_at DESC
+            SELECT c.*, COUNT(p.product_id) as product_in_category
+            FROM ${SCHEMA}.category c
+            LEFT JOIN ${SCHEMA}.product p ON c.category_id = p.category_id
+            GROUP BY c.category_id
+            ORDER BY c.created_at DESC
         `;
 
       const categories = await db.manyOrNone(query);
