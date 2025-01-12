@@ -151,5 +151,83 @@ module.exports = {
         catch (error) {
             throw error;
         }
+    },
+
+    getOrdersOfUser: async (userID, page, size, order, status, date) => {
+        try {
+            const sortOptions = {
+                'date_asc': 'o.order_date ASC',
+                'date_desc': 'o.order_date DESC',
+                'total_asc': 'o.total ASC',
+                'total_desc': 'o.total DESC',
+                'id_asc': 'o.order_id ASC',
+                'id_desc': 'o.order_id DESC'
+            }
+
+            const query1 = 
+            `
+                SELECT 
+                    COUNT(*) OVER()::INTEGER AS total_item,
+                    o.order_id,
+                    o.total,
+                    o.status,
+                    o.order_date,
+                    json_agg(json_build_object(
+                        'id', od.order_detail_id,
+                        'product', json_build_object(
+                            'id', p.product_id,
+                            'name', p.product_name,
+                            'price', p.price,
+                            'images',  (
+                                SELECT json_agg(image_url)
+                                FROM product_image
+                                WHERE product_id = p.product_id
+                            ),
+                            'category', json_build_object(
+                                'id', c.category_id,
+                                'name', c.name
+                            ),
+                            'manufacturer', json_build_object(
+                                'id', m.manufacturer_id,
+                                'name', m.manufacturer_name
+                            )
+                        ),
+                        'quantity', od.quantity,
+                        'subtotal', od.subtotal
+                    )) AS details
+                FROM orders o JOIN order_details od ON o.order_id = od.order_id
+                JOIN product p ON od.product_id = p.product_id
+                JOIN category c ON p.category_id = c.category_id
+                JOIN manufacturer m ON p.manufacturer_id = m.manufacturer_id
+                WHERE o.user_id = $1
+                ${status ? ` AND o.status = '${status}' ` : ' '}
+                ${date ? ` AND o.order_date::date = '${date}' ` : ' '}
+                GROUP BY o.order_id, o.total, o.status, o.order_date
+                ORDER BY ${sortOptions[order]}
+                OFFSET $2 LIMIT $3;
+            `;
+
+            const result = await db.any(query1, [userID, (page - 1) * size, size]);
+            const total_item = result.length > 0 ? result[0].total_item : 0;
+
+            return {
+                paging: {
+                    current_page: page,
+                    page_size: size,
+                    total_item: total_item,
+                    total_page: Math.ceil(total_item / size)
+                },
+                filter: {
+                    order: order,
+                    status: status,
+                    date: date
+                },
+                orders: result
+            }
+        }
+        catch (error) {
+            console.log(error);
+            throw error;
+        }
     }
 };

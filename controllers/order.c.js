@@ -63,5 +63,19 @@ module.exports = {
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
+    },
+
+    getOrdersOfUser: async (req, res) => {
+        try {
+            const page = parseInt(req.query.page) || 1;
+            const size = parseInt(req.query.size) || 10;
+            const order = req.query.order || 'id_asc';
+            const status = req.query.status;
+            const date = req.query.date;
+            const orders = await Order.getOrdersOfUser(req.user.user_id, page, size, order, status, date);
+            return res.status(200).json(orders);
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
     }
 };

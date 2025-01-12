@@ -4,6 +4,8 @@ const {verifyUser, verifyAdmin} = require('../middlewares/authorize');
 
 router.post('/', verifyUser, OrderC.createOrder);
 
+router.get('/history', verifyUser, OrderC.getOrdersOfUser);
+
 router.get('/statistics/revenue', verifyAdmin, OrderC.getRevenueByMonth);
 
 router.get('/statistics/best-sellers', verifyAdmin, OrderC.getBestSellers);
