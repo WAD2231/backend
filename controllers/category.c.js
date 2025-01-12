@@ -4,7 +4,9 @@ module.exports = {
     getProductsInCategory: async (req, res) => {
         try {
             const id = parseInt(req.params.id);
-            const products = await Category.getProductsInCategory(id);
+            const page_size = parseInt(req.query.page_size) || 10;
+            const page = parseInt(req.query.page) || 1;
+            const products = await Category.getProductsInCategory(id, page, page_size);
             res.status(200).json(products);
         } catch (error) {
             res.status(500).send('An error occurred while fetching products in category');
