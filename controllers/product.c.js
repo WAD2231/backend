@@ -3,12 +3,30 @@ const Category = require('../models/category.m.js');
 const Attribute = require('../models/attribute.m.js');
 const upload = require('../middlewares/upload');
 module.exports = {
+    getProductsForHome: async (req, res) => {
+        try {
+            const{max, page_size, current_page} = req.query;
+            const filters = {
+                max: max ? parseInt(max) : 20,
+                page_size: page_size ? parseInt(page_size) : 10,
+                current_page: current_page ? parseInt(current_page) : 1
+            };
+            const result = await Product.getProductsForHome(filters);
+            res.status(200).json(result);
+        } catch (error) {
+            console.error(error); // Log the error for debugging
+            res.status(500).send('An error occurred while fetching products');
+        }
+    },
     getProducts: async (req, res) => {
         try {
-            const { category_id, search, page_size, current_page } = req.query;
+            const { category_id, tag, price_min, price_max, search, page_size, current_page } = req.query;
             
             const filters = {
                 category_id: category_id ? parseInt(category_id) : null,
+                tag: tag || null,
+                price_min: price_min ? parseInt(price_min) : null,
+                price_max: price_max ? parseInt(price_max) : null,
                 search: search || '',
                 page_size: page_size ? parseInt(page_size) : 10,
                 current_page: current_page ? parseInt(current_page) : 1
