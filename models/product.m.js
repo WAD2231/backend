@@ -26,7 +26,7 @@ module.exports = {
     getProductsForHome: async (filters) => {
         try {
             const { max, page_size, current_page } = filters;
-            const offset = (current_page - 1) * page_size;
+            const offset = (current_page - 1)*page_size;
     
             // Query for new products
             const newProductsQuery = `
@@ -54,10 +54,10 @@ module.exports = {
                 WHERE pr.tag = 'new'
                 GROUP BY pr.product_id, c.name, m.manufacturer_name, c.category_id, m.manufacturer_id
                 ORDER BY pr.created_at DESC
-                LIMIT $1 OFFSET $2
+                LIMIT $1
             `;
-            const newProducts = await db.manyOrNone(newProductsQuery, [max, offset]);
-    
+            const newProductsFull = await db.manyOrNone(newProductsQuery, [max, offset]);
+            const newProducts=newProductsFull.slice(offset, offset+page_size);
             // Query for best-selling products
             const bestSellingProductsQuery = `
                 WITH top_products AS (
@@ -66,7 +66,7 @@ module.exports = {
                     LEFT JOIN ${SCHEMA}.order_details od ON pr.product_id = od.product_id
                     GROUP BY pr.product_id
                     ORDER BY COUNT(od.product_id) DESC
-                    LIMIT $1 OFFSET $2
+                    LIMIT $1 
                 )
                 SELECT pr.product_id as id,
                     pr.product_name as name,
@@ -94,9 +94,11 @@ module.exports = {
                 LEFT JOIN ${SCHEMA}.manufacturer m ON pr.manufacturer_id = m.manufacturer_id
                 WHERE pr.product_id IN (SELECT product_id FROM top_products)
                 GROUP BY pr.product_id, c.name, m.manufacturer_name, c.category_id, m.manufacturer_id
+
+
             `;
-            const bestSellingProducts = await db.manyOrNone(bestSellingProductsQuery, [max, offset]);
-    
+            const bestSellingProductsFull = await db.manyOrNone(bestSellingProductsQuery, [max, offset]);
+            const bestSellingProducts=bestSellingProductsFull.slice(offset, offset+page_size);
             // Query for highest discount products
             const highestDiscountProductsQuery = `
                 SELECT pr.product_id as id,
@@ -125,11 +127,12 @@ module.exports = {
                 ORDER BY pr.discount DESC
                 LIMIT $1 OFFSET $2
             `;
-            const highestDiscountProducts = await db.manyOrNone(highestDiscountProductsQuery, [max, offset]);
-    
+            const highestDiscountProductsFull = await db.manyOrNone(highestDiscountProductsQuery, [max, offset]);
+            const highestDiscountProducts=highestDiscountProductsFull.slice(offset, offset+page_size);
+            
             // Calculate total pages
-            const totalItems = Math.min(max * 3, newProducts.length + bestSellingProducts.length + highestDiscountProducts.length);
-            const totalPages = Math.ceil(totalItems / page_size);
+            const totalItems = max * 3; // max items per category
+            const totalPages = Math.ceil(max / page_size);
     
             return {
                 paging: {
@@ -200,9 +203,10 @@ module.exports = {
                 values.push(price_max);
             }
 
+
             if (search) {
-                query += ` AND pr.product_name ILIKE $${index++}`;
-                values.push(`%${search}%`);
+                query += ` AND (pr.product_name ILIKE $${index++} OR c.name ILIKE $${index++} OR m.manufacturer_name ILIKE $${index++} OR pr.tag ILIKE $${index++})`;
+                values.push(`%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`);
             }
 
             if (exclude_product_id) {
@@ -217,10 +221,13 @@ module.exports = {
 
             // Get total count for pagination
             let countQuery = `
-                SELECT COUNT(*) as total
-                FROM ${SCHEMA}.product pr
-                WHERE 1=1
+            SELECT COUNT(*) as total
+            FROM ${SCHEMA}.product pr
+            LEFT JOIN ${SCHEMA}.category c ON pr.category_id = c.category_id
+            LEFT JOIN ${SCHEMA}.manufacturer m ON pr.manufacturer_id = m.manufacturer_id
+            WHERE 1=1
             `;
+
 
             const countValues = [];
             let countIndex = 1;
@@ -244,10 +251,9 @@ module.exports = {
                 countQuery += ` AND pr.price <= $${countIndex++}`;
                 countValues.push(price_max);
             }
-
             if (search) {
-                countQuery += ` AND pr.product_name ILIKE $${countIndex++}`;
-                countValues.push(`%${search}%`);
+                countQuery += ` AND (pr.product_name ILIKE $${countIndex++} OR c.name ILIKE $${countIndex++} OR m.manufacturer_name ILIKE $${countIndex++} OR pr.tag ILIKE $${countIndex++})`;
+                countValues.push(`%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`);
             }
 
             if (exclude_product_id) {

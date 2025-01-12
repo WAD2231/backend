@@ -116,6 +116,404 @@ GET /api/auth/login/google
 
 GET /api/auth/logout
 
+# 3. PRODUCT MANAGEMENT
+
+## 3.1. Get  special product
+
+GET /api/products/home?max=5&page_size=&current_page=1
+
+```json
+{
+  "paging": {
+    "current_page": 1,
+    "page_size": 2,
+    "total_pages": 3,
+    "total_items": 15
+  },
+  "newProducts": [
+    {
+      "id": 45,
+      "name": "Dell XPS 13 2-in-1",
+      "price": "1099.99",
+      "description": "Dell XPS 13 2-in-1, Intel Core i7, 13.4' FHD Touch, 16GB RAM, 512GB SSD, Windows 11 Pro",
+      "stock": 6,
+      "discount": "0.20",
+      "created_at": "2025-01-11T17:32:25.904Z",
+      "category": "Mac Games & Accessories",
+      "category_id": 9,
+      "manufacturer": "Sony",
+      "manufacturer_id": 3,
+      "tag": "new",
+      "images": [
+        {
+          "image_url": "https://m.media-amazon.com/images/I/815uX7wkOZS._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/81divYKpeTL._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/61gKkYQn6lL._AC_UY218_.jpg"
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Acer Aspire 5 Slim Laptop",
+      "price": "364.99",
+      "description": "Acer Aspire 5 Slim Laptop, 15.6 inches Full HD IPS Display, AMD Ryzen 3 3200U, Vega 3 Graphics, 4GB DDR4, 128GB SSD, Backlit Keyboard, Windows 10 in S Mode, A515-43-R19L, Silver",
+      "stock": 15,
+      "discount": "0.00",
+      "created_at": "2025-01-11T17:32:25.904Z",
+      "category": "PC Game Headsets",
+      "category_id": 1,
+      "manufacturer": "Lenovo",
+      "manufacturer_id": 6,
+      "tag": "new",
+      "images": [
+        {
+          "image_url": "https://m.media-amazon.com/images/I/71yFp1LYUGL._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/61IpRGnny7L._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/71CGrFl8cjL._AC_UY218_.jpg"
+        }
+      ]
+    }
+  ],
+  "bestSellingProducts": [
+    {
+      "id": 13,
+      "name": "Logitech G915 LIGHTSPEED RGB Mechanical Gaming Keyboard",
+      "price": "149.99",
+      "description": "Logitech G915 LIGHTSPEED RGB Mechanical Gaming Keyboard, Low Profile GL Clicky Key Switch, LIGHTSYNC RGB, Advanced LIGHTSPEED Wireless and Bluetooth Support - Clicky,Black",
+      "stock": 25,
+      "discount": "0.30",
+      "created_at": "2025-01-11T17:32:25.904Z",
+      "category": "PC Game Headsets",
+      "category_id": 1,
+      "manufacturer": "Samsung",
+      "manufacturer_id": 2,
+      "tag": "new",
+      "images": [
+        {
+          "image_url": "https://m.media-amazon.com/images/I/61-kTKQuDUL._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/61gSpxZTZZL._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/71Yp7pxBFOL._AC_UY218_.jpg"
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Lenovo IdeaPad 3 Laptop",
+      "price": "299.99",
+      "description": "Lenovo IdeaPad 3 Laptop, 15.6 HD Display, AMD Ryzen 3 3250U, 4GB RAM, 128GB Storage, Windows 10 Home in S Mode, 81W1009DUS, Abyss Blue",
+      "stock": 10,
+      "discount": "0.00",
+      "created_at": "2025-01-11T17:32:25.904Z",
+      "category": "PC Game Headsets",
+      "category_id": 1,
+      "manufacturer": "Samsung",
+      "manufacturer_id": 2,
+      "tag": "new",
+      "images": [
+        {
+          "image_url": "https://m.media-amazon.com/images/I/614Jk1dIoGL._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/61jojpe4KVL._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/71pTP-ll4sL._AC_UY218_.jpg"
+        }
+      ]
+    }
+  ],
+  "highestDiscountProducts": [
+    {
+      "id": 17,
+      "name": "MOFII Wireless Keyboard",
+      "price": "39.99",
+      "description": "MOFII Wireless Keyboard and Mouse Combo,2.4GHz Retro Full-Size Keyboard with Number Pad and Cute Mouse for Computer PC Desktops Laptop WindowsxP/7/8/10(Milk Tea Colorful-B)",
+      "stock": 34,
+      "discount": "0.60",
+      "created_at": "2025-01-11T17:32:25.904Z",
+      "category": "PlayStation 4 Headsets",
+      "category_id": 4,
+      "manufacturer": "Sony",
+      "manufacturer_id": 3,
+      "tag": "featured",
+      "images": [
+        {
+          "image_url": "https://m.media-amazon.com/images/I/61qhXbkJvTL._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/61-kTKQuDUL._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/71Yp7pxBFOL._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/61RM1rMoceL._AC_UY218_.jpg"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "MageGee Portable Mechanical Gaming Keyboard",
+      "price": "30.99",
+      "description": "MageGee Portable 60% Mechanical Gaming Keyboard, MK-Box LED Backlit Compact 68 Keys Mini Wired Office Keyboard with Red Switch for Windows Laptop PC Mac - Black/Grey",
+      "stock": 95,
+      "discount": "0.50",
+      "created_at": "2025-01-11T17:32:25.904Z",
+      "category": "Computer Headsets",
+      "category_id": 5,
+      "manufacturer": "Apple",
+      "manufacturer_id": 4,
+      "tag": "new",
+      "images": [
+        {
+          "image_url": "https://m.media-amazon.com/images/I/61is2ZwnHEL._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/61-kTKQuDUL._AC_UY218_.jpg"
+        },
+        {
+          "image_url": "https://m.media-amazon.com/images/I/715mkYSaJLL._AC_UY218_.jpg"
+        }
+      ]
+    }
+  ]
+}
+```
+
+## 3.2. Get all products
+
+GET /api/products?category_id=1&tag=new&&search=samsung&page_size=10&current_page=1 
+
+```json
+  {
+    "paging": {
+      "total_page": 1,
+      "total_item": 2,
+      "current_page": 1,
+      "page_size": 10
+    },
+    "query": {
+      "search": "samsung",
+      "category_id": 1,
+      "tag": "new",
+      "price_min": null,
+      "price_max": null
+    },
+    "products": [
+      {
+        "id": 13,
+        "name": "Logitech G915 LIGHTSPEED RGB Mechanical Gaming Keyboard",
+        "price": "149.99",
+        "description": "Logitech G915 LIGHTSPEED RGB Mechanical Gaming Keyboard, Low Profile GL Clicky Key Switch, LIGHTSYNC RGB, Advanced LIGHTSPEED Wireless and Bluetooth Support - Clicky,Black",
+        "stock": 25,
+        "discount": "0.30",
+        "created_at": "2025-01-11T17:32:25.904Z",
+        "category": "PC Game Headsets",
+        "category_id": 1,
+        "manufacturer": "Samsung",
+        "manufacturer_id": 2,
+        "tag": "new",
+        "images": [
+          {
+            "image_url": "https://m.media-amazon.com/images/I/61-kTKQuDUL._AC_UY218_.jpg"
+          },
+          {
+            "image_url": "https://m.media-amazon.com/images/I/61gSpxZTZZL._AC_UY218_.jpg"
+          },
+          {
+            "image_url": "https://m.media-amazon.com/images/I/71Yp7pxBFOL._AC_UY218_.jpg"
+          }
+        ]
+      },
+      {
+        "id": 35,
+        "name": "Lenovo IdeaPad 3 Laptop",
+        "price": "299.99",
+        "description": "Lenovo IdeaPad 3 Laptop, 15.6 HD Display, AMD Ryzen 3 3250U, 4GB RAM, 128GB Storage, Windows 10 Home in S Mode, 81W1009DUS, Abyss Blue",
+        "stock": 10,
+        "discount": "0.00",
+        "created_at": "2025-01-11T17:32:25.904Z",
+        "category": "PC Game Headsets",
+        "category_id": 1,
+        "manufacturer": "Samsung",
+        "manufacturer_id": 2,
+        "tag": "new",
+        "images": [
+          {
+            "image_url": "https://m.media-amazon.com/images/I/614Jk1dIoGL._AC_UY218_.jpg"
+          },
+          {
+            "image_url": "https://m.media-amazon.com/images/I/61jojpe4KVL._AC_UY218_.jpg"
+          },
+          {
+            "image_url": "https://m.media-amazon.com/images/I/71pTP-ll4sL._AC_UY218_.jpg"
+          }
+        ]
+      }
+    ]
+  }
+```
+
+## 3.3. Get product details
+
+GET /api/products/details?product_id=1
+
+```json
+  {
+    "id": 1,
+    "name": "Logitech MK270 Wireless Keyboard And Mouse Combo",
+    "price": "27.99",
+    "discount": "0.00",
+    "stock": 100,
+    "created_at": "2025-01-11T17:32:25.904Z",
+    "tag": "featured",
+    "category_id": 6,
+    "categoryName": "Computer Keyboards, Mice & Accessories",
+    "manufacturer_id": 1,
+    "manufacturerName": "Logitech",
+    "description": "Logitech MK270 Wireless Keyboard And Mouse Combo For Windows, 2.4 GHz Wireless, Compact Mouse, 8 Multimedia And Shortcut Keys, For PC, Laptop - Black",
+    "images": [
+      {
+        "image_url": "https://m.media-amazon.com/images/I/61gSpxZTZZL._AC_UY218_.jpg"
+      },
+      {
+        "image_url": "https://m.media-amazon.com/images/I/7113k0qNblL._AC_UY218_.jpg"
+      },
+      {
+        "image_url": "https://m.media-amazon.com/images/I/61j3wQheLXL._AC_UY218_.jpg"
+      },
+      {
+        "image_url": "https://m.media-amazon.com/images/I/61is2ZwnHEL._AC_UY218_.jpg"
+      }
+    ],
+    "attributes": [
+      {
+        "name": "Connectivity",
+        "value": "Wired"
+      },
+      {
+        "name": "Key Switch Type",
+        "value": "Mechanical (Cherry MX Red)"
+      },
+      {
+        "name": "Backlight",
+        "value": "RGB"
+      },
+      {
+        "name": "Layout",
+        "value": "Full-size"
+      },
+      {
+        "name": "Compatibility",
+        "value": "Windows"
+      }
+    ],
+    "relatedProducts": [
+      {
+        "id": 2,
+        "name": "NPET K10V3PRO Gaming Keyboard",
+        "price": "12.49",
+        "images": [
+          {
+            "image_url": "https://m.media-amazon.com/images/I/61is2ZwnHEL._AC_UY218_.jpg"
+          },
+          {
+            "image_url": "https://m.media-amazon.com/images/I/61gSpxZTZZL._AC_UY218_.jpg"
+          },
+          {
+            "image_url": "https://m.media-amazon.com/images/I/61j3wQheLXL._AC_UY218_.jpg"
+          }
+        ]
+      }
+    ]
+  }
+```
+
+## 3.4. Create product
+
+POST /api/products/create
+
+```json
+{
+  "name": "Logitech MK270 Wireless Keyboard And Mouse Combo",
+  "price": 27.99,
+  "description": "Logitech MK270 Wireless Keyboard And Mouse Combo For Windows, 2.4 GHz Wireless, Compact Mouse, 8 Multimedia And Shortcut Keys, For PC, Laptop - Black",
+  "stock": 100,
+  "discount": 0.00,
+  "category_id": 6,
+  "manufacturer_id": 1,
+  "tag": "featured",
+  "images": [
+    {
+      "image_url": "https://m.media-amazon.com/images/I/61gSpxZTZZL._AC_UY218_.jpg"
+    },
+    {
+      "image_url": "https://m.media-amazon.com/images/I/7113k0qNblL._AC_UY218_.jpg"
+    },
+    {
+      "image_url": "https://m.media-amazon.com/images/I/61j3wQheLXL._AC_UY218_.jpg"
+    },
+    {
+      "image_url": "https://m.media-amazon.com/images/I/61is2ZwnHEL._AC_UY218_.jpg"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "Connectivity",
+      "value": "Wired"
+    },
+    {
+      "name": "Key Switch Type",
+      "value": "Mechanical (Cherry MX Red)"
+    },
+    {
+      "name": "Backlight",
+      "value": "RGB"
+    },
+    {
+      "name": "Layout",
+      "value": "Full-size"
+    },
+    {
+      "name": "Compatibility",
+      "value": "Windows"
+    }
+  ]
+}
+```
+
+## 3.5. Update product information
+
+PUT /api/products/:id
+
+```json
+{
+  "price": 49.99,
+  "stock": 70,
+  "discount": 0.2
+}
+```
+
+## 3.6 Delete product
+
+DELETE /api/products/:id
+
+
+
+
+
 # 4. PRODUCT REVIEW
 
 ## 4.1. Post a review
@@ -400,3 +798,5 @@ GET /api/products/statistics/manufacturer
   }
 ]
 ```
+# 8. CATEGORY MANAGEMENT
+

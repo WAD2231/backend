@@ -21,7 +21,7 @@ router.post('/create', verifyAdmin, upload.array('image', 10), uploadArray, prod
 router.put('/:id', verifyAdmin, upload.array('newImages'), uploadArray, productController.updateProduct);
 
 // Route to delete a product by ID
-router.delete('/:id', productController.deleteProduct);
+router.delete('/:id', verifyAdmin, productController.deleteProduct);
 
 // Route to search for products
 router.get('/search/:query', productController.getProduct);
