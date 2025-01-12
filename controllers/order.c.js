@@ -77,5 +77,18 @@ module.exports = {
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
+    },
+
+    getOrders: async (req, res) => {
+        try {
+            const page = parseInt(req.query.page) || 1;
+            const size = parseInt(req.query.size) || 10;
+            const sort = req.query.sort || 'id_asc';
+            const status = req.query.status;
+            const data = await Order.getOrders(page, size, sort, status);
+            return res.status(200).json(data);
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
     }
 };
