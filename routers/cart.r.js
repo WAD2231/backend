@@ -6,6 +6,8 @@ router.get('/', verifyUser, CartC.get);
 
 router.post('/', verifyUser, CartC.add);
 
+router.post('/items', verifyUser, CartC.addItems);
+
 router.put('/:id', verifyUser, CartC.update);
 
 router.delete('/:id', verifyUser, CartC.delete);

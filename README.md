@@ -812,10 +812,20 @@ GET /api/carts?page=1&size=2
 ```
 
 ## 6.2. Add product to cart
+
+Add one product to cart
 POST /api/carts
 ```json
 {
     "product_id": 1,
+}
+```
+
+Add multiple products to cart
+POST /api/carts/items
+```json 
+{
+  "items": [1, 2, 3]
 }
 ```
 
