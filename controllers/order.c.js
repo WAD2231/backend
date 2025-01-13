@@ -79,6 +79,21 @@ module.exports = {
         }
     },
 
+    getOrdersOfUserById: async (req, res) => {
+        try {
+            const id = parseInt(req.params.id);
+            const page = parseInt(req.query.page) || 1;
+            const size = parseInt(req.query.size) || 10;
+            const order = req.query.order || 'id_asc';
+            const status = req.query.status;
+            const date = req.query.date;
+            const orders = await Order.getOrdersOfUser(id, page, size, order, status, date);
+            return res.status(200).json(orders);
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
+    },
+
     getOrders: async (req, res) => {
         try {
             const page = parseInt(req.query.page) || 1;
@@ -90,5 +105,17 @@ module.exports = {
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
+    },
+
+    getOrderDetail: async (req, res) => {
+        try {
+            const id = parseInt(req.params.id);
+            const order = await Order.getOrderDetail(id, req.user);
+
+            return res.status(200).json(order);
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
     }
+
 };
