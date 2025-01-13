@@ -312,5 +312,83 @@ module.exports = {
         catch (error) {
             throw error;
         }
+    },
+    getOrderDetail: async (id, user) => { 
+        try {
+            const query = `
+                SELECT 
+                    o.order_id,
+                    o.total,
+                    o.status,
+                    o.order_date,
+                    json_agg(json_build_object(
+                        'id', od.order_detail_id,
+                        'product', json_build_object(
+                            'id', p.product_id,
+                            'name', p.product_name,
+                            'price', p.price,
+                            'images', (
+                                SELECT json_agg(image_url)
+                                FROM product_image
+                                WHERE product_id = p.product_id
+                            ),
+                            'category', json_build_object(
+                                'id', c.category_id,
+                                'name', c.name
+                            ),
+                            'manufacturer', json_build_object(
+                                'id', m.manufacturer_id,
+                                'name', m.manufacturer_name
+                            )
+                        ),
+                        'quantity', od.quantity,
+                        'subtotal', od.subtotal
+                    )) AS details,
+                    json_build_object(
+                        'id', u.user_id,
+                        'fullname', u.fullname,
+                        'username', u.username,
+                        'avatar', u.avatar,
+                        'phone', u.phone,
+                        'address', u.address
+                    ) as user
+                FROM orders o
+                JOIN users u ON o.user_id = u.user_id
+                JOIN order_details od ON o.order_id = od.order_id
+                JOIN product p ON od.product_id = p.product_id
+                JOIN category c ON p.category_id = c.category_id
+                JOIN manufacturer m ON p.manufacturer_id = m.manufacturer_id
+                WHERE o.order_id = $1 AND (o.user_id = $2 OR $2 = 1)
+                GROUP BY o.order_id, 
+                         o.total, 
+                         o.status, 
+                         o.order_date, 
+                         u.user_id, 
+                         u.fullname, 
+                         u.username, 
+                         u.avatar, 
+                         u.phone, 
+                         u.address;
+            `;
+    
+            const result = await db.oneOrNone(query, [id, user.user_id, user.permission]);
+    
+            if (!result) {
+                throw new Error(`Order with ID ${id} not found.`);
+            }
+    
+            return {
+                order_id: result.order_id,
+                total: result.total,
+                status: result.status,
+                order_date: result.order_date,
+                details: result.details,
+                user: result.user,
+            };
+        } 
+        catch (error) {
+            throw error;
+        }
     }
+    
 };

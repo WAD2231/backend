@@ -14,4 +14,6 @@ router.get('/statistics/best-sellers', verifyAdmin, OrderC.getBestSellers);
 
 router.get('/statistics/top-customers', verifyAdmin, OrderC.getTopCustomers);
 
+router.get("/detail/:id", verifyUser, OrderC.getOrderDetail);
+
 module.exports = router;

@@ -90,5 +90,17 @@ module.exports = {
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
+    },
+
+    getOrderDetail: async (req, res) => {
+        try {
+            const id = parseInt(req.params.id);
+            const order = await Order.getOrderDetail(id, req.user);
+
+            return res.status(200).json(order);
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
     }
+
 };
