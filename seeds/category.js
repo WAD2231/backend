@@ -119,7 +119,7 @@ exports.seed = async function (knex) {
     .update({ super_category_id: categoryMap['PC Game Headsets'] });
   await knex('category')
     .where({ name: 'Computer Keyboards, Mice & Accessories' })
-    .update({ super_category_id: categoryMap['PlayStation 5 Headsets'] });
+    .update({ super_category_id: categoryMap['Computer Headsets'] });
   await knex('category')
     .where({ name: 'Computer Keyboards' })
     .update({ super_category_id: categoryMap['PC Game Headsets'] });
@@ -128,32 +128,29 @@ exports.seed = async function (knex) {
     .update({ super_category_id: categoryMap['Computers & Tablets'] });
   await knex('category')
     .where({ name: 'Mac Games & Accessories' })
-    .update({ super_category_id: categoryMap['PlayStation 5 Headsets'] });
-  await knex('category')
-    .where({ name: 'Mac Gaming Keyboards' })
-    .update({ super_category_id: categoryMap['Mac Games & Accessories'] });
+    .update({ super_category_id: categoryMap['Computer Headsets'] });
   await knex('category')
     .where({ name: 'Asus Gaming Keyboards' })
     .update({ super_category_id: categoryMap['Mac Gaming Keyboards'] });
   await knex('category')
-    .where({ name: 'PC Gaming Accessories' })
-    .update({ super_category_id: categoryMap['PlayStation 5 Headsets'] });
-  await knex('category')
-    .where({ name: 'RGB Gaming Keyboards' })
-    .update({ super_category_id: categoryMap['Mac Games & Accessories'] });
-  await knex('category')
-    .where({ name: 'High-Performance Mice' })
-    .update({ super_category_id: categoryMap['Mac Gaming Keyboards'] });
-  await knex('category')
-    .where({ name: 'Custom Build PCs' })
-    .update({ super_category_id: categoryMap['PC Game Headsets'] });
-  await knex('category')
-    .where({ name: 'Gaming Laptops' })
-    .update({ super_category_id: categoryMap['Custom Build PCs'] });
+    .where({ name: 'Computers & Tablets' })
+    .update({ super_category_id: categoryMap['PC Gaming Accessories'] });
   await knex('category')
     .where({ name: 'Custom Build PCs' })
     .update({ super_category_id: categoryMap['Gaming Laptops'] });
   await knex('category')
-    .where({ name: 'Custom Build PCs' })
-    .update({ super_category_id: categoryMap['High-Performance Mice'] });
+    .where({ name: 'RGB Gaming Keyboards' })
+    .update({ super_category_id: categoryMap['PC Gaming Accessories'] });
+  await knex('category')
+    .where({ name: 'High-Performance Mice' })
+    .update({ super_category_id: categoryMap['PC Gaming Accessories'] });
+  await knex('category')
+    .where({ name: 'Mac Gaming Mice' })
+    .update({ super_category_id: categoryMap['PlayStation 4 Headsets'] });
+  await knex('category')
+    .where({ name: 'Gaming Laptops' })
+    .update({ super_category_id: categoryMap['Computers & Tablets'] });
+  await knex('category')
+    .where({ name: 'Computer Headsets'})
+    .update({ super_category_id: categoryMap['PlayStation 4 Headsets'] });
 };
