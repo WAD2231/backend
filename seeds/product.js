@@ -885,6 +885,227 @@ exports.seed = async function(knex) {
       discount: 0.1,
       type: 'phone',
       tag: 'sale'
+    },
+    {
+      product_name: 'Apple MacBook Air M2, 256GB, Silver',
+      description: 'Apple MacBook Air M2, 256GB, Silver - Lightweight Powerhouse',
+      price: 999.99,
+      stock: 15,
+      category_id: 10,
+      manufacturer_id: 1,
+      discount: 0.05,
+      type: 'laptop',
+      tag: 'new'
+    },
+    {
+      product_name: 'Dell XPS 13, 512GB, Platinum Silver',
+      description: 'Dell XPS 13, 512GB, Platinum Silver - Premium Ultrabook',
+      price: 1299.99,
+      stock: 10,
+      category_id: 11,
+      manufacturer_id: 3,
+      discount: 0.1,
+      type: 'laptop',
+      tag: 'sale'
+    },
+    {
+      product_name: 'HP Omen 16, 1TB SSD, Shadow Black',
+      description: 'HP Omen 16, 1TB SSD, Shadow Black - Gaming Beast',
+      price: 1499.99,
+      stock: 8,
+      category_id: 12,
+      manufacturer_id: 2,
+      discount: 0.15,
+      type: 'laptop',
+      tag: 'featured'
+    },
+    {
+      product_name: 'Lenovo Legion 5, 512GB SSD, Phantom Blue',
+      description: 'Lenovo Legion 5, 512GB SSD, Phantom Blue - Performance Champion',
+      price: 1149.99,
+      stock: 12,
+      category_id: 13,
+      manufacturer_id: 4,
+      discount: 0,
+      type: 'laptop',
+      tag: 'new'
+    },
+    {
+      product_name: 'Razer Blade 15, 1TB SSD, Black',
+      description: 'Razer Blade 15, 1TB SSD, Black - Sleek Gaming Power',
+      price: 1999.99,
+      stock: 5,
+      category_id: 14,
+      manufacturer_id: 6,
+      discount: 0.2,
+      type: 'laptop',
+      tag: 'sale'
+    },
+    {
+      product_name: 'Samsung Galaxy Buds Pro, Phantom Black',
+      description: 'Samsung Galaxy Buds Pro, Phantom Black - Immersive Sound',
+      price: 199.99,
+      stock: 50,
+      category_id: 15,
+      manufacturer_id: 5,
+      discount: 0.1,
+      type: 'headset',
+      tag: 'featured'
+    },
+    {
+      product_name: 'Sony WH-1000XM5, Silver',
+      description: 'Sony WH-1000XM5, Silver - Noise Cancelling Excellence',
+      price: 349.99,
+      stock: 20,
+      category_id: 16,
+      manufacturer_id: 1,
+      discount: 0.05,
+      type: 'headset',
+      tag: 'new'
+    },
+    {
+      product_name: 'Logitech G Pro X, Black',
+      description: 'Logitech G Pro X, Black - Pro Gaming Headset',
+      price: 129.99,
+      stock: 25,
+      category_id: 17,
+      manufacturer_id: 3,
+      discount: 0,
+      type: 'headset',
+      tag: 'new'
+    },
+    {
+      product_name: 'Corsair K95 RGB Platinum XT, Black',
+      description: 'Corsair K95 RGB Platinum XT, Black - Premium Gaming Keyboard',
+      price: 199.99,
+      stock: 18,
+      category_id: 10,
+      manufacturer_id: 2,
+      discount: 0.1,
+      type: 'keyboard',
+      tag: 'sale'
+    },
+    {
+      product_name: 'Razer Huntsman Elite, Black',
+      description: 'Razer Huntsman Elite, Black - Ultimate Gaming Keyboard',
+      price: 249.99,
+      stock: 22,
+      category_id: 11,
+      manufacturer_id: 6,
+      discount: 0.15,
+      type: 'keyboard',
+      tag: 'featured'
+    },
+    {
+      product_name: 'SteelSeries Apex Pro, Black',
+      description: 'SteelSeries Apex Pro, Black - Adjustable Gaming Keyboard',
+      price: 179.99,
+      stock: 30,
+      category_id: 12,
+      manufacturer_id: 5,
+      discount: 0.1,
+      type: 'keyboard',
+      tag: 'new'
+    },
+    {
+      product_name: 'HyperX Alloy FPS Pro, Red',
+      description: 'HyperX Alloy FPS Pro, Red - Compact Gaming Keyboard',
+      price: 99.99,
+      stock: 40,
+      category_id: 13,
+      manufacturer_id: 4,
+      discount: 0.05,
+      type: 'keyboard',
+      tag: 'sale'
+    },
+    {
+      product_name: 'Microsoft Surface Laptop 5, 256GB, Platinum',
+      description: 'Microsoft Surface Laptop 5, 256GB, Platinum - Elegant and Powerful',
+      price: 1299.99,
+      stock: 14,
+      category_id: 14,
+      manufacturer_id: 1,
+      discount: 0.05,
+      type: 'laptop',
+      tag: 'featured'
+    },
+    {
+      product_name: 'Asus ROG Strix Scar 17, 1TB SSD, Black',
+      description: 'Asus ROG Strix Scar 17, 1TB SSD, Black - Gaming Masterpiece',
+      price: 2499.99,
+      stock: 6,
+      category_id: 15,
+      manufacturer_id: 6,
+      discount: 0.1,
+      type: 'laptop',
+      tag: 'sale'
+    },
+    {
+      product_name: 'Apple AirPods Max, Space Gray',
+      description: 'Apple AirPods Max, Space Gray - Premium Over-Ear Audio',
+      price: 549.99,
+      stock: 15,
+      category_id: 16,
+      manufacturer_id: 1,
+      discount: 0.05,
+      type: 'headset',
+      tag: 'new'
+    },
+    {
+      product_name: 'Bose QuietComfort 45, Black',
+      description: 'Bose QuietComfort 45, Black - Iconic Noise Cancelling',
+      price: 329.99,
+      stock: 20,
+      category_id: 17,
+      manufacturer_id: 2,
+      discount: 0,
+      type: 'headset',
+      tag: 'featured'
+    },
+    {
+      product_name: 'Xiaomi Mi Notebook Pro 14, 512GB SSD, Silver',
+      description: 'Xiaomi Mi Notebook Pro 14, 512GB SSD, Silver - Affordable Workhorse',
+      price: 899.99,
+      stock: 25,
+      category_id: 10,
+      manufacturer_id: 5,
+      discount: 0.05,
+      type: 'laptop',
+      tag: 'new'
+    },
+    {
+      product_name: 'Samsung Galaxy Book 3 Pro, 1TB SSD, Mystic Silver',
+      description: 'Samsung Galaxy Book 3 Pro, 1TB SSD, Mystic Silver - Sleek Productivity',
+      price: 1499.99,
+      stock: 10,
+      category_id: 11,
+      manufacturer_id: 4,
+      discount: 0.1,
+      type: 'laptop',
+      tag: 'sale'
+    },
+    {
+      product_name: 'Dell Inspiron 15, 512GB SSD, Black',
+      description: 'Dell Inspiron 15, 512GB SSD, Black - Everyday Performance',
+      price: 749.99,
+      stock: 20,
+      category_id: 12,
+      manufacturer_id: 3,
+      discount: 0,
+      type: 'laptop',
+      tag: 'featured'
+    },
+    {
+      product_name: 'Razer Kraken X, Black',
+      description: 'Razer Kraken X, Black - Lightweight Gaming Headset',
+      price: 49.99,
+      stock: 50,
+      category_id: 13,
+      manufacturer_id: 6,
+      discount: 0.2,
+      type: 'headset',
+      tag: 'sale'
     }
+    
   ]);
 };

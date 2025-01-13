@@ -295,6 +295,10 @@ GET /api/products/home?max=5&page_size=&current_page=1
 ## 3.2. Get all products
 
 GET /api/products?category_id=1&tag=new&&search=samsung&page_size=10&current_page=1 
+tag=[new|sale|featured]
+price_min=[],
+price_max=[],
+order=[product_id_asc|product_id_desc|product_name_asc|product_name_desc|price_asc|price_desc|create_at_asc|create_at_desc]
 
 ```json
   {
@@ -698,69 +702,6 @@ page=1&size=10
           "subtotal": 70
         }
       ]
-    }
-  ]
-}
-```
-
-## 5.3. Get orders of all users
-GET /api/orders?page=1&size=2&sort=date_asc
-page=[1, 2, 3, ...]
-size=[1, 2, 3, ...] 
-sort=[id_asc|id_desc|total_asc|total_desc|date_asc|date_desc]
-status=[completed|pending]
-
-```json
-{
-  "paging": {
-    "current_page": 1,
-    "page_size": 2,
-    "total_item": 1020,
-    "total_page": 510
-  },
-  "filter": {
-    "sort": "date_asc"
-  },
-  "orders": [
-    {
-      "total_item": 1020,
-      "order_id": 808,
-      "total": "1273",
-      "status": "completed",
-      "order_date": "2024-01-01T02:46:39.000Z",
-      "details": [
-        {
-          "id": 1630,
-          "product": {
-            "id": 43,
-            "name": "Acer Swift 3 Thin & Light Laptop",
-            "price": 669.99,
-            "images": [
-              "https://m.media-amazon.com/images/I/61gKkYQn6lL._AC_UY218_.jpg",
-              "https://m.media-amazon.com/images/I/81yG4KTmOpL._AC_UY218_.jpg",
-              "https://m.media-amazon.com/images/I/71yaP7euNAL._AC_UY218_.jpg"
-            ],
-            "category": {
-              "id": 7,
-              "name": "Computer Keyboards"
-            },
-            "manufacturer": {
-              "id": 1,
-              "name": "Logitech"
-            }
-          },
-          "quantity": 2,
-          "subtotal": 1273
-        }
-      ],
-      "user": {
-        "id": 346,
-        "fullname": "Benjamin Callan",
-        "username": "Callan",
-        "avatar": "https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA$1rs=1&pid=ImgDetMain",
-        "phone": "5-882-007-6338",
-        "address": "Mr. Benjamin Callan, Hamilton  8207, Huntsville - 6624, Namibia"
-      }
     }
   ]
 }

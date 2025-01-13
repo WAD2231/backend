@@ -20,13 +20,14 @@ module.exports = {
     },
     getProducts: async (req, res) => {
         try {
-            const { category_id, tag, price_min, price_max, search, page_size, current_page } = req.query;
+            const { category_id, tag, price_min, price_max, order, search, page_size, current_page } = req.query;
             
             const filters = {
                 category_id: category_id ? parseInt(category_id) : null,
                 tag: tag || null,
                 price_min: price_min ? parseInt(price_min) : null,
                 price_max: price_max ? parseInt(price_max) : null,
+                order: order || 'product_id_desc',
                 search: search || '',
                 page_size: page_size ? parseInt(page_size) : 10,
                 current_page: current_page ? parseInt(current_page) : 1
