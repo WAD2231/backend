@@ -15,11 +15,7 @@ const sortOptions = {
 
 const createOrder = async (order, retries = 0) => {
     try {
-        const orderID = await db.tx({
-            mode: new TransactionMode({
-                tiLevel: isolationLevel.repeatableRead
-            })
-        }, async t => {
+        const orderID = await db.tx(async t => {
             for (let detail of order.details) {
                 const result = await t.one(`
                     SELECT stock
@@ -50,6 +46,11 @@ const createOrder = async (order, retries = 0) => {
                         SET stock = stock - $1
                         WHERE product_id = $2    
                     `, [detail.quantity, detail.product_id]);
+                
+                await t.none(`
+                        DELETE FROM ${SCHEMA}.carts
+                        WHERE user_id = $1 AND product_id = $2
+                `, [order.user_id, detail.product_id]);
             }
 
             return newOrder.order_id;
