@@ -261,7 +261,8 @@ module.exports = {
                     fullname,
                     avatar,
                     phone,
-                    address
+                    address,
+                    account_id
                 FROM USERS
                 WHERE user_id = $4
             `;

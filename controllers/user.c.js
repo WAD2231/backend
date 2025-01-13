@@ -27,6 +27,10 @@ module.exports = {
                 return res.status(404).json({ message: 'User not found' });
             }
 
+            const token = jwt.sign({}, priKey, { algorithm: 'RS256' });
+            const response = await fetch(`https://localhost:${process.env.EPAY_PORT}/api/accounts?id=${user.account_id}&token=${token}`);
+            const result = await response.json();
+            user.balance = result.balance;
             return res.status(200).json(user);
         }
         catch (error) {

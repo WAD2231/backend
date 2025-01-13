@@ -16,7 +16,7 @@ exports.up = async function(knex) {
             fullname VARCHAR(255),
             phone VARCHAR(20),
             address VARCHAR(255),
-            avatar TEXT DEFAULT 'https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA?rs=1&pid=ImgDetMain'
+            avatar TEXT DEFAULT 'https://res.cloudinary.com/dnrz2djhd/image/upload/v1734689215/d9wy5b4anfqh1rksfiwk.png'
         );
         
     `);

@@ -69,7 +69,8 @@ GET /api/users/:id
   "fullname": "Nguyễn Ánh Tuyết",
   "avatar": "https://th.bing.com/th/id/OIP.P8F796BGNue4Lu2SImT1bgAAAA$1rs=1&pid=ImgDetMain",
   "phone": null,
-  "address": null
+  "address": null,
+  "balance" : 1000.45
 }
 ```
 
