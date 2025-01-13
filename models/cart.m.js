@@ -64,6 +64,22 @@ module.exports = {
         }
     },
 
+    addItems: async (userId, items) => {
+        try {
+            const values = items.map(item => `(${userId}, ${item.product_id}, ${item.quantity})`).join(', ');
+            const query = `
+                INSERT INTO ${SCHEMA}.carts (user_id, product_id, quantity)
+                VALUES ${values}
+                ON CONFLICT (user_id, product_id)
+                DO UPDATE SET quantity = ${SCHEMA}.carts.quantity + EXCLUDED.quantity;
+            `;
+            await db.none(query);
+        }
+        catch (err) {
+            throw err;
+        }
+    },
+
     update: async (userID, productID, quantity) => {
         try {
             const sql = `

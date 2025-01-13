@@ -825,7 +825,16 @@ Add multiple products to cart
 POST /api/carts/items
 ```json 
 {
-  "items": [1, 2, 3]
+    "items": [
+        {
+            "product_id": 1,
+            "quantity": 2
+        },
+        {
+            "product_id": 2,
+            "quantity": 3
+        }
+    ]
 }
 ```
 

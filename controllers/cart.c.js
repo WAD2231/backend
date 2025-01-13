@@ -30,10 +30,7 @@ module.exports = {
     addItems: async (req, res) => {
         try {
             const userID = req.user.user_id;
-            const items = req.body.items;
-            for (let i = 0; i < items.length; i++) {
-                await Cart.add(userID, items[i]);
-            }
+            await Cart.addItems(userID, req.body.items);
             return res.status(201).json({ message: 'Products added to cart' });
         }
         catch (err) {
