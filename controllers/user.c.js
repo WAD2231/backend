@@ -58,7 +58,12 @@ module.exports = {
                 },
                 body: JSON.stringify({token})
             });
+
             const result = await response.json();
+            if (response.status !== 201) {
+                return res.status(500).json({ message: result.message });
+            }
+
             user.account_id = result.account_id;
             user.permission = process.env.PERMISSION_USER;
 
