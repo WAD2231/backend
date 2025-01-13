@@ -2,6 +2,16 @@
 const { fi } = require('@faker-js/faker');
 const db = require('./db');
 const SCHEMA = process.env.DB_SCHEMA;
+const sortOptions = {
+    'product_id_asc': 'pr.product_id ASC',
+    'product_id_desc': 'pr.product_id DESC',
+    'created_at_asc': 'pr.created_at ASC',
+    'created_at_desc': 'pr.created_at DESC',
+    'price_asc': 'pr.price ASC',
+    'price_desc': 'pr.price DESC',
+    'product_name_asc': 'pr.product_name ASC',
+    'product_name_desc': 'pr.product_name DESC'
+};
 
 module.exports = {
     getProduct: async (field, value) => {
@@ -181,9 +191,11 @@ module.exports = {
             throw error;
         }
     },
+
+
     getProducts: async (filters) => {
         try {
-            const { category_id, tag, price_min, price_max, search, page_size, current_page, exclude_product_id } = filters;
+            const { category_id, tag, price_min, price_max, order, search, page_size, current_page, exclude_product_id } = filters;
 
             const offset = (current_page - 1) * page_size;
 
@@ -235,7 +247,6 @@ module.exports = {
                 values.push(price_max);
             }
 
-
             if (search) {
                 query += ` AND (pr.product_name ILIKE $${index++} OR c.name ILIKE $${index++} OR m.manufacturer_name ILIKE $${index++} OR pr.tag ILIKE $${index++})`;
                 values.push(`%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`);
@@ -246,7 +257,15 @@ module.exports = {
                 values.push(exclude_product_id);
             }
 
-            query += ` GROUP BY pr.product_id, c.name, m.manufacturer_name, c.category_id, m.manufacturer_id ORDER BY pr.product_id LIMIT $${index++} OFFSET $${index}`;
+            query += ` GROUP BY pr.product_id, c.name, m.manufacturer_name, c.category_id, m.manufacturer_id`;
+            // Handle order_by and order_direction
+            if (sortOptions[order]) {
+                query += ` ORDER BY ${sortOptions[order]}`;
+            } else {
+                query += ` ORDER BY pr.product_id DESC`; // Default order
+            }
+
+            query += ` LIMIT $${index++} OFFSET $${index}`;
             values.push(page_size, offset);
 
             const products = await db.manyOrNone(query, values);
@@ -259,7 +278,6 @@ module.exports = {
             LEFT JOIN ${SCHEMA}.manufacturer m ON pr.manufacturer_id = m.manufacturer_id
             WHERE 1=1
             `;
-
 
             const countValues = [];
             let countIndex = 1;
@@ -283,6 +301,7 @@ module.exports = {
                 countQuery += ` AND pr.price <= $${countIndex++}`;
                 countValues.push(price_max);
             }
+
             if (search) {
                 countQuery += ` AND (pr.product_name ILIKE $${countIndex++} OR c.name ILIKE $${countIndex++} OR m.manufacturer_name ILIKE $${countIndex++} OR pr.tag ILIKE $${countIndex++})`;
                 countValues.push(`%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`);
@@ -309,7 +328,8 @@ module.exports = {
                     category_id: category_id,
                     tag: tag,
                     price_min: price_min,
-                    price_max: price_max
+                    price_max: price_max,
+                    order: order
                 },
                 products: products
             };
