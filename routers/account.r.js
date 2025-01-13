@@ -3,4 +3,6 @@ const AccountC = require('../controllers/account.c.js');
 
 router.post('/', AccountC.createAccount);
 
+router.get('/', AccountC.getBalance);
+
 module.exports = router;
