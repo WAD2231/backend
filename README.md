@@ -295,6 +295,10 @@ GET /api/products/home?max=5&page_size=&current_page=1
 ## 3.2. Get all products
 
 GET /api/products?category_id=1&tag=new&&search=samsung&page_size=10&current_page=1 
+tag=[new|sale|featured]
+price_min=[],
+price_max=[],
+order=[product_id_asc|product_id_desc|product_name_asc|product_name_desc|price_asc|price_desc|create_at_asc|create_at_desc]
 
 ```json
   {
