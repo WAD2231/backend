@@ -27,6 +27,20 @@ module.exports = {
         }
     },
 
+    addItems: async (req, res) => {
+        try {
+            const userID = req.user.user_id;
+            const items = req.body.items;
+            for (let i = 0; i < items.length; i++) {
+                await Cart.add(userID, items[i]);
+            }
+            return res.status(201).json({ message: 'Products added to cart' });
+        }
+        catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    },
+
     update: async (req, res) => {
         try {
             const userID = req.user.user_id;
