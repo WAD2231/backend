@@ -16,6 +16,9 @@ exports.up = async function(knex) {
         ALTER TABLE reviews
         ADD CONSTRAINT fk_reviews_product FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE;
 
+        ALTER TABLE reviews
+        ADD CONSTRAINT fk_reviews_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE;
+
         ALTER TABLE carts
         ADD CONSTRAINT pk_carts PRIMARY KEY (user_id, product_id);
 

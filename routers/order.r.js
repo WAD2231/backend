@@ -6,6 +6,8 @@ router.post('/', verifyUser, OrderC.createOrder);
 
 router.get('/history', verifyUser, OrderC.getOrdersOfUser);
 
+router.get('/history/:id', verifyAdmin, OrderC.getOrdersOfUserById);
+
 router.get('/', verifyAdmin, OrderC.getOrders);
 
 router.get('/statistics/revenue', verifyAdmin, OrderC.getRevenueByMonth);

@@ -358,7 +358,7 @@ module.exports = {
                 JOIN product p ON od.product_id = p.product_id
                 JOIN category c ON p.category_id = c.category_id
                 JOIN manufacturer m ON p.manufacturer_id = m.manufacturer_id
-                WHERE o.order_id = $1 AND (o.user_id = $2 OR $2 = 1)
+                WHERE o.order_id = $1 AND (o.user_id = $2 OR $3 = 1)
                 GROUP BY o.order_id, 
                          o.total, 
                          o.status, 
@@ -370,7 +370,6 @@ module.exports = {
                          u.phone, 
                          u.address;
             `;
-    
             const result = await db.oneOrNone(query, [id, user.user_id, user.permission]);
     
             if (!result) {

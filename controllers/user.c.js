@@ -9,7 +9,8 @@ module.exports = {
         try {
             const page = parseInt(req.query.page) || 1;
             const size = parseInt(req.query.size) || 10;
-            const users = await User.getUsers(page, size);
+            const search = req.query.search || '';
+            const users = await User.getUsers(page, size, search);
             return res.status(200).json(users);
         }
         catch (error) {

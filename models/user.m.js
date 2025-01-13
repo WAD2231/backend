@@ -166,14 +166,10 @@ module.exports = {
         }
     },
 
-    getUsers: async (page, size) => {
+    getUsers: async (page, size, search) => {
         try {
             const query = `
-                WITH total_users AS (
-                    SELECT COUNT(*) AS total_item
-                    FROM ${SCHEMA}.users
-                ),
-                user_details AS (
+                WITH filtered_users AS (
                     SELECT 
                         user_id, 
                         username, 
@@ -190,38 +186,47 @@ module.exports = {
                         phone,
                         address
                     FROM ${SCHEMA}.users
-                    LIMIT $4
-                    OFFSET $5
+                    WHERE ($4 = '' OR username ILIKE '%' || $4 || '%' OR fullname ILIKE '%' || $4 || '%')
+                ),
+                total_users AS (
+                    SELECT COUNT(*) AS total_item
+                    FROM filtered_users
                 )
                 SELECT 
-                    (SELECT json_object('total_item': total_item) FROM total_users) AS paging,
-                    json_agg(user_details) AS users
-                FROM user_details;
+                    (SELECT total_item FROM total_users) AS total_item,
+                    json_agg(u) AS users
+                FROM (
+                    SELECT * 
+                    FROM filtered_users
+                    LIMIT $5 OFFSET $6
+                ) u
             `;
+        
             const data = await db.one(query, [
                 LOCAL, 
                 GOOGLE, 
                 FACEBOOK,
+                search,
                 size,
                 (page - 1) * size
             ]);
-
+        
             return {
                 paging: {
-                    total_page: Math.ceil(data.paging.total_item / size),
-                    total_item: data.paging.total_item,
+                    total_page: Math.ceil(data.total_item / size),
+                    total_item: data.total_item,
                     page_size: size,
                     current_page: page,
                 },
-                users: data.users
-            }
-        }
-        catch (error) {
+                users: data.users || [], 
+            };
+        } catch (error) {
             console.log(error);
             throw error;
         }
     },
-
+    
+    
     deleteUser: async (id) => {
         try {
             const query = `
