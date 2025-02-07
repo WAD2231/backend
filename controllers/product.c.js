@@ -115,7 +115,19 @@ module.exports = {
 
             const { name, price, description, manufacturer_id, category_id, stock, images = [], oldImages = [], attributes, discount, tag } = req.body;
 
-            const image_url = [...oldImages, ...images];
+            let image_url = []
+
+            if (Array.isArray(images)) {
+                image_url = [...image_url, ...images];
+            } else {
+                image_url.push(images);
+            }
+
+            if (Array.isArray(oldImages)) { 
+                image_url = [...image_url, ...oldImages];
+            } else {
+                image_url.push(oldImages);
+            }
 
             const product = await Product.getProductDetail(id);
             if (!product) {
